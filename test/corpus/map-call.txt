@@ -1,0 +1,108 @@
+================================================================================
+Map Call
+================================================================================
+
+
+stage SQUARE(
+    in  float value,
+    out float square,
+    src comp  "square",
+)
+
+stage SUM(
+    in  float[] values,
+    out float   sum,
+    src comp    "sum",
+)
+
+pipeline SUM_SQUARES(
+    in  float[] values,
+    out float   sum,
+)
+{
+    map call SQUARE(
+        value = split self.values,
+    )
+
+    call SUM(
+        values = SQUARE.square,
+    )
+
+    return (
+        value = SUM.sum,
+    )
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (stage
+    name: (identifier)
+    (input_parameter
+      type: (type_id
+        (type))
+      name: (identifier))
+    (output_parameter
+      type: (type_id
+        (type))
+      help: (identifier))
+    (source
+      type: (src_lang)
+      file: (string)))
+  (stage
+    name: (identifier)
+    (input_parameter
+      type: (type_id
+        (type)
+        (arr_list))
+      name: (identifier))
+    (output_parameter
+      type: (type_id
+        (type))
+      help: (identifier))
+    (source
+      type: (src_lang)
+      file: (string)))
+  (pipeline
+    name: (identifier)
+    (input_parameter
+      type: (type_id
+        (type)
+        (arr_list))
+      name: (identifier))
+    (output_parameter
+      type: (type_id
+        (type))
+      help: (identifier))
+    (call_stm_list
+      (call_stm
+        (call_stm_begin
+          (identifier))
+        (split_bind_stm_list
+          (split_bind_stm_list_partial
+            (split_bind_stm
+              (identifier)
+              (ref_exp
+                (identifier))))))
+      (call_stm
+        (call_stm_begin
+          (identifier))
+        (bind_stm_list
+          (nonempty_bind_stm_list
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier)
+                  (id_list
+                    (identifier)))))))))
+    (return_stm
+      (bind_stm_list
+        (nonempty_bind_stm_list
+          (bind_stm
+            (identifier)
+            (exp
+              (ref_exp
+                (identifier)
+                (id_list
+                  (identifier))))))))))

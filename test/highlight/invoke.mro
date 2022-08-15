@@ -1,0 +1,5 @@
+@include "pipeline.mro"
+
+call DUPLICATE_FINDER(
+    unsorted =  "unsorted.txt",
+)

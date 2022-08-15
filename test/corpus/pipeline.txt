@@ -1,0 +1,126 @@
+================================================================================
+Pipeline
+================================================================================
+
+filetype txt;
+
+stage SORT_ITEMS(
+    in  txt  unsorted,
+    in  bool case_sensitive,
+    out txt  sorted,
+    src py   "stages/sort",
+)
+
+stage FIND_DUPLICATES(
+    in  txt  sorted,
+    out txt  duplicates,
+    src py   "stages/find_duplicates",
+)
+
+pipeline DUPLICATE_FINDER(
+    in  txt  unsorted,
+    out txt  duplicates,
+)
+{
+    call SORT_ITEMS(
+        unsorted = self.unsorted,
+    )
+    call FIND_DUPLICATES(
+        sorted = SORT_ITEMS.sorted,
+    )
+    return (
+        duplicates = FIND_DUPLICATES.duplicates,
+    )
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (filetype_statement
+    filetype: (id_list
+      (identifier)))
+  (stage
+    name: (identifier)
+    (input_parameter
+      type: (type_id
+        (type
+          (id_list
+            (identifier))))
+      name: (identifier))
+    (input_parameter
+      type: (type_id
+        (type))
+      name: (identifier))
+    (output_parameter
+      type: (type_id
+        (type
+          (id_list
+            (identifier))))
+      help: (identifier))
+    (source
+      type: (src_lang)
+      file: (string)))
+  (stage
+    name: (identifier)
+    (input_parameter
+      type: (type_id
+        (type
+          (id_list
+            (identifier))))
+      name: (identifier))
+    (output_parameter
+      type: (type_id
+        (type
+          (id_list
+            (identifier))))
+      help: (identifier))
+    (source
+      type: (src_lang)
+      file: (string)))
+  (pipeline
+    name: (identifier)
+    (input_parameter
+      type: (type_id
+        (type
+          (id_list
+            (identifier))))
+      name: (identifier))
+    (output_parameter
+      type: (type_id
+        (type
+          (id_list
+            (identifier))))
+      help: (identifier))
+    (call_stm_list
+      (call_stm
+        (call_stm_begin
+          (identifier))
+        (bind_stm_list
+          (nonempty_bind_stm_list
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier)))))))
+      (call_stm
+        (call_stm_begin
+          (identifier))
+        (bind_stm_list
+          (nonempty_bind_stm_list
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier)
+                  (id_list
+                    (identifier)))))))))
+    (return_stm
+      (bind_stm_list
+        (nonempty_bind_stm_list
+          (bind_stm
+            (identifier)
+            (exp
+              (ref_exp
+                (identifier)
+                (id_list
+                  (identifier))))))))))

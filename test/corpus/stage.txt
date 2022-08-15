@@ -1,0 +1,40 @@
+================================================================================
+Simple stage
+================================================================================
+
+filetype txt;
+
+stage SORT_ITEMS(
+  in txt unsorted,
+  in bool case_sensitive,
+  out txt sorted,
+  src py "stages/sort",
+)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (filetype_statement
+    (id_list
+      (identifier)))
+  (stage
+    (identifier)
+    (input_parameter
+      (type_id
+        (type
+          (id_list
+            (identifier))))
+      (identifier))
+    (input_parameter
+      (type_id
+        (type))
+      (identifier))
+    (output_parameter
+      (type_id
+        (type
+          (id_list
+            (identifier))))
+      (identifier))
+    (source
+      (src_lang)
+      (string))))

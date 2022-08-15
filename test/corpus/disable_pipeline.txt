@@ -1,0 +1,676 @@
+================================================================================
+Disable Pipeline
+================================================================================
+
+# This pipeline tests some edge cases for disabled sub-pipelines,
+# map calls, and structs.
+
+stage CREATE_DISABLE(
+    in  int  foo,
+    out bool disable,
+    src py   "disable",
+)
+
+pipeline RUN_CREATOR(
+    in  int  foo,
+    in  bool disable,
+    out int  foo,
+    out bool disable,
+)
+{
+    call CREATE_DISABLE(
+        * = self,
+    ) using (
+        disabled = self.disable,
+    )
+
+    return (
+        foo = self.foo,
+        *   = CREATE_DISABLE,
+    )
+}
+
+pipeline RUNS(
+    in  int     foo,
+    in  int[]   foos,
+    in  int[]   empty,
+    in  bool    disable,
+    in  bool    disable_one,
+    out int[][] results,
+    out bool    disable1,
+    out bool    disable2,
+)
+{
+    call RUN_CREATOR(
+        foo     = self.foo,
+        disable = false,
+    ) using (
+        disabled = self.disable_one,
+    )
+
+    map call RUN_CREATOR as RUN_CREATOR1(
+        foo     = split self.foos,
+        disable = self.disable,
+    ) using (
+        disabled = self.disable,
+    )
+
+    map call RUN_CREATOR as RUN_CREATOR2(
+        foo     = split self.foos,
+        disable = self.disable,
+    ) using (
+        disabled = self.disable,
+    )
+
+    # Always null
+    map call RUN_CREATOR as RUN_CREATOR3(
+        foo     = split self.empty,
+        disable = self.disable,
+    ) using (
+        disabled = self.disable,
+    )
+
+    # Always null
+    map call RUN_CREATOR as RUN_CREATOR4(
+        foo     = split self.empty,
+        disable = self.disable,
+    ) using (
+        disabled = self.disable,
+    )
+
+    call RUN_CREATOR as RUN_CREATOR5(
+        foo     = self.foo,
+        disable = false,
+    ) using (
+        disabled = self.disable,
+    )
+
+    return (
+        results  = [
+            [RUN_CREATOR.foo],
+            RUN_CREATOR1.foo,
+            RUN_CREATOR2.foo,
+            RUN_CREATOR3.foo,
+            RUN_CREATOR4.foo,
+        ],
+        disable1 = RUN_CREATOR.disable,
+        disable2 = RUN_CREATOR5.disable,
+    )
+}
+
+pipeline TOP_CALL(
+    in  int       foo,
+    in  int[]     foos,
+    in  int[]     empty,
+    in  bool      disable_always,
+    out int[][][] results,
+)
+{
+    # [self.foo],self.foos,null,null,null]
+    call RUNS as RUNS_ENABLED(
+        foo         = self.foo,
+        foos        = self.foos,
+        empty       = self.empty,
+        disable     = false,
+        disable_one = false,
+    )
+
+    # [[0],null,self.foos,null,null]
+    call RUNS as RUNS_DISABLED(
+        foo         = 0,
+        foos        = self.foos,
+        empty       = self.empty,
+        disable     = true,
+        disable_one = false,
+    )
+
+    call RUNS as RUNS_DISABLED_DYNAMIC(
+        foo         = 0,
+        foos        = self.foos,
+        empty       = self.empty,
+        disable     = RUNS_ENABLED.disable2,
+        disable_one = RUNS_ENABLED.disable2,
+    ) using (
+        disabled = RUNS_ENABLED.disable1,
+    )
+
+    # null
+    call RUNS as RUNS_DISABLED_ALWAYS(
+        foo         = 0,
+        foos        = self.foos,
+        empty       = self.empty,
+        disable     = true,
+        disable_one = false,
+    ) using (
+        disabled = self.disable_always,
+    )
+
+    return (
+        results = [
+            RUNS_ENABLED.results,
+            RUNS_DISABLED.results,
+            RUNS_DISABLED_DYNAMIC.results,
+            RUNS_DISABLED_ALWAYS.results,
+        ],
+    )
+}
+
+call TOP_CALL(
+    foo            = 1,
+    foos           = [
+        2,
+        3,
+    ],
+    empty          = null,
+    disable_always = true,
+)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (comment)
+  (stage
+    name: (identifier)
+    (input_parameter
+      type: (type_id
+        (type))
+      name: (identifier))
+    (output_parameter
+      type: (type_id
+        (type))
+      help: (identifier))
+    (source
+      type: (src_lang)
+      file: (string)))
+  (pipeline
+    name: (identifier)
+    (input_parameter
+      type: (type_id
+        (type))
+      name: (identifier))
+    (input_parameter
+      type: (type_id
+        (type))
+      name: (identifier))
+    (output_parameter
+      type: (type_id
+        (type))
+      help: (identifier))
+    (output_parameter
+      type: (type_id
+        (type))
+      help: (identifier))
+    (call_stm_list
+      (call_stm
+        (call_stm_begin
+          (identifier))
+        (bind_stm_list
+          (wildcard_bind))
+        (modifier_stm_list
+          (modifier_stm
+            (ref_exp
+              (identifier))))))
+    (return_stm
+      (bind_stm_list
+        (nonempty_bind_stm_list
+          (bind_stm
+            (identifier)
+            (exp
+              (ref_exp
+                (identifier)))))
+        (wildcard_bind
+          (ref_exp
+            (identifier))))))
+  (pipeline
+    name: (identifier)
+    (input_parameter
+      type: (type_id
+        (type))
+      name: (identifier))
+    (input_parameter
+      type: (type_id
+        (type)
+        (arr_list))
+      name: (identifier))
+    (input_parameter
+      type: (type_id
+        (type)
+        (arr_list))
+      name: (identifier))
+    (input_parameter
+      type: (type_id
+        (type))
+      name: (identifier))
+    (input_parameter
+      type: (type_id
+        (type))
+      name: (identifier))
+    (output_parameter
+      type: (type_id
+        (type)
+        (arr_list))
+      help: (identifier))
+    (output_parameter
+      type: (type_id
+        (type))
+      help: (identifier))
+    (output_parameter
+      type: (type_id
+        (type))
+      help: (identifier))
+    (call_stm_list
+      (call_stm
+        (call_stm_begin
+          (identifier))
+        (bind_stm_list
+          (nonempty_bind_stm_list
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))
+            (bind_stm
+              (identifier)
+              (exp
+                (val_exp
+                  (bool_exp))))))
+        (modifier_stm_list
+          (modifier_stm
+            (ref_exp
+              (identifier)))))
+      (call_stm
+        (call_stm_begin
+          (identifier)
+          (identifier))
+        (split_bind_stm_list
+          (split_bind_stm_list_partial
+            (split_bind_stm
+              (identifier)
+              (ref_exp
+                (identifier)))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))))
+        (modifier_stm_list
+          (modifier_stm
+            (ref_exp
+              (identifier)))))
+      (call_stm
+        (call_stm_begin
+          (identifier)
+          (identifier))
+        (split_bind_stm_list
+          (split_bind_stm_list_partial
+            (split_bind_stm
+              (identifier)
+              (ref_exp
+                (identifier)))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))))
+        (modifier_stm_list
+          (modifier_stm
+            (ref_exp
+              (identifier)))))
+      (comment)
+      (call_stm
+        (call_stm_begin
+          (identifier)
+          (identifier))
+        (split_bind_stm_list
+          (split_bind_stm_list_partial
+            (split_bind_stm
+              (identifier)
+              (ref_exp
+                (identifier)))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))))
+        (modifier_stm_list
+          (modifier_stm
+            (ref_exp
+              (identifier)))))
+      (comment)
+      (call_stm
+        (call_stm_begin
+          (identifier)
+          (identifier))
+        (split_bind_stm_list
+          (split_bind_stm_list_partial
+            (split_bind_stm
+              (identifier)
+              (ref_exp
+                (identifier)))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))))
+        (modifier_stm_list
+          (modifier_stm
+            (ref_exp
+              (identifier)))))
+      (call_stm
+        (call_stm_begin
+          (identifier)
+          (identifier))
+        (bind_stm_list
+          (nonempty_bind_stm_list
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))
+            (bind_stm
+              (identifier)
+              (exp
+                (val_exp
+                  (bool_exp))))))
+        (modifier_stm_list
+          (modifier_stm
+            (ref_exp
+              (identifier))))))
+    (return_stm
+      (bind_stm_list
+        (nonempty_bind_stm_list
+          (bind_stm
+            (identifier)
+            (exp
+              (val_exp
+                (array_exp
+                  (nonempty_array_exp
+                    (exp_list
+                      (exp_list_partial
+                        (exp
+                          (val_exp
+                            (array_exp
+                              (nonempty_array_exp
+                                (exp_list
+                                  (exp_list_partial
+                                    (exp
+                                      (ref_exp
+                                        (identifier)
+                                        (id_list
+                                          (identifier))))))))))
+                        (exp
+                          (ref_exp
+                            (identifier)
+                            (id_list
+                              (identifier))))
+                        (exp
+                          (ref_exp
+                            (identifier)
+                            (id_list
+                              (identifier))))
+                        (exp
+                          (ref_exp
+                            (identifier)
+                            (id_list
+                              (identifier))))
+                        (exp
+                          (ref_exp
+                            (identifier)
+                            (id_list
+                              (identifier))))
+                        (exp
+                          (ref_exp
+                            (MISSING identifier))))))))))
+          (bind_stm
+            (identifier)
+            (exp
+              (ref_exp
+                (identifier)
+                (id_list
+                  (identifier)))))
+          (bind_stm
+            (identifier)
+            (exp
+              (ref_exp
+                (identifier)
+                (id_list
+                  (identifier)))))))))
+  (pipeline
+    name: (identifier)
+    (input_parameter
+      type: (type_id
+        (type))
+      name: (identifier))
+    (input_parameter
+      type: (type_id
+        (type)
+        (arr_list))
+      name: (identifier))
+    (input_parameter
+      type: (type_id
+        (type)
+        (arr_list))
+      name: (identifier))
+    (input_parameter
+      type: (type_id
+        (type))
+      name: (identifier))
+    (output_parameter
+      type: (type_id
+        (type)
+        (arr_list))
+      help: (identifier))
+    (comment)
+    (call_stm_list
+      (call_stm
+        (call_stm_begin
+          (identifier)
+          (identifier))
+        (bind_stm_list
+          (nonempty_bind_stm_list
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))
+            (bind_stm
+              (identifier)
+              (exp
+                (val_exp
+                  (bool_exp))))
+            (bind_stm
+              (identifier)
+              (exp
+                (val_exp
+                  (bool_exp)))))))
+      (comment)
+      (call_stm
+        (call_stm_begin
+          (identifier)
+          (identifier))
+        (bind_stm_list
+          (nonempty_bind_stm_list
+            (bind_stm
+              (identifier)
+              (exp
+                (val_exp
+                  (integer))))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))
+            (bind_stm
+              (identifier)
+              (exp
+                (val_exp
+                  (bool_exp))))
+            (bind_stm
+              (identifier)
+              (exp
+                (val_exp
+                  (bool_exp)))))))
+      (call_stm
+        (call_stm_begin
+          (identifier)
+          (identifier))
+        (bind_stm_list
+          (nonempty_bind_stm_list
+            (bind_stm
+              (identifier)
+              (exp
+                (val_exp
+                  (integer))))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier)
+                  (id_list
+                    (identifier)))))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier)
+                  (id_list
+                    (identifier)))))))
+        (modifier_stm_list
+          (modifier_stm
+            (ref_exp
+              (identifier)
+              (id_list
+                (identifier))))))
+      (comment)
+      (call_stm
+        (call_stm_begin
+          (identifier)
+          (identifier))
+        (bind_stm_list
+          (nonempty_bind_stm_list
+            (bind_stm
+              (identifier)
+              (exp
+                (val_exp
+                  (integer))))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))
+            (bind_stm
+              (identifier)
+              (exp
+                (ref_exp
+                  (identifier))))
+            (bind_stm
+              (identifier)
+              (exp
+                (val_exp
+                  (bool_exp))))
+            (bind_stm
+              (identifier)
+              (exp
+                (val_exp
+                  (bool_exp))))))
+        (modifier_stm_list
+          (modifier_stm
+            (ref_exp
+              (identifier))))))
+    (return_stm
+      (bind_stm_list
+        (nonempty_bind_stm_list
+          (bind_stm
+            (identifier)
+            (exp
+              (val_exp
+                (array_exp
+                  (nonempty_array_exp
+                    (exp_list
+                      (exp_list_partial
+                        (exp
+                          (ref_exp
+                            (identifier)
+                            (id_list
+                              (identifier))))
+                        (exp
+                          (ref_exp
+                            (identifier)
+                            (id_list
+                              (identifier))))
+                        (exp
+                          (ref_exp
+                            (identifier)
+                            (id_list
+                              (identifier))))
+                        (exp
+                          (ref_exp
+                            (identifier)
+                            (id_list
+                              (identifier))))
+                        (exp
+                          (ref_exp
+                            (MISSING identifier))))))))))))))
+  (call_stm
+    (call_stm_begin
+      (identifier))
+    (bind_stm_list
+      (nonempty_bind_stm_list
+        (bind_stm
+          (identifier)
+          (exp
+            (val_exp
+              (integer))))
+        (bind_stm
+          (identifier)
+          (exp
+            (val_exp
+              (array_exp
+                (nonempty_array_exp
+                  (exp_list
+                    (exp_list_partial
+                      (exp
+                        (val_exp
+                          (integer)))
+                      (exp
+                        (val_exp
+                          (integer)))
+                      (exp
+                        (ref_exp
+                          (MISSING identifier))))))))))
+        (bind_stm
+          (identifier)
+          (exp
+            (ref_exp
+              (identifier))))
+        (bind_stm
+          (identifier)
+          (exp
+            (val_exp
+              (bool_exp))))))))

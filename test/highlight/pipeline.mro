@@ -1,0 +1,30 @@
+filetype txt;
+
+stage SORT_ITEMS(
+    in  txt  unsorted,
+    in  bool case_sensitive,
+    out txt  sorted,
+    src py   "stages/sort",
+)
+
+stage FIND_DUPLICATES(
+    in  txt  sorted,
+    out txt  duplicates,
+    src py   "stages/find_duplicates",
+)
+
+pipeline DUPLICATE_FINDER(
+    in  txt  unsorted,
+    out txt  duplicates,
+)
+{
+    call SORT_ITEMS(
+        unsorted = self.unsorted,
+    )
+    call FIND_DUPLICATES(
+        sorted = SORT_ITEMS.sorted,
+    )
+    return (
+        duplicates = FIND_DUPLICATES.duplicates,
+    )
+}

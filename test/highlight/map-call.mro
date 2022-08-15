@@ -1,0 +1,29 @@
+stage SQUARE(
+    in  float value,
+    out float square,
+    src comp  "square",
+)
+
+stage SUM(
+    in  float[] values,
+    out float   sum,
+    src comp    "sum",
+)
+
+pipeline SUM_SQUARES(
+    in  float[] values,
+    out float   sum,
+)
+{
+    map call SQUARE(
+        value = split self.values,
+    )
+
+    call SUM(
+        values = SQUARE.square,
+    )
+
+    return (
+        value = SUM.sum,
+    )
+}

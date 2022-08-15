@@ -1,0 +1,8 @@
+filetype txt;
+
+stage SORT_ITEMS(
+  in txt unsorted,
+  in bool case_sensitive,
+  out txt sorted,
+  src py "stages/sort"
+)

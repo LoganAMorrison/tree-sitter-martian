@@ -1,0 +1,8 @@
+stage SUM_SQUARES(
+    in  map[] values,
+    out fdf   sum,
+    src comp "sum_squares",
+) split (
+    in  bool[] value,
+    out float value,
+)

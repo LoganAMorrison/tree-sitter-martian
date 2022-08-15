@@ -1,0 +1,26 @@
+================================================================================
+Pipeline Invoker
+================================================================================
+
+@include "pipeline.mro"
+
+call DUPLICATE_FINDER(
+    unsorted = "/home/duplicator_dave/unsorted.txt",
+)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (includes
+    (include
+      include: (string)))
+  (call_stm
+    (call_stm_begin
+      (identifier))
+    (bind_stm_list
+      (nonempty_bind_stm_list
+        (bind_stm
+          (identifier)
+          (exp
+            (val_exp
+              (string))))))))
