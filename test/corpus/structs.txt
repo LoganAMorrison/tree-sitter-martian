@@ -1,0 +1,77 @@
+================================================================================
+Structs
+================================================================================
+
+struct Point(
+    # x coordinate
+    float x,
+    # y coordinate
+    int[] y,
+)
+
+# A thing with coordinates.
+struct Pointalism(
+    Point point,
+    # output file
+    json  dest  "help" "dest.xml",
+)
+
+struct Helpful(
+    int    d2                            "foo",
+    file   d3_is_a_file_with_a_long_name ""    "blargh",
+    int[]  ia,
+    map    m,
+    bool[] a,
+)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct_expression
+    name: (identifier)
+    (comment)
+    body: (field_declaration_list
+      (field_declaration
+        type: (type)
+        name: (identifier))
+      (comment)
+      (field_declaration
+        type: (type)
+        name: (identifier))))
+  (comment)
+  (struct_expression
+    name: (identifier)
+    body: (field_declaration_list
+      (field_declaration
+        type: (type
+          (identifier))
+        name: (identifier))
+      (comment)
+      (field_declaration
+        type: (type
+          (identifier))
+        name: (identifier)
+        help: (string)
+        outname: (string))))
+  (struct_expression
+    name: (identifier)
+    body: (field_declaration_list
+      (field_declaration
+        type: (type)
+        name: (identifier)
+        help: (string))
+      (field_declaration
+        type: (type
+          (identifier))
+        name: (identifier)
+        (ERROR)
+        help: (string))
+      (field_declaration
+        type: (type)
+        name: (identifier))
+      (field_declaration
+        type: (type)
+        name: (identifier))
+      (field_declaration
+        type: (type)
+        name: (identifier)))))

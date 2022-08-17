@@ -37,90 +37,65 @@ pipeline DUPLICATE_FINDER(
 
 (source_file
   (filetype_statement
-    filetype: (id_list
-      (identifier)))
-  (stage
+    filetype: (identifier))
+  (stage_expression
     name: (identifier)
-    (input_parameter
-      type: (type_id
-        (type
-          (id_list
-            (identifier))))
-      name: (identifier))
-    (input_parameter
-      type: (type_id
-        (type))
-      name: (identifier))
-    (output_parameter
-      type: (type_id
-        (type
-          (id_list
-            (identifier))))
-      help: (identifier))
-    (source
-      type: (src_lang)
-      file: (string)))
-  (stage
-    name: (identifier)
-    (input_parameter
-      type: (type_id
-        (type
-          (id_list
-            (identifier))))
-      name: (identifier))
-    (output_parameter
-      type: (type_id
-        (type
-          (id_list
-            (identifier))))
-      help: (identifier))
-    (source
-      type: (src_lang)
-      file: (string)))
-  (pipeline
-    name: (identifier)
-    (input_parameter
-      type: (type_id
-        (type
-          (id_list
-            (identifier))))
-      name: (identifier))
-    (output_parameter
-      type: (type_id
-        (type
-          (id_list
-            (identifier))))
-      help: (identifier))
-    (call_stm_list
-      (call_stm
-        (call_stm_begin
+    parameters: (stage_parameters
+      (input_parameter
+        type: (type
           (identifier))
-        (bind_stm_list
-          (nonempty_bind_stm_list
-            (bind_stm
-              (identifier)
-              (exp
-                (ref_exp
-                  (identifier)))))))
-      (call_stm
-        (call_stm_begin
+        name: (identifier))
+      (input_parameter
+        type: (type)
+        name: (identifier))
+      (output_parameter
+        type: (type
           (identifier))
-        (bind_stm_list
-          (nonempty_bind_stm_list
-            (bind_stm
-              (identifier)
-              (exp
-                (ref_exp
-                  (identifier)
-                  (id_list
-                    (identifier)))))))))
-    (return_stm
-      (bind_stm_list
-        (nonempty_bind_stm_list
-          (bind_stm
-            (identifier)
-            (exp
-              (ref_exp
-                (identifier)
-                (id_list
-                  (identifier))))))))))
+        help: (identifier))
+      (source
+        type: (src_lang)
+        file: (string))))
+  (stage_expression
+    name: (identifier)
+    parameters: (stage_parameters
+      (input_parameter
+        type: (type
+          (identifier))
+        name: (identifier))
+      (output_parameter
+        type: (type
+          (identifier))
+        help: (identifier))
+      (source
+        type: (src_lang)
+        file: (string))))
+  (pipeline_expression
+    name: (identifier)
+    parameters: (pipeline_parameters
+      (input_parameter
+        type: (type
+          (identifier))
+        name: (identifier))
+      (output_parameter
+        type: (type
+          (identifier))
+        help: (identifier)))
+    (call_expression
+      name: (identifier)
+      (bindings
+        (bind
+          name: (identifier)
+          value: (identifier))))
+    (call_expression
+      name: (identifier)
+      (bindings
+        (bind
+          name: (identifier)
+          value: (identifier)
+          value: (identifier))))
+    (return
+      (bindings
+        (bind
+          name: (identifier)
+          value: (identifier)
+          value: (identifier))))))

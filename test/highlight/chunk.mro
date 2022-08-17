@@ -1,3 +1,7 @@
+@include "x";
+
+filetype txt;
+
 stage SUM_SQUARES(
     in  map[] values,
     out fdf   sum,

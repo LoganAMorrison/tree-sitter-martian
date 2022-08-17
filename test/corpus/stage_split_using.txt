@@ -1,6 +1,6 @@
-=================
+================================================================================
 Stage Split Using
-=================
+================================================================================
 
 stage SUM_SQUARES(
     in  float[] values,
@@ -14,36 +14,32 @@ stage SUM_SQUARES(
     threads = -16,
 )
 
----
+--------------------------------------------------------------------------------
 
 (source_file
-    (stage
-        name: (identifier)
-        (input_parameter
-            type: (type_id (type) (arr_list))
-            name: (identifier)
-        )
-        (output_parameter
-            type: (type_id (type))
-            help: (identifier)
-        )
-        (source
-            type: (src_lang)
-            file: (string)
-        )
-        (split_param_list
-            (input_parameter
-                type: (type_id (type))
-                name: (identifier)
-            )
-            (output_parameter
-                type: (type_id (type))
-                help: (identifier)
-            )
-        )
-        (resources
-            (resource value: (number (float)))
-            (resource value: (number (integer)))
-        )
-    )
-)
+  (stage_expression
+    name: (identifier)
+    parameters: (stage_parameters
+      (input_parameter
+        type: (type)
+        name: (identifier))
+      (output_parameter
+        type: (type)
+        help: (identifier))
+      (source
+        type: (src_lang)
+        file: (string)))
+    (split_parameters
+      (input_parameter
+        type: (type)
+        name: (identifier))
+      (output_parameter
+        type: (type)
+        help: (identifier)))
+    (resources
+      (resource
+        value: (number
+          (float)))
+      (resource
+        value: (number
+          (integer))))))

@@ -1,12 +1,12 @@
 stage SUM_SQUARES(
-    in  float[] values,
-    out float   "sum" "blah",
-    src comp "sum_squares",
+  in  float[] values,
+  out float "sum" "blah",
+  src comp "sum_squares",
 ) split (
-    in  float   value,
-    out float   value,
+  in  float value,
+  out float value,
 ) using (
-    mem_gb  = 0.,
-    threads =  -16,
-    threads = 23,
+  mem_gb  = 0.0,
+  threads = -16,
+  threads = 23,
 )

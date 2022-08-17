@@ -1,34 +1,24 @@
 ================================================================================
-Simple stage
+Map type
 ================================================================================
 
-filetype txt;
-
-stage SORT_ITEMS(
-  in txt unsorted,
-  in bool case_sensitive,
-  out txt sorted,
-  src py "stages/sort",
+stage MY_STAGE(
+  in map<float[]> v1,
+  out map<float>[] v2,
+  src comp "blah",
 )
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (filetype_statement
-    filetype: (identifier))
   (stage_expression
     name: (identifier)
     parameters: (stage_parameters
       (input_parameter
-        type: (type
-          (identifier))
-        name: (identifier))
-      (input_parameter
-        type: (type)
+        type: (map_type)
         name: (identifier))
       (output_parameter
-        type: (type
-          (identifier))
+        type: (map_type)
         help: (identifier))
       (source
         type: (src_lang)

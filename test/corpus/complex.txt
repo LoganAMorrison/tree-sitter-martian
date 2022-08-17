@@ -1,49 +1,64 @@
 ================================================================================
-Map Call
+Complex
 ================================================================================
 
+@include "pipeline.mro"
 
-stage SQUARE(
-    in  float value,
-    out float square,
-    src comp  "square",
+filetype txt;
+
+stage STAGE1(
+  in txt file,
+  out txt outfile,
+  src comp "comp",
 )
 
-stage SUM(
-    in  float[] values,
-    out float   sum,
-    src comp    "sum",
+stage STAGE2(
+  in txt file,
+  out float[] floats,
+  src py "comp",
 )
 
-pipeline SUM_SQUARES(
-    in  float[] values,
-    out float   sum,
+pipeline MY_PIPE(
+  in txt file,
+  out float[] floats,
 )
 {
-    map call SQUARE(
-        value = split self.values,
-    )
 
-    call SUM(
-        values = SQUARE.square,
-    )
+  call STAGE1(
+    file = self.file,
+  )
+  call STAGE2(
+    file = STAGE1.file,
+  )
 
-    return (
-        value = SUM.sum,
-    )
+  return(
+    floats = STAGE2.floats,
+  )
+
 }
+
+call MY_PIPE(
+    file = "/home/duplicator_dave/unsorted.txt",
+)
 
 --------------------------------------------------------------------------------
 
 (source_file
+  (includes
+    (include
+      include: (string)))
+  (filetype_statement
+    filetype: (identifier))
   (stage_expression
     name: (identifier)
     parameters: (stage_parameters
       (input_parameter
-        type: (type)
+        type: (type
+          (identifier))
         name: (identifier))
       (output_parameter
-        type: (type)
+        type: (type
+          (identifier))
         help: (identifier))
       (source
         type: (src_lang)
@@ -52,7 +67,8 @@ pipeline SUM_SQUARES(
     name: (identifier)
     parameters: (stage_parameters
       (input_parameter
-        type: (type)
+        type: (type
+          (identifier))
         name: (identifier))
       (output_parameter
         type: (type)
@@ -64,7 +80,8 @@ pipeline SUM_SQUARES(
     name: (identifier)
     parameters: (pipeline_parameters
       (input_parameter
-        type: (type)
+        type: (type
+          (identifier))
         name: (identifier))
       (output_parameter
         type: (type)
@@ -73,8 +90,8 @@ pipeline SUM_SQUARES(
       name: (identifier)
       (bindings
         (bind
-          (identifier)
-          (identifier))))
+          name: (identifier)
+          value: (identifier))))
     (call_expression
       name: (identifier)
       (bindings
@@ -87,4 +104,10 @@ pipeline SUM_SQUARES(
         (bind
           name: (identifier)
           value: (identifier)
-          value: (identifier))))))
+          value: (identifier)))))
+  (call_expression
+    name: (identifier)
+    (bindings
+      (bind
+        name: (identifier)
+        value: (string)))))

@@ -1,0 +1,38 @@
+@include "pipeline.mro"
+
+filetype txt;
+
+stage STAGE1(
+  in txt file,
+  out txt outfile,
+  src comp "comp",
+)
+
+stage STAGE2(
+  in txt file,
+  out float[] floats,
+  src py "comp",
+)
+
+pipeline MY_PIPE(
+  in txt file,
+  out float[] floats,
+)
+{
+  call STAGE1(
+    file = self.file,
+  )
+
+  call STAGE2(
+    file = STAGE1.file,
+  )
+
+  return(
+    floats = STAGE2.floats,
+  )
+
+}
+
+call MY_PIPE(
+    file = "/home/duplicator_dave/unsorted.txt",
+)

@@ -5,36 +5,32 @@ Chunked Stage
 
 stage SUM_SQUARES(
     in  float[] values,
-    out float   sum,
-    src comp    "sum_squares",
+    out float sum,
+    src comp "sum_squares",
 ) split (
-    in  float   value,
-    out float   value,
+    in  float value,
+    out float value,
 )
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (stage
+  (stage_expression
     name: (identifier)
-    (input_parameter
-      type: (type_id
-        (type)
-        (arr_list))
-      name: (identifier))
-    (output_parameter
-      type: (type_id
-        (type))
-      help: (identifier))
-    (source
-      type: (src_lang)
-      file: (string))
-    (split_param_list
+    parameters: (stage_parameters
       (input_parameter
-        type: (type_id
-          (type))
+        type: (type)
         name: (identifier))
       (output_parameter
-        type: (type_id
-          (type))
+        type: (type)
+        help: (identifier))
+      (source
+        type: (src_lang)
+        file: (string)))
+    (split_parameters
+      (input_parameter
+        type: (type)
+        name: (identifier))
+      (output_parameter
+        type: (type)
         help: (identifier)))))
