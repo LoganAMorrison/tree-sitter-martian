@@ -1,3 +1,5 @@
+@include "myfile.mro"
+
 stage SQUARE(
     in  float value,
     out float square,
