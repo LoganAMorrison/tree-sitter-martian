@@ -74,20 +74,43 @@
 ;;;  name: (identifier) @function.call)
 
 ; Bindings
-(bind 
-  name: (identifier) @variable 
+(binding_statement 
+  target: (identifier) @variable 
   value: (identifier) @field)
 
 (input_parameter
-  type: (type) @type.builtin
+  type: (parameter_type) @type.builtin
   name: (identifier) @variable)
 (output_parameter
-  type: (type) @type.builtin)
+  type: (parameter_type) @type.builtin)
 (output_parameter
   (identifier) @variable)
 
+
+(using_statement
+  (using_binding 
+    resource: (using_binding_resource) @variable.builtin))
+
+(using_binding
+  (_)
+  value: (identifier) @variable.builtin
+  (#match? @variable.builtin "^strict$"))
+
+((identifier) @constant
+ (#match? @constant "^[A-Z][A-Z_]*$"))
+
+(scoped_identifier name: (identifier) @property)
+
 [
   "self"
+  "special"
+  "threads"
+  "volatile"
+  "mem_gb"
+  "vmem_gb"
+  "local"
+  "disabled"
+  "*"
 ] @variable.builtin
 
 [
@@ -100,13 +123,18 @@
  "split"
  "using"
  "filetype"
-] @keyword
-
-[
+ "struct"
  "in"
  "out"
  "src"
-] @keyword.operator
+ "@include"
+] @keyword
+
+;; [
+;;  "in"
+;;  "out"
+;;  "src"
+;; ] @keyword.operator
 
 [
  "return"
@@ -118,16 +146,17 @@
  "py"
  "comp"
  "exec"
- (type)
+ (parameter_type)
 ] @type.builtin
 
-(type (identifier) @type)
+(parameter_type (identifier) @type)
 
 ; Numbers, bools, etc.
 [
- "true"
- "false"
-] @boolean
+ (true)
+ (false)
+ (null)
+] @constant.builtin
 
 (integer) @number
 (float) @float
@@ -135,5 +164,21 @@
 (comment) @comment
 
 ; Punctuation
-["(" ")" "[" "]" "{" "}"]  @punctuation.bracket
-["," "." ";"] @punctuation.delimiter
+[
+  "(" 
+  ")" 
+  "[" 
+  "]" 
+  "{" 
+  "}"
+]  @punctuation.bracket
+
+[
+  "," 
+  "." 
+  ";"
+] @punctuation.delimiter
+
+[
+  "="
+] @operator

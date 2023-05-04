@@ -15,22 +15,29 @@ stage SUM_SQUARES(
 --------------------------------------------------------------------------------
 
 (source_file
-  (stage_expression
+  (stage_declaration
     name: (identifier)
-    parameters: (stage_parameters
+    (parameter_list
       (input_parameter
-        type: (type)
+        type: (parameter_type
+          (array_type
+            (parameter_type
+              (primitive_type))))
         name: (identifier))
       (output_parameter
-        type: (type)
-        help: (identifier))
-      (source
-        type: (src_lang)
-        file: (string)))
-    (split_parameters
-      (input_parameter
-        type: (type)
-        name: (identifier))
-      (output_parameter
-        type: (type)
-        help: (identifier)))))
+        type: (parameter_type
+          (primitive_type))
+        name: (identifier)))
+    (source_declaration
+      (source_type)
+      source_path: (string))
+    (split_statement
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))))))

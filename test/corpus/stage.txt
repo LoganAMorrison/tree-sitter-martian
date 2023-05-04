@@ -14,22 +14,22 @@ stage SORT_ITEMS(
 --------------------------------------------------------------------------------
 
 (source_file
-  (filetype_statement
-    filetype: (identifier))
-  (stage_expression
+  (filetype_declaration)
+  (stage_declaration
     name: (identifier)
-    parameters: (stage_parameters
+    (parameter_list
       (input_parameter
-        type: (type
+        type: (parameter_type
           (identifier))
         name: (identifier))
       (input_parameter
-        type: (type)
+        type: (parameter_type
+          (primitive_type))
         name: (identifier))
       (output_parameter
-        type: (type
+        type: (parameter_type
           (identifier))
-        help: (identifier))
-      (source
-        type: (src_lang)
-        file: (string)))))
+        name: (identifier)))
+    (source_declaration
+      (source_type)
+      source_path: (string))))

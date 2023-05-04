@@ -1,16 +1,16 @@
 [
- (pipeline)
- (stage)
- (call)
- (using)
- (split)
- (return)
+ (pipeline_declaration)
+ (stage_declaration)
+ (call_statement)
+ (using_statement)
+ (split_statement)
+ (return_statement)
 ] @indent
 
-(pipeline "{" @indent)
-(pipeline "{" @indent)
+(pipeline_declaration "{" @indent)
+(pipeline_declaration "{" @indent)
 
-(call (bindings) @indent)
+(call_statement (binding_statement) @indent)
 
 [
   ")"
@@ -18,26 +18,17 @@
   "]"
 ] @branch
 
-(pipeline ")" @indent_end)
-(stage ")" @indent_end)
-(call ")" @indent_end)
-(using ")" @indent_end)
-(split ")" @indent_end)
-(return ")" @indent_end)
+(pipeline_declaration ")" @indent_end)
+(stage_declaration ")" @indent_end)
+(call_statement ")" @indent_end)
+(using_statement ")" @indent_end)
+(split_statement ")" @indent_end)
+(return_statement ")" @indent_end)
 
-(stage (input_parameter) @indent)
-(stage (input_parameter "," @indent_end))
-(stage (output_parameter) @indent)
-(stage (output_parameter "," @indent_end))
-(stage (source) @indent)
-(stage (source "," @indent_end))
+;(stage_declaration (input_parameter) @indent)
+;(stage_declaration (input_parameter "," @indent_end))
+;(stage_declaration (output_parameter) @indent)
+;(stage_declaration (output_parameter "," @indent_end))
+;(stage_declaration (source_declaration) @indent)
+;(stage_declaration (source_declaration "," @indent_end))
 
-(stage (input_parameter) @indent)
-(stage (input_parameter "," @indent_end))
-(stage (output_parameter) @indent)
-(stage (output_parameter "," @indent_end))
-(stage (source) @indent)
-(stage (source "," @indent_end))
-
-(call (bindings) @indent)
-(stage (bindings "," @indent_end))

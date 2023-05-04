@@ -1,55 +1,18 @@
 [
   {
-    "type": "_array_type",
+    "type": "array_binding",
     "named": true,
-    "fields": {
-      "path": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "array_expr",
-    "named": true,
-    "fields": {
-      "path": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "array_expr",
+          "type": "array_binding",
           "named": true
         },
         {
-          "type": "bool_expr",
+          "type": "false",
           "named": true
         },
         {
@@ -65,34 +28,55 @@
           "named": true
         },
         {
-          "type": "map_expr",
+          "type": "map_binding",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "scoped_identifier",
           "named": true
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "true",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "bind",
+    "type": "array_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "binding_statement",
     "named": true,
     "fields": {
-      "name": {
+      "target": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "path": {
-        "multiple": true,
-        "required": false,
-        "types": [
+            "type": "*",
+            "named": false
+          },
           {
             "type": "identifier",
             "named": true
@@ -100,19 +84,15 @@
         ]
       },
       "value": {
-        "multiple": true,
-        "required": false,
+        "multiple": false,
+        "required": true,
         "types": [
           {
-            "type": ".",
-            "named": false
-          },
-          {
-            "type": "array_expr",
+            "type": "array_binding",
             "named": true
           },
           {
-            "type": "bool_expr",
+            "type": "false",
             "named": true
           },
           {
@@ -128,12 +108,16 @@
             "named": true
           },
           {
-            "type": "map_expr",
+            "type": "map_binding",
             "named": true
           },
           {
             "type": "null",
-            "named": false
+            "named": true
+          },
+          {
+            "type": "scoped_identifier",
+            "named": true
           },
           {
             "type": "self",
@@ -142,51 +126,17 @@
           {
             "type": "string",
             "named": true
+          },
+          {
+            "type": "true",
+            "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "nonempty_collection_exp",
-          "named": true
-        }
-      ]
     }
   },
   {
-    "type": "bindings",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "bind",
-          "named": true
-        },
-        {
-          "type": "wildcard_bind",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "bool_expr",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "call_expression",
+    "type": "call_statement",
     "named": true,
     "fields": {
       "alias": {
@@ -212,128 +162,26 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "bindings",
+          "type": "binding_statement",
           "named": true
         },
         {
-          "type": "modifier",
-          "named": true
-        },
-        {
-          "type": "modifiers",
+          "type": "using_statement",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "field_declaration",
+    "type": "filetype_declaration",
     "named": true,
-    "fields": {
-      "help": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "outname": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "[",
-            "named": false
-          },
-          {
-            "type": "]",
-            "named": false
-          },
-          {
-            "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "type",
-            "named": true
-          }
-        ]
-      }
-    }
+    "fields": {}
   },
   {
-    "type": "field_declaration_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "field_declaration",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "filetype_statement",
-    "named": true,
-    "fields": {
-      "filetype": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ".",
-            "named": false
-          },
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "path": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "include",
+    "type": "include_statement",
     "named": true,
     "fields": {
       "include": {
@@ -346,21 +194,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "includes",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "include",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -388,23 +221,11 @@
         ]
       },
       "type": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "[",
-            "named": false
-          },
-          {
-            "type": "]",
-            "named": false
-          },
-          {
-            "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "type",
+            "type": "parameter_type",
             "named": true
           }
         ]
@@ -412,218 +233,85 @@
     }
   },
   {
-    "type": "kvpair_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "kvpair_list_partial",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "kvpair_list_partial",
+    "type": "map_binding",
     "named": true,
     "fields": {
-      "path": {
+      "key": {
         "multiple": true,
         "required": false,
         "types": [
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "array_binding",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "map_binding",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "scoped_identifier",
+            "named": true
+          },
+          {
+            "type": "self",
+            "named": false
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array_expr",
-          "named": true
-        },
-        {
-          "type": "bool_expr",
-          "named": true
-        },
-        {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
-          "type": "map_expr",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "map_expr",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "kvpair_list",
-          "named": true
-        },
-        {
-          "type": "struct_vals_list",
-          "named": true
-        }
-      ]
     }
   },
   {
     "type": "map_type",
     "named": true,
-    "fields": {
-      "path": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "modifier",
-    "named": true,
-    "fields": {
-      "path": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bool_expr",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "modifiers",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "nonempty_collection_exp",
-    "named": true,
-    "fields": {
-      "path": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "array_expr",
-          "named": true
-        },
-        {
-          "type": "bool_expr",
-          "named": true
-        },
-        {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
-          "type": "kvpair_list",
-          "named": true
-        },
-        {
-          "type": "map_expr",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "number",
-    "named": true,
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "integer",
+          "type": "parameter_type",
           "named": true
         }
       ]
@@ -638,16 +326,22 @@
         "required": false,
         "types": [
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "string",
             "named": true
           }
         ]
       },
-      "outname": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "output_name": {
         "multiple": false,
         "required": false,
         "types": [
@@ -658,23 +352,11 @@
         ]
       },
       "type": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "[",
-            "named": false
-          },
-          {
-            "type": "]",
-            "named": false
-          },
-          {
-            "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "type",
+            "type": "parameter_type",
             "named": true
           }
         ]
@@ -682,51 +364,7 @@
     }
   },
   {
-    "type": "pipeline_expression",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "parameters": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "pipeline_parameters",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "pipeline_retain",
-          "named": true
-        },
-        {
-          "type": "return",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "pipeline_parameters",
+    "type": "parameter_list",
     "named": true,
     "fields": {},
     "children": {
@@ -745,27 +383,39 @@
     }
   },
   {
-    "type": "pipeline_retain",
+    "type": "parameter_type",
     "named": true,
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "pipeline_retain_list",
+          "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "pipeline_retain_list",
+    "type": "pipeline_declaration",
     "named": true,
     "fields": {
-      "path": {
-        "multiple": true,
-        "required": false,
+      "name": {
+        "multiple": false,
+        "required": true,
         "types": [
           {
             "type": "identifier",
@@ -779,60 +429,47 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "parameter_list",
+          "named": true
+        },
+        {
+          "type": "retain_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "resource",
+    "type": "primitive_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "retain_statement",
     "named": true,
     "fields": {
-      "resource": {
-        "multiple": false,
+      "name": {
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "mem_gb",
+            "type": ",",
             "named": false
           },
           {
-            "type": "special",
-            "named": false
-          },
-          {
-            "type": "threads",
-            "named": false
-          },
-          {
-            "type": "vmem_gb",
-            "named": false
-          },
-          {
-            "type": "volatile",
-            "named": false
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "false",
-            "named": false
-          },
-          {
-            "type": "number",
+            "type": "identifier",
             "named": true
           },
           {
-            "type": "strict",
-            "named": false
-          },
-          {
-            "type": "string",
+            "type": "scoped_identifier",
             "named": true
           }
         ]
@@ -840,59 +477,74 @@
     }
   },
   {
-    "type": "resources",
+    "type": "return_statement",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "resource",
+          "type": "binding_statement",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "return",
+    "type": "scoped_identifier",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "path": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "self",
+            "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "source_declaration",
+    "named": true,
+    "fields": {
+      "source_path": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "bindings",
+          "type": "source_type",
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "source",
-    "named": true,
-    "fields": {
-      "file": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "src_lang",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -904,82 +556,54 @@
       "required": false,
       "types": [
         {
-          "type": "array_expr",
+          "type": "call_statement",
           "named": true
         },
         {
-          "type": "bool_expr",
+          "type": "filetype_declaration",
           "named": true
         },
         {
-          "type": "call_expression",
+          "type": "include_statement",
           "named": true
         },
         {
-          "type": "filetype_statement",
+          "type": "pipeline_declaration",
           "named": true
         },
         {
-          "type": "float",
+          "type": "stage_declaration",
           "named": true
         },
         {
-          "type": "includes",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
-          "type": "map_expr",
-          "named": true
-        },
-        {
-          "type": "pipeline_expression",
-          "named": true
-        },
-        {
-          "type": "stage_expression",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "struct_expression",
+          "type": "struct_declaration",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "split_parameters",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "input_parameter",
-          "named": true
-        },
-        {
-          "type": "output_parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "src_lang",
+    "type": "source_type",
     "named": true,
     "fields": {}
   },
   {
-    "type": "stage_expression",
+    "type": "split_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stage_declaration",
     "named": true,
     "fields": {
       "name": {
@@ -991,85 +615,30 @@
             "named": true
           }
         ]
-      },
-      "parameters": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "stage_parameters",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
       "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "resources",
-          "named": true
-        },
-        {
-          "type": "split_parameters",
-          "named": true
-        },
-        {
-          "type": "stage_retain",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stage_parameters",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "input_parameter",
+          "type": "parameter_list",
           "named": true
         },
         {
-          "type": "output_parameter",
+          "type": "retain_statement",
           "named": true
         },
         {
-          "type": "source",
+          "type": "source_declaration",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stage_retain",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
+        },
         {
-          "type": "stage_retain_list",
+          "type": "split_statement",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stage_retain_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
+        },
         {
-          "type": "identifier",
+          "type": "using_statement",
           "named": true
         }
       ]
@@ -1081,19 +650,9 @@
     "fields": {}
   },
   {
-    "type": "struct_expression",
+    "type": "struct_declaration",
     "named": true,
     "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "field_declaration_list",
-            "named": true
-          }
-        ]
-      },
       "name": {
         "multiple": false,
         "required": true,
@@ -1104,120 +663,133 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "struct_parameter_list",
+          "named": true
+        }
+      ]
     }
   },
   {
-    "type": "struct_vals_list",
+    "type": "struct_parameter_list",
+    "named": true,
+    "fields": {
+      "help": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "output_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "parameter_type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "using_binding",
+    "named": true,
+    "fields": {
+      "resource": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "using_binding_resource",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "scoped_identifier",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "using_binding_resource",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "using_statement",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "struct_vals_list_partial",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "struct_vals_list_partial",
-    "named": true,
-    "fields": {
-      "path": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "array_expr",
-          "named": true
-        },
-        {
-          "type": "bool_expr",
-          "named": true
-        },
-        {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
-          "type": "map_expr",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "type",
-    "named": true,
-    "fields": {
-      "path": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "wildcard_bind",
-    "named": true,
-    "fields": {
-      "path": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
       "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "identifier",
+          "type": "using_binding",
           "named": true
         }
       ]
@@ -1225,10 +797,6 @@
   },
   {
     "type": "\"",
-    "named": false
-  },
-  {
-    "type": "'",
     "named": false
   },
   {
@@ -1280,30 +848,6 @@
     "named": false
   },
   {
-    "type": "\\\"",
-    "named": false
-  },
-  {
-    "type": "\\\\",
-    "named": false
-  },
-  {
-    "type": "\\b",
-    "named": false
-  },
-  {
-    "type": "\\n",
-    "named": false
-  },
-  {
-    "type": "\\r",
-    "named": false
-  },
-  {
-    "type": "\\t",
-    "named": false
-  },
-  {
     "type": "]",
     "named": false
   },
@@ -1337,6 +881,10 @@
   },
   {
     "type": "false",
+    "named": true
+  },
+  {
+    "type": "file",
     "named": false
   },
   {
@@ -1381,7 +929,7 @@
   },
   {
     "type": "null",
-    "named": false
+    "named": true
   },
   {
     "type": "out",
@@ -1432,10 +980,6 @@
     "named": false
   },
   {
-    "type": "strict",
-    "named": false
-  },
-  {
     "type": "string",
     "named": false
   },
@@ -1449,7 +993,7 @@
   },
   {
     "type": "true",
-    "named": false
+    "named": true
   },
   {
     "type": "using",

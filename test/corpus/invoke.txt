@@ -15,21 +15,18 @@ call DUPLICATE_FINDER(
 --------------------------------------------------------------------------------
 
 (source_file
-  (includes
-    (include
-      (string)))
-  (ERROR
-    (call_expression
-      (identifier)
-      (bindings
-        (bind
-          (identifier)
-          (string)))))
-  (call_expression
+  (include_statement
+    (string))
+  (call_statement
     (identifier)
-    (bindings
-      (bind
-        (identifier)
+    (binding_statement
+      (identifier)
+      (string)))
+  (call_statement
+    (identifier)
+    (binding_statement
+      (identifier)
+      (scoped_identifier
         (identifier)
         (identifier)
         (identifier)
