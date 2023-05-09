@@ -49,34 +49,36 @@ call MY_PIPE(
   (filetype_declaration)
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (primitive_type))))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (primitive_type))))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (pipeline_declaration
     name: (identifier)
     (parameter_list
@@ -92,17 +94,19 @@ call MY_PIPE(
         name: (identifier)))
     (call_statement
       name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          name: (identifier))))
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            name: (identifier)))))
     (call_statement
       name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier))))
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)))))
     (return_statement
       (binding_statement
         target: (identifier)
@@ -111,6 +115,7 @@ call MY_PIPE(
           name: (identifier)))))
   (call_statement
     name: (identifier)
-    (binding_statement
-      target: (identifier)
-      value: (string))))
+    (call_body
+      (binding_statement
+        target: (identifier)
+        value: (string)))))

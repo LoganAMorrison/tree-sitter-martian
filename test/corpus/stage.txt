@@ -17,19 +17,20 @@ stage SORT_ITEMS(
   (filetype_declaration)
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string))))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string)))))

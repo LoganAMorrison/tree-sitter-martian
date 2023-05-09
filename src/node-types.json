@@ -136,6 +136,21 @@
     }
   },
   {
+    "type": "call_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binding_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "call_statement",
     "named": true,
     "fields": {
@@ -162,10 +177,10 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "binding_statement",
+          "type": "call_body",
           "named": true
         },
         {
@@ -603,9 +618,38 @@
     }
   },
   {
+    "type": "stage_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter_list",
+          "named": true
+        },
+        {
+          "type": "source_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "stage_declaration",
     "named": true,
     "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "stage_body",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -619,18 +663,10 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "parameter_list",
-          "named": true
-        },
-        {
           "type": "retain_statement",
-          "named": true
-        },
-        {
-          "type": "source_declaration",
           "named": true
         },
         {
@@ -781,7 +817,7 @@
     "fields": {}
   },
   {
-    "type": "using_statement",
+    "type": "using_body",
     "named": true,
     "fields": {},
     "children": {
@@ -793,6 +829,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "using_statement",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "using_body",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

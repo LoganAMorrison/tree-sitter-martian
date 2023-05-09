@@ -19,15 +19,17 @@ call DUPLICATE_FINDER(
     (string))
   (call_statement
     (identifier)
-    (binding_statement
-      (identifier)
-      (string)))
+    (call_body
+      (binding_statement
+        (identifier)
+        (string))))
   (call_statement
     (identifier)
-    (binding_statement
-      (identifier)
-      (scoped_identifier
+    (call_body
+      (binding_statement
         (identifier)
-        (identifier)
-        (identifier)
-        (identifier)))))
+        (scoped_identifier
+          (identifier)
+          (identifier)
+          (identifier)
+          (identifier))))))

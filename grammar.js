@@ -214,11 +214,15 @@ module.exports = grammar({
     stage_declaration: ($) => seq(
       keywords.stage,
       field("name", $.identifier),
+      field("body", $.stage_body),
+      optional($._stage_modifiers),
+    ),
+
+    stage_body: ($) => seq(
       "(",
       $.parameter_list,
       $.source_declaration,
       ")",
-      optional($._stage_modifiers),
     ),
 
     source_declaration: ($) => seq(
@@ -263,6 +267,10 @@ module.exports = grammar({
 
     using_statement: ($) => seq(
       "using",
+      field("body", $.using_body),
+    ),
+
+    using_body: ($) => seq(
       "(",
       repeat($.using_binding),
       ")",
@@ -275,7 +283,7 @@ module.exports = grammar({
       ","
     ),
 
-    using_binding_resource: ($) => choice(
+    using_binding_resource: (_) => choice(
       keywords.mem_gb,
       keywords.vmem_gb,
       keywords.threads,
@@ -452,13 +460,17 @@ module.exports = grammar({
 
     call_statement: ($) => seq(
       $._call_statement_begin,
-      "(",
-      repeat($.binding_statement),
-      ")",
+      $.call_body,
       // using (
       //  preflight = true,
       // )
       optional($.using_statement),
+    ),
+
+    call_body: ($) => seq(
+      "(",
+      repeat($.binding_statement),
+      ")",
     ),
 
     _call_statement_begin: ($) => seq(

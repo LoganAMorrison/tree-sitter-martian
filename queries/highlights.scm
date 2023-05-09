@@ -75,8 +75,7 @@
 
 ; Bindings
 (binding_statement 
-  target: (identifier) @variable 
-  value: (identifier) @field)
+  target: (identifier) @variable)
 
 (input_parameter
   type: (parameter_type) @type.builtin
@@ -96,8 +95,11 @@
   value: (identifier) @variable.builtin
   (#match? @variable.builtin "^strict$"))
 
-((identifier) @constant
- (#match? @constant "^[A-Z][A-Z_]*$"))
+(binding_statement
+  target: (identifier) @parameter)
+
+(call_statement 
+  "map" @keyword.function)
 
 (scoped_identifier name: (identifier) @property)
 

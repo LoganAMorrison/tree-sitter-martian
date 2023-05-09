@@ -535,157 +535,163 @@ map call AWESOME(
   (comment)
   (stage_declaration
     name: (identifier)
-    (comment)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
+    body: (stage_body
       (comment)
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (comment)
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (comment)
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (comment)
+        (comment)
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (comment)
+        (output_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier)
+          help: (string)
+          output_name: (string)))
       (comment)
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (comment)
-      (comment)
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (comment)
-      (output_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier)
-        help: (string)
-        output_name: (string)))
-    (comment)
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (comment)
   (comment)
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier)
-        help: (string))
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier)
-        help: (string))
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier)
-        help: (string))
-      (output_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier)
+          help: (string))
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier)
+          help: (string))
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier)
+          help: (string))
+        (output_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string)))
     (using_statement
-      (using_binding
-        resource: (using_binding_resource)
-        value: (string))
-      (using_binding
-        resource: (using_binding_resource)
-        value: (identifier))))
+      body: (using_body
+        (using_binding
+          resource: (using_binding_resource)
+          value: (string))
+        (using_binding
+          resource: (using_binding_resource)
+          value: (identifier)))))
   (comment)
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string)))
     (retain_statement
       name: (identifier)))
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (primitive_type))))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (primitive_type))))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (primitive_type))))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (primitive_type))))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (primitive_type))))
-        name: (identifier)
-        help: (string))
-      (output_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (comment)
-      (output_parameter
-        type: (parameter_type
-          (primitive_type))))
-    (source_declaration
-      (source_type)
-      source_path: (string))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (primitive_type))))
+          name: (identifier)
+          help: (string))
+        (output_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (comment)
+        (output_parameter
+          type: (parameter_type
+            (primitive_type))))
+      (source_declaration
+        (source_type)
+        source_path: (string)))
     (split_statement
       (parameter_list
         (input_parameter
@@ -697,321 +703,334 @@ map call AWESOME(
             (primitive_type))
           name: (identifier))))
     (using_statement
-      (comment)
-      (using_binding
-        resource: (using_binding_resource)
-        value: (integer))
-      (comment)
-      (using_binding
-        resource: (using_binding_resource)
-        value: (false))))
+      body: (using_body
+        (comment)
+        (using_binding
+          resource: (using_binding_resource)
+          value: (integer))
+        (comment)
+        (using_binding
+          resource: (using_binding_resource)
+          value: (false)))))
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (primitive_type))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (primitive_type))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (comment)
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string)))
     (using_statement
-      (comment)
-      (using_binding
-        resource: (using_binding_resource)
-        value: (float))
-      (comment)
-      (using_binding
-        resource: (using_binding_resource)
-        value: (float))))
+      body: (using_body
+        (comment)
+        (using_binding
+          resource: (using_binding_resource)
+          value: (float))
+        (comment)
+        (using_binding
+          resource: (using_binding_resource)
+          value: (float)))))
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (identifier))))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (identifier))))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (map_type))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (map_type))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string)))
     (using_statement
-      (using_binding
-        resource: (using_binding_resource)
-        value: (integer))
-      (comment)
-      (using_binding
-        resource: (using_binding_resource)
-        value: (integer))
-      (comment)
-      (using_binding
-        resource: (using_binding_resource)
-        value: (integer))
-      (using_binding
-        resource: (using_binding_resource)
-        value: (identifier))))
+      body: (using_body
+        (using_binding
+          resource: (using_binding_resource)
+          value: (integer))
+        (comment)
+        (using_binding
+          resource: (using_binding_resource)
+          value: (integer))
+        (comment)
+        (using_binding
+          resource: (using_binding_resource)
+          value: (integer))
+        (using_binding
+          resource: (using_binding_resource)
+          value: (identifier)))))
   (comment)
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (primitive_type))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (primitive_type))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (primitive_type))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (primitive_type))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (comment)
+        (output_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier))
+        (comment)
+        (output_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (primitive_type))))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (comment)
+        (output_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier)
+          help: (string))
+        (output_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (identifier))))
+          name: (identifier)))
       (comment)
-      (output_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (comment)
-      (output_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (primitive_type))))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (comment)
-      (output_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier)
-        help: (string))
-      (output_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (identifier))))
-        name: (identifier)))
-    (comment)
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (map_type
-            (parameter_type
-              (identifier))))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (map_type
-                (parameter_type
-                  (identifier))))))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (map_type
-            (parameter_type
-              (array_type
-                (parameter_type
-                  (identifier))))))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (map_type
-                (parameter_type
-                  (array_type
-                    (parameter_type
-                      (identifier))))))))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (identifier))))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (identifier))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (map_type
+              (parameter_type
+                (identifier))))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (map_type
+                  (parameter_type
+                    (identifier))))))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (map_type
+              (parameter_type
+                (array_type
+                  (parameter_type
+                    (identifier))))))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (map_type
+                  (parameter_type
+                    (array_type
+                      (parameter_type
+                        (identifier))))))))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (identifier))))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (map_type
-            (parameter_type
-              (identifier))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (map_type
-            (parameter_type
-              (identifier))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (identifier))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (map_type
-            (parameter_type
-              (array_type
-                (parameter_type
-                  (primitive_type))))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (array_type
-                (parameter_type
-                  (primitive_type))))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (map_type
-            (parameter_type
-              (array_type
-                (parameter_type
-                  (primitive_type))))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (map_type
-                (parameter_type
-                  (primitive_type))))))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (map_type
+              (parameter_type
+                (identifier))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (map_type
+              (parameter_type
+                (identifier))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (identifier))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (map_type
+              (parameter_type
+                (array_type
+                  (parameter_type
+                    (primitive_type))))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (array_type
+                  (parameter_type
+                    (primitive_type))))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (map_type
+              (parameter_type
+                (array_type
+                  (parameter_type
+                    (primitive_type))))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (map_type
+                  (parameter_type
+                    (primitive_type))))))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (map_type
-                (parameter_type
-                  (identifier))))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (map_type
-            (parameter_type
-              (array_type
-                (parameter_type
-                  (identifier))))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (array_type
+              (parameter_type
+                (map_type
+                  (parameter_type
+                    (identifier))))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (map_type
+              (parameter_type
+                (array_type
+                  (parameter_type
+                    (identifier))))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (primitive_type))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (map_type
-            (parameter_type
-              (identifier))))
-        name: (identifier))
-      (input_parameter
-        type: (parameter_type
-          (map_type
-            (parameter_type
-              (identifier))))
-        name: (identifier)))
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+    body: (stage_body
+      (parameter_list
+        (input_parameter
+          type: (parameter_type
+            (map_type
+              (parameter_type
+                (identifier))))
+          name: (identifier))
+        (input_parameter
+          type: (parameter_type
+            (map_type
+              (parameter_type
+                (identifier))))
+          name: (identifier)))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (comment)
   (stage_declaration
     name: (identifier)
-    (parameter_list
-      (output_parameter
-        type: (parameter_type
-          (primitive_type))))
-    (source_declaration
-      (source_type)
-      source_path: (string)))
+    body: (stage_body
+      (parameter_list
+        (output_parameter
+          type: (parameter_type
+            (primitive_type))))
+      (source_declaration
+        (source_type)
+        source_path: (string))))
   (pipeline_declaration
     name: (identifier)
     (parameter_list
@@ -1020,7 +1039,8 @@ map call AWESOME(
           (primitive_type))
         name: (identifier)))
     (call_statement
-      name: (identifier))
+      name: (identifier)
+      (call_body))
     (return_statement
       (binding_statement
         target: (identifier)
@@ -1082,7 +1102,8 @@ map call AWESOME(
         name: (identifier)))
     (call_statement
       name: (identifier)
-      (binding_statement))
+      (call_body
+        (binding_statement)))
     (return_statement
       (binding_statement
         target: (identifier)
@@ -1130,393 +1151,421 @@ map call AWESOME(
         name: (identifier)))
     (call_statement
       name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          name: (identifier)))
-      (comment)
-      (binding_statement
-        target: (identifier)
-        value: (string))
-      (binding_statement
-        target: (identifier)
-        value: (null))
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            name: (identifier)))
+        (comment)
+        (binding_statement
+          target: (identifier)
+          value: (string))
+        (binding_statement
+          target: (identifier)
+          value: (null)))
       (using_statement
-        (using_binding
-          resource: (using_binding_resource)
-          value: (true))))
+        body: (using_body
+          (using_binding
+            resource: (using_binding_resource)
+            value: (true)))))
     (call_statement
       name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (string))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier))))
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (string))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)))))
     (call_statement
       name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (string))
-      (binding_statement
-        target: (identifier)
-        value: (string))
-      (binding_statement
-        target: (identifier)
-        value: (string))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier))))
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (string))
+        (binding_statement
+          target: (identifier)
+          value: (string))
+        (binding_statement
+          target: (identifier)
+          value: (string))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)))))
     (call_statement
       name: (identifier)
       alias: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (string))
-      (comment)
-      (binding_statement
-        target: (identifier)
-        value: (array_binding
-          (comment)
-          (comment)
-          (string)
-          (string)))
-      (binding_statement
-        target: (identifier)
-        value: (string))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier))))
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (string))
+        (comment)
+        (binding_statement
+          target: (identifier)
+          value: (array_binding
+            (comment)
+            (comment)
+            (string)
+            (string)))
+        (binding_statement
+          target: (identifier)
+          value: (string))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)))))
     (call_statement
       name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (map_binding
-          key: (string)
-          value: (string)
-          (comment)
-          key: (string)
-          value: (null)
-          key: (string)
+      (call_body
+        (binding_statement
+          target: (identifier)
           value: (map_binding
+            key: (string)
+            value: (string)
             (comment)
             key: (string)
-            value: (integer))))
+            value: (null)
+            key: (string)
+            value: (map_binding
+              (comment)
+              key: (string)
+              value: (integer)))))
       (using_statement
-        (comment)
-        (using_binding
-          resource: (using_binding_resource)
+        body: (using_body
+          (comment)
+          (using_binding
+            resource: (using_binding_resource)
+            value: (scoped_identifier
+              path: (identifier)
+              name: (identifier)))
+          (using_binding
+            resource: (using_binding_resource)
+            value: (true))
+          (comment)
+          (using_binding
+            resource: (using_binding_resource)
+            value: (false)))))
+    (call_statement
+      name: (identifier)
+      alias: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (map_binding))))
+    (call_statement
+      name: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (string))
+        (binding_statement
+          target: (identifier)
+          value: (array_binding
+            (string))))
+      (using_statement
+        body: (using_body
+          (using_binding
+            resource: (using_binding_resource)
+            value: (true)))))
+    (call_statement
+      name: (identifier)
+      alias: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (string))
+        (binding_statement
+          target: (identifier)
+          value: (array_binding
+            (string)
+            (string)))))
+    (call_statement
+      name: (identifier)
+      alias: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
           value: (scoped_identifier
             path: (identifier)
             name: (identifier)))
-        (using_binding
-          resource: (using_binding_resource)
-          value: (true))
-        (comment)
-        (using_binding
-          resource: (using_binding_resource)
-          value: (false))))
+        (binding_statement
+          target: (identifier)
+          value: (null))))
     (call_statement
       name: (identifier)
-      alias: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (map_binding)))
-    (call_statement
-      name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (string))
-      (binding_statement
-        target: (identifier)
-        value: (array_binding
-          (string)))
-      (using_statement
-        (using_binding
-          resource: (using_binding_resource)
-          value: (true))))
-    (call_statement
-      name: (identifier)
-      alias: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (string))
-      (binding_statement
-        target: (identifier)
-        value: (array_binding
-          (string)
-          (string))))
-    (call_statement
-      name: (identifier)
-      alias: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (null)))
-    (call_statement
-      name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier))))
-    (call_statement
-      name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (array_binding
-          (scoped_identifier
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
             path: (identifier)
             name: (identifier)))))
     (call_statement
       name: (identifier)
-      alias: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier))))
-    (call_statement
-      name: (identifier)
-      alias: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (array_binding
-          (string)
-          (scoped_identifier
-            path: (identifier)
-            name: (identifier)))))
-    (call_statement
-      name: (identifier)
-      alias: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (array_binding)))
-    (call_statement
-      name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          name: (identifier)
-          name: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (null))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          name: (identifier)
-          name: (identifier))))
-    (call_statement
-      name: (identifier)
-      alias: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (identifier))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier))))
-    (call_statement
-      name: (identifier)
-      alias: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)
-          name: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)
-          name: (identifier))))
-    (call_statement
-      name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (identifier)))
-    (call_statement
-      name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (integer))
-      (binding_statement
-        value: (identifier)))
-    (call_statement
-      name: (identifier)
-      (binding_statement
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier))))
-    (call_statement
-      name: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (map_binding
-          key: (string)
-          value: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)
-          name: (identifier)))
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier)
-          name: (identifier))))
-    (call_statement
-      name: (identifier)
-      alias: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (array_binding
-          (float)))
-      (binding_statement
-        target: (identifier)
-        value: (array_binding
-          (integer)))
-      (binding_statement
-        target: (identifier)
-        value: (integer))
-      (binding_statement
-        target: (identifier)
-        value: (map_binding
-          key: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
           value: (array_binding
             (scoped_identifier
               path: (identifier)
-              name: (identifier)))
-          key: (identifier)
-          value: (integer)
-          key: (identifier)
-          value: (string)
-          key: (identifier)
-          value: (array_binding)
-          key: (identifier)
-          value: (map_binding)))
-      (using_statement
-        (using_binding
-          resource: (using_binding_resource)
-          value: (true))))
+              name: (identifier))))))
     (call_statement
       name: (identifier)
       alias: (identifier)
-      (binding_statement
-        target: (identifier)
-        value: (float))
-      (binding_statement
-        target: (identifier)
-        value: (array_binding
-          (integer)
-          (integer)))
-      (binding_statement
-        target: (identifier)
-        value: (integer))
-      (binding_statement
-        target: (identifier)
-        value: (map_binding
-          key: (identifier)
-          value: (array_binding)
-          key: (identifier)
-          value: (integer)
-          key: (identifier)
-          value: (string)
-          key: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)))))
+    (call_statement
+      name: (identifier)
+      alias: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
           value: (array_binding
-            (integer)
-            (integer))
-          key: (identifier)
+            (string)
+            (scoped_identifier
+              path: (identifier)
+              name: (identifier))))))
+    (call_statement
+      name: (identifier)
+      alias: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (array_binding))))
+    (call_statement
+      name: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            name: (identifier)
+            name: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (null))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            name: (identifier)
+            name: (identifier)))))
+    (call_statement
+      name: (identifier)
+      alias: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (identifier))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)))))
+    (call_statement
+      name: (identifier)
+      alias: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)
+            name: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)
+            name: (identifier)))))
+    (call_statement
+      name: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (identifier))))
+    (call_statement
+      name: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (integer))
+        (binding_statement
+          value: (identifier))))
+    (call_statement
+      name: (identifier)
+      (call_body
+        (binding_statement
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)))))
+    (call_statement
+      name: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
           value: (map_binding
             key: (string)
-            value: (integer))))
+            value: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)
+            name: (identifier)))
+        (binding_statement
+          target: (identifier)
+          value: (scoped_identifier
+            path: (identifier)
+            name: (identifier)
+            name: (identifier)))))
+    (call_statement
+      name: (identifier)
+      alias: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (array_binding
+            (float)))
+        (binding_statement
+          target: (identifier)
+          value: (array_binding
+            (integer)))
+        (binding_statement
+          target: (identifier)
+          value: (integer))
+        (binding_statement
+          target: (identifier)
+          value: (map_binding
+            key: (identifier)
+            value: (array_binding
+              (scoped_identifier
+                path: (identifier)
+                name: (identifier)))
+            key: (identifier)
+            value: (integer)
+            key: (identifier)
+            value: (string)
+            key: (identifier)
+            value: (array_binding)
+            key: (identifier)
+            value: (map_binding))))
       (using_statement
-        (using_binding
-          resource: (using_binding_resource)
-          value: (true))))
+        body: (using_body
+          (using_binding
+            resource: (using_binding_resource)
+            value: (true)))))
+    (call_statement
+      name: (identifier)
+      alias: (identifier)
+      (call_body
+        (binding_statement
+          target: (identifier)
+          value: (float))
+        (binding_statement
+          target: (identifier)
+          value: (array_binding
+            (integer)
+            (integer)))
+        (binding_statement
+          target: (identifier)
+          value: (integer))
+        (binding_statement
+          target: (identifier)
+          value: (map_binding
+            key: (identifier)
+            value: (array_binding)
+            key: (identifier)
+            value: (integer)
+            key: (identifier)
+            value: (string)
+            key: (identifier)
+            value: (array_binding
+              (integer)
+              (integer))
+            key: (identifier)
+            value: (map_binding
+              key: (string)
+              value: (integer)))))
+      (using_statement
+        body: (using_body
+          (using_binding
+            resource: (using_binding_resource)
+            value: (true)))))
     (return_statement
       (binding_statement
         target: (identifier)
@@ -1546,30 +1595,31 @@ map call AWESOME(
   (comment)
   (call_statement
     name: (identifier)
-    (binding_statement
-      target: (identifier)
-      value: (string))
-    (binding_statement
-      target: (identifier)
-      value: (string))
-    (binding_statement
-      target: (identifier)
-      value: (string))
-    (binding_statement
-      target: (identifier)
-      value: (array_binding
-        (string)
-        (string)))
-    (binding_statement
-      target: (identifier)
-      value: (map_binding
-        key: (identifier)
-        value: (string)
-        key: (identifier)
+    (call_body
+      (binding_statement
+        target: (identifier)
+        value: (string))
+      (binding_statement
+        target: (identifier)
+        value: (string))
+      (binding_statement
+        target: (identifier)
+        value: (string))
+      (binding_statement
+        target: (identifier)
+        value: (array_binding
+          (string)
+          (string)))
+      (binding_statement
+        target: (identifier)
         value: (map_binding
           key: (identifier)
-          value: (float)
+          value: (string)
           key: (identifier)
-          value: (array_binding
-            (integer)
-            (integer)))))))
+          value: (map_binding
+            key: (identifier)
+            value: (float)
+            key: (identifier)
+            value: (array_binding
+              (integer)
+              (integer))))))))

@@ -78,6 +78,7 @@ call POINT_CONSUMER(
     * = MAP_PRODUCER.flat_map,
 )
 
+
 call MAP_CONSUMER(
     foo1               = {
         "item": STRUCT_CONSUMER,
