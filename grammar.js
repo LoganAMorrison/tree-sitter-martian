@@ -372,6 +372,8 @@ module.exports = grammar({
       $.array_type,
       // json, Point, ...
       $.identifier,
+      // ome.tif, ...
+      $.filetype,
     ),
 
     primitive_type: (_) => choice(
@@ -564,9 +566,9 @@ module.exports = grammar({
     // The file type declaration is something of the form:
     //      filetype json;
 
-    filetype_declaration: ($) => seq(keywords.filetype, $._filetype_name, ";"),
+    filetype_declaration: ($) => seq(keywords.filetype, $.filetype, ";"),
 
-    _filetype_name: ($) => /(?:[a-zA-z0-9_]+\.)*[a-zA-z0-9_]+/,
+    filetype: ($) => /(?:[a-zA-z0-9_]+\.)*[a-zA-z0-9_]+/,
 
     // -----------------------------------------------------------------------
     // ==== Constants ========================================================

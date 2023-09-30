@@ -479,31 +479,31 @@ map call AWESOME(
   (include_statement
     include: (string))
   (comment)
-  (filetype_declaration)
-  (filetype_declaration)
+  (filetype_declaration
+    (filetype))
+  (filetype_declaration
+    (filetype))
   (struct_declaration
     name: (identifier)
     (comment)
     (struct_parameter_list
       type: (parameter_type
-        (primitive_type))
+        (filetype))
       name: (identifier)
       (comment)
       type: (parameter_type
-        (array_type
-          (parameter_type
-            (primitive_type))))
+        (filetype))
       name: (identifier)))
   (comment)
   (struct_declaration
     name: (identifier)
     (struct_parameter_list
       type: (parameter_type
-        (identifier))
+        (filetype))
       name: (identifier)
       (comment)
       type: (parameter_type
-        (identifier))
+        (filetype))
       name: (identifier)
       help: (string)
       output_name: (string)))
@@ -511,26 +511,22 @@ map call AWESOME(
     name: (identifier)
     (struct_parameter_list
       type: (parameter_type
-        (primitive_type))
+        (filetype))
       name: (identifier)
       help: (string)
       type: (parameter_type
-        (primitive_type))
+        (filetype))
       name: (identifier)
       help: (string)
       output_name: (string)
       type: (parameter_type
-        (array_type
-          (parameter_type
-            (primitive_type))))
+        (filetype))
       name: (identifier)
       type: (parameter_type
-        (map_type))
+        (filetype))
       name: (identifier)
       type: (parameter_type
-        (array_type
-          (parameter_type
-            (primitive_type))))
+        (filetype))
       name: (identifier)))
   (comment)
   (stage_declaration
@@ -540,28 +536,28 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (comment)
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (comment)
         (input_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (comment)
         (comment)
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (comment)
         (output_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier)
           help: (string)
           output_name: (string)))
@@ -577,30 +573,30 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier)
           help: (string))
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier)
           help: (string))
         (input_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier)
           help: (string))
         (output_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -620,27 +616,27 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -653,19 +649,15 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (array_type
-              (parameter_type
-                (primitive_type))))
+            (filetype))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (array_type
-              (parameter_type
-                (primitive_type))))
+            (filetype))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -676,19 +668,17 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (array_type
-              (parameter_type
-                (primitive_type))))
+            (filetype))
           name: (identifier)
           help: (string))
         (output_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (comment)
         (output_parameter
           type: (parameter_type
-            (primitive_type))))
+            (filetype))))
       (source_declaration
         (source_type)
         source_path: (string)))
@@ -696,11 +686,11 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))))
     (using_statement
       body: (using_body
@@ -718,21 +708,19 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (array_type
-              (parameter_type
-                (primitive_type))))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -744,15 +732,15 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -773,9 +761,7 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (array_type
-              (parameter_type
-                (identifier))))
+            (filetype))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -786,7 +772,7 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (map_type))
+            (filetype))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -814,55 +800,47 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (array_type
-              (parameter_type
-                (primitive_type))))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (array_type
-              (parameter_type
-                (primitive_type))))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (comment)
         (output_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (comment)
         (output_parameter
           type: (parameter_type
-            (array_type
-              (parameter_type
-                (primitive_type))))
+            (filetype))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (comment)
         (output_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier)
           help: (string))
         (output_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (array_type
-              (parameter_type
-                (identifier))))
+            (filetype))
           name: (identifier)))
       (comment)
       (source_declaration
@@ -874,45 +852,45 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
+            (filetype))
+          name: (identifier))
+        (output_parameter
+          type: (parameter_type
+            (filetype))
+          (ERROR
             (identifier))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (map_type
+            (array_type
               (parameter_type
+                (filetype))
+              (ERROR
                 (identifier))))
           name: (identifier))
         (output_parameter
           type: (parameter_type
             (array_type
               (parameter_type
-                (map_type
-                  (parameter_type
-                    (identifier))))))
+                (filetype))
+              (ERROR
+                (identifier))))
+          (ERROR)
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (map_type
+            (array_type
               (parameter_type
                 (array_type
                   (parameter_type
-                    (identifier))))))
+                    (filetype))
+                  (ERROR
+                    (identifier))))
+              (ERROR)))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (array_type
-              (parameter_type
-                (map_type
-                  (parameter_type
-                    (array_type
-                      (parameter_type
-                        (identifier))))))))
-          name: (identifier))
-        (output_parameter
-          type: (parameter_type
-            (array_type
-              (parameter_type
-                (identifier))))
+            (filetype))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -923,53 +901,49 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (map_type
-              (parameter_type
-                (identifier))))
+            (filetype))
+          (ERROR
+            (identifier))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (map_type
-              (parameter_type
-                (identifier))))
+            (filetype))
+          (ERROR
+            (identifier))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (array_type
-              (parameter_type
-                (identifier))))
-          name: (identifier))
-        (input_parameter
-          type: (parameter_type
-            (map_type
-              (parameter_type
-                (array_type
-                  (parameter_type
-                    (primitive_type))))))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
             (array_type
               (parameter_type
-                (array_type
-                  (parameter_type
-                    (primitive_type))))))
+                (filetype))
+              (ERROR)))
+          (ERROR)
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (map_type
-              (parameter_type
-                (array_type
-                  (parameter_type
-                    (primitive_type))))))
+            (filetype))
           name: (identifier))
         (input_parameter
+          (ERROR
+            (parameter_type
+              (filetype)))
+          type: (parameter_type
+            (filetype))
+          (ERROR)
+          name: (identifier))
+        (input_parameter
+          (ERROR
+            (parameter_type
+              (filetype)))
           type: (parameter_type
             (array_type
               (parameter_type
-                (map_type
-                  (parameter_type
-                    (primitive_type))))))
+                (filetype))
+              (ERROR)))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -982,21 +956,22 @@ map call AWESOME(
           type: (parameter_type
             (array_type
               (parameter_type
-                (map_type
-                  (parameter_type
-                    (identifier))))))
+                (filetype))
+              (ERROR
+                (identifier))))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (map_type
+            (array_type
               (parameter_type
-                (array_type
-                  (parameter_type
-                    (identifier))))))
+                (filetype))
+              (ERROR
+                (identifier))))
+          (ERROR)
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -1007,15 +982,15 @@ map call AWESOME(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (map_type
-              (parameter_type
-                (identifier))))
+            (filetype))
+          (ERROR
+            (identifier))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (map_type
-              (parameter_type
-                (identifier))))
+            (filetype))
+          (ERROR
+            (identifier))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -1027,7 +1002,7 @@ map call AWESOME(
       (parameter_list
         (output_parameter
           type: (parameter_type
-            (primitive_type))))
+            (filetype))))
       (source_declaration
         (source_type)
         source_path: (string))))
@@ -1036,7 +1011,7 @@ map call AWESOME(
     (parameter_list
       (output_parameter
         type: (parameter_type
-          (primitive_type))
+          (filetype))
         name: (identifier)))
     (call_statement
       name: (identifier)
@@ -1052,53 +1027,53 @@ map call AWESOME(
     (parameter_list
       (input_parameter
         type: (parameter_type
-          (identifier))
+          (filetype))
         name: (identifier))
       (input_parameter
         type: (parameter_type
-          (primitive_type))
+          (filetype))
         name: (identifier))
       (output_parameter
         type: (parameter_type
-          (primitive_type))
+          (filetype))
         name: (identifier))
       (output_parameter
         type: (parameter_type
-          (map_type
+          (filetype))
+        (ERROR
+          (identifier))
+        name: (identifier))
+      (output_parameter
+        type: (parameter_type
+          (array_type
             (parameter_type
+              (filetype))
+            (ERROR
               (identifier))))
         name: (identifier))
       (output_parameter
         type: (parameter_type
           (array_type
             (parameter_type
-              (map_type
-                (parameter_type
-                  (identifier))))))
+              (filetype))
+            (ERROR
+              (identifier))))
+        (ERROR)
         name: (identifier))
       (output_parameter
         type: (parameter_type
-          (map_type
+          (array_type
             (parameter_type
               (array_type
                 (parameter_type
-                  (identifier))))))
+                  (filetype))
+                (ERROR
+                  (identifier))))
+            (ERROR)))
         name: (identifier))
       (output_parameter
         type: (parameter_type
-          (array_type
-            (parameter_type
-              (map_type
-                (parameter_type
-                  (array_type
-                    (parameter_type
-                      (identifier))))))))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (array_type
-            (parameter_type
-              (identifier))))
+          (filetype))
         name: (identifier)))
     (call_statement
       name: (identifier)
@@ -1117,37 +1092,35 @@ map call AWESOME(
     (parameter_list
       (input_parameter
         type: (parameter_type
-          (primitive_type))
+          (filetype))
         name: (identifier)
         help: (string))
       (input_parameter
         type: (parameter_type
-          (primitive_type))
+          (filetype))
         name: (identifier))
       (input_parameter
         type: (parameter_type
-          (primitive_type))
+          (filetype))
         name: (identifier))
       (input_parameter
         type: (parameter_type
-          (primitive_type))
+          (filetype))
         name: (identifier))
       (input_parameter
         type: (parameter_type
-          (identifier))
+          (filetype))
         name: (identifier))
       (comment)
       (output_parameter
         type: (parameter_type
-          (array_type
-            (parameter_type
-              (identifier))))
+          (filetype))
         name: (identifier)
         help: (string)
         output_name: (string))
       (output_parameter
         type: (parameter_type
-          (identifier))
+          (filetype))
         name: (identifier)))
     (call_statement
       name: (identifier)

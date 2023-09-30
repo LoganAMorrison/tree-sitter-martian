@@ -36,22 +36,23 @@ pipeline DUPLICATE_FINDER(
 --------------------------------------------------------------------------------
 
 (source_file
-  (filetype_declaration)
+  (filetype_declaration
+    (filetype))
   (stage_declaration
     name: (identifier)
     body: (stage_body
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (input_parameter
           type: (parameter_type
-            (primitive_type))
+            (filetype))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -62,11 +63,11 @@ pipeline DUPLICATE_FINDER(
       (parameter_list
         (input_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier))
         (output_parameter
           type: (parameter_type
-            (identifier))
+            (filetype))
           name: (identifier)))
       (source_declaration
         (source_type)
@@ -76,11 +77,11 @@ pipeline DUPLICATE_FINDER(
     (parameter_list
       (input_parameter
         type: (parameter_type
-          (identifier))
+          (filetype))
         name: (identifier))
       (output_parameter
         type: (parameter_type
-          (identifier))
+          (filetype))
         name: (identifier)))
     (call_statement
       name: (identifier)

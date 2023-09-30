@@ -902,6 +902,10 @@
         {
           "type": "SYMBOL",
           "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "filetype"
         }
       ]
     },
@@ -1391,7 +1395,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_filetype_name"
+          "name": "filetype"
         },
         {
           "type": "STRING",
@@ -1399,7 +1403,7 @@
         }
       ]
     },
-    "_filetype_name": {
+    "filetype": {
       "type": "PATTERN",
       "value": "(?:[a-zA-z0-9_]+\\.)*[a-zA-z0-9_]+"
     },

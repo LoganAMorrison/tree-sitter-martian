@@ -16,20 +16,22 @@ stage MY_STAGE(
     body: (stage_body
       (parameter_list
         (input_parameter
+          (ERROR
+            (parameter_type
+              (filetype)))
           type: (parameter_type
-            (map_type
-              (parameter_type
-                (array_type
-                  (parameter_type
-                    (primitive_type))))))
+            (filetype))
+          (ERROR)
           name: (identifier))
         (output_parameter
+          (ERROR
+            (parameter_type
+              (filetype)))
           type: (parameter_type
             (array_type
               (parameter_type
-                (map_type
-                  (parameter_type
-                    (primitive_type))))))
+                (filetype))
+              (ERROR)))
           name: (identifier)))
       (source_declaration
         (source_type)

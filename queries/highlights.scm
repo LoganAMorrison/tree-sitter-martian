@@ -64,17 +64,17 @@
 ; ((identifier) @constant)
 
 ; Stage, Pipeline, Call
-;;;(stage_expression 
+;;;(stage_expression
 ;;;  name: (identifier) @function.call)
-;;;(pipeline_expression 
+;;;(pipeline_expression
 ;;;  name: (identifier) @function.call)
 ;;;(call_expression
 ;;;  name: (identifier) @function.call)
-;;;(struct_expression 
+;;;(struct_expression
 ;;;  name: (identifier) @function.call)
 
 ; Bindings
-(binding_statement 
+(binding_statement
   target: (identifier) @variable)
 
 (input_parameter
@@ -85,23 +85,34 @@
 (output_parameter
   (identifier) @variable)
 
+(pipeline_declaration
+  name: (identifier) @function)
+(stage_declaration
+  name: (identifier) @function)
+(call_statement
+  name: (identifier) @function.call)
 
-(using_statement
-  (using_binding 
+
+(using_body
+  (using_binding
     resource: (using_binding_resource) @variable.builtin))
 
 (using_binding
   (_)
-  value: (identifier) @variable.builtin
-  (#match? @variable.builtin "^strict$"))
+  value: (identifier) @constant.builtin
+  (#match? @constant.builtin "^strict$"))
 
 (binding_statement
   target: (identifier) @parameter)
 
-(call_statement 
-  "map" @keyword.function)
+(call_statement
+  "map" @type.qualifier)
+
+(call_statement
+  "as" @keyword)
 
 (scoped_identifier name: (identifier) @property)
+
 
 [
   "self"
@@ -112,8 +123,11 @@
   "vmem_gb"
   "local"
   "disabled"
-  "*"
 ] @variable.builtin
+
+[
+ "*"
+] @character.special
 
 [
  "stage"
@@ -129,6 +143,7 @@
  "in"
  "out"
  "src"
+ "retain"
  "@include"
 ] @keyword
 
@@ -167,20 +182,22 @@
 
 ; Punctuation
 [
-  "(" 
-  ")" 
-  "[" 
-  "]" 
-  "{" 
+  "("
+  ")"
+  "["
+  "]"
+  "{"
   "}"
 ]  @punctuation.bracket
 
 [
-  "," 
-  "." 
+  ","
+  "."
   ";"
 ] @punctuation.delimiter
 
 [
   "="
 ] @operator
+
+(ERROR) @error

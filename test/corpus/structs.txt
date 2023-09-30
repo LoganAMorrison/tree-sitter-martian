@@ -32,24 +32,22 @@ struct Helpful(
     (comment)
     (struct_parameter_list
       type: (parameter_type
-        (primitive_type))
+        (filetype))
       name: (identifier)
       (comment)
       type: (parameter_type
-        (array_type
-          (parameter_type
-            (primitive_type))))
+        (filetype))
       name: (identifier)))
   (comment)
   (struct_declaration
     name: (identifier)
     (struct_parameter_list
       type: (parameter_type
-        (identifier))
+        (filetype))
       name: (identifier)
       (comment)
       type: (parameter_type
-        (identifier))
+        (filetype))
       name: (identifier)
       help: (string)
       output_name: (string)))
@@ -57,24 +55,20 @@ struct Helpful(
     name: (identifier)
     (struct_parameter_list
       type: (parameter_type
-        (primitive_type))
+        (filetype))
       name: (identifier)
       help: (string)
       type: (parameter_type
-        (primitive_type))
+        (filetype))
       name: (identifier)
       help: (string)
       output_name: (string)
       type: (parameter_type
-        (array_type
-          (parameter_type
-            (primitive_type))))
+        (filetype))
       name: (identifier)
       type: (parameter_type
-        (map_type))
+        (filetype))
       name: (identifier)
       type: (parameter_type
-        (array_type
-          (parameter_type
-            (primitive_type))))
+        (filetype))
       name: (identifier))))

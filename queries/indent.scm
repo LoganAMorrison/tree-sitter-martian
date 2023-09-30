@@ -1,34 +1,22 @@
 [
- (pipeline_declaration)
- (stage_declaration)
- (call_statement)
- (using_statement)
- (split_statement)
- (return_statement)
-] @indent
+  (stage_body)
+  (using_body)
+] @indent.begin
 
-(pipeline_declaration "{" @indent)
-(pipeline_declaration "{" @indent)
 
-(call_statement (binding_statement) @indent)
+((call_statement) @indent.begin
+ (#set! indent.open_delimiter "(")
+ (#set! indent.close_delimiter ")"))
+
+((struct_declaration) @indent.align
+ (#set! indent.open_delimiter "(")
+ (#set! indent.close_delimiter ")"))
+
+(using_body ")" @indent.end)
+(stage_body ")" @indent.end)
 
 [
   ")"
-  "}"
   "]"
-] @branch
-
-(pipeline_declaration ")" @indent_end)
-(stage_declaration ")" @indent_end)
-(call_statement ")" @indent_end)
-(using_statement ")" @indent_end)
-(split_statement ")" @indent_end)
-(return_statement ")" @indent_end)
-
-;(stage_declaration (input_parameter) @indent)
-;(stage_declaration (input_parameter "," @indent_end))
-;(stage_declaration (output_parameter) @indent)
-;(stage_declaration (output_parameter "," @indent_end))
-;(stage_declaration (source_declaration) @indent)
-;(stage_declaration (source_declaration "," @indent_end))
-
+  "}"
+] @indent.branch
