@@ -495,8 +495,16 @@
           "value": "("
         },
         {
-          "type": "SYMBOL",
-          "name": "parameter_list"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "parameter_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -736,6 +744,10 @@
         {
           "type": "SYMBOL",
           "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "id_list"
         }
       ]
     },

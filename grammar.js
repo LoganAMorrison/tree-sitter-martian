@@ -283,7 +283,7 @@ module.exports = grammar({
       keywords.split,
       optional(keywords.using),
       "(",
-      $.parameter_list,
+      optional($.parameter_list),
       ")",
     ),
 
@@ -364,6 +364,8 @@ module.exports = grammar({
       $.array_type,
       // json, Point, ...
       $.identifier,
+      // filetype
+      $.id_list,
     ),
 
     primitive_type: (_) => choice(
