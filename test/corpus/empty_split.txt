@@ -39,15 +39,17 @@ stage GENERATE_DECODING_METRICS_CS(
           (identifier))
         (in_param
           (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           (identifier))
         (in_param
           (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           (identifier))
         (in_param
           (parameter_type

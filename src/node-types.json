@@ -416,10 +416,6 @@
           "named": true
         },
         {
-          "type": "id_list",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
@@ -429,6 +425,10 @@
         },
         {
           "type": "primitive_type",
+          "named": true
+        },
+        {
+          "type": "ref_list",
           "named": true
         }
       ]

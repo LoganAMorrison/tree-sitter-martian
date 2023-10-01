@@ -365,7 +365,7 @@ module.exports = grammar({
       // json, Point, ...
       $.identifier,
       // filetype
-      $.id_list,
+      $.ref_list,
     ),
 
     primitive_type: (_) => choice(

@@ -747,7 +747,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "id_list"
+          "name": "ref_list"
         }
       ]
     },

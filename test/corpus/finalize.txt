@@ -3481,21 +3481,24 @@ call PA_FINALIZE(
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
@@ -3503,38 +3506,43 @@ call PA_FINALIZE(
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))))
   (struct_declaration
     name: (identifier)
     body: (struct_field_list
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -3563,9 +3571,10 @@ call PA_FINALIZE(
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
@@ -3588,9 +3597,10 @@ call PA_FINALIZE(
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))))
   (struct_declaration
     name: (identifier)
@@ -3611,21 +3621,6 @@ call PA_FINALIZE(
         type: (parameter_type
           (primitive_type))
         name: (identifier))
-      (struct_field
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (struct_field
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))
-      (struct_field
-        type: (parameter_type
-          (primitive_type))
-        name: (identifier))))
-  (struct_declaration
-    name: (identifier)
-    body: (struct_field_list
       (struct_field
         type: (parameter_type
           (primitive_type))
@@ -3667,6 +3662,21 @@ call PA_FINALIZE(
       (struct_field
         type: (parameter_type
           (primitive_type))
+        name: (identifier))))
+  (struct_declaration
+    name: (identifier)
+    body: (struct_field_list
+      (struct_field
+        type: (parameter_type
+          (primitive_type))
+        name: (identifier))
+      (struct_field
+        type: (parameter_type
+          (primitive_type))
+        name: (identifier))
+      (struct_field
+        type: (parameter_type
+          (primitive_type))
         name: (identifier))
       (struct_field
         type: (parameter_type
@@ -3686,41 +3696,42 @@ call PA_FINALIZE(
       (struct_field
         type: (parameter_type
           (primitive_type))
-        name: (identifier))))
-  (comment)
-  (comment)
-  (comment)
-  (struct_declaration
-    name: (identifier)
-    body: (struct_field_list
-      (struct_field
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (struct_field
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (struct_field
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (struct_field
-        type: (parameter_type
-          (identifier))
         name: (identifier))))
   (comment)
   (comment)
   (comment)
+  (struct_declaration
+    name: (identifier)
+    body: (struct_field_list
+      (struct_field
+        type: (parameter_type
+          (identifier))
+        name: (identifier))
+      (struct_field
+        type: (parameter_type
+          (identifier))
+        name: (identifier))
+      (struct_field
+        type: (parameter_type
+          (identifier))
+        name: (identifier))
+      (struct_field
+        type: (parameter_type
+          (identifier))
+        name: (identifier))))
+  (comment)
+  (comment)
+  (comment)
   (comment)
   (struct_declaration
     name: (identifier)
     body: (struct_field_list
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
@@ -3961,15 +3972,17 @@ call PA_FINALIZE(
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -3981,9 +3994,10 @@ call PA_FINALIZE(
         output_name: (string))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -3995,53 +4009,28 @@ call PA_FINALIZE(
         output_name: (string))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
-        name: (identifier)
-        help: (string)
-        output_name: (string))
-      (struct_field
-        type: (parameter_type
-          (identifier))
-        name: (identifier)
-        help: (string)
-        output_name: (string))
-      (struct_field
-        type: (parameter_type
-          (identifier))
-        name: (identifier)
-        help: (string)
-        output_name: (string))
-      (struct_field
-        type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
-        name: (identifier)
-        help: (string)
-        output_name: (string))
-      (struct_field
-        type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -4053,21 +4042,54 @@ call PA_FINALIZE(
         output_name: (string))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (identifier))
+        name: (identifier)
+        help: (string)
+        output_name: (string))
+      (struct_field
+        type: (parameter_type
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
+        name: (identifier)
+        help: (string)
+        output_name: (string))
+      (struct_field
+        type: (parameter_type
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
+        name: (identifier)
+        help: (string)
+        output_name: (string))
+      (struct_field
+        type: (parameter_type
+          (identifier))
+        name: (identifier)
+        help: (string)
+        output_name: (string))
+      (struct_field
+        type: (parameter_type
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
@@ -4113,35 +4135,40 @@ call PA_FINALIZE(
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (struct_field
         type: (parameter_type
@@ -4326,15 +4353,17 @@ call PA_FINALIZE(
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
@@ -4342,9 +4371,10 @@ call PA_FINALIZE(
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
@@ -4647,15 +4677,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -4710,9 +4742,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -4771,9 +4804,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -4816,15 +4850,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -4874,9 +4910,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -4920,39 +4957,45 @@ call PA_FINALIZE(
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
@@ -4972,9 +5015,10 @@ call PA_FINALIZE(
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
@@ -4982,9 +5026,10 @@ call PA_FINALIZE(
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
@@ -5288,15 +5333,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -5384,33 +5431,38 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -5418,9 +5470,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -5483,9 +5536,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -5547,9 +5601,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -5600,9 +5655,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -5618,9 +5674,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -5667,9 +5724,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -5811,9 +5869,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -5821,9 +5880,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -5839,25 +5899,28 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)
           help: (string)
           output_name: (string))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)
           help: (string)
           output_name: (string))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)
           help: (string)
           output_name: (string))
@@ -5971,23 +6034,26 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)
           help: (string)
           output_name: (string))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)
           help: (string)
           output_name: (string))
@@ -6869,9 +6935,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -7053,15 +7120,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -7101,15 +7170,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -7117,9 +7188,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -7166,21 +7238,24 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -7225,15 +7300,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -7249,9 +7326,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -7325,9 +7403,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))))
     (resources
       (resource_list
@@ -8582,15 +8661,17 @@ call PA_FINALIZE(
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
@@ -8624,9 +8705,10 @@ call PA_FINALIZE(
       (comment)
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -8638,9 +8720,10 @@ call PA_FINALIZE(
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -8658,9 +8741,10 @@ call PA_FINALIZE(
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -8688,9 +8772,10 @@ call PA_FINALIZE(
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
@@ -9176,15 +9261,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -9196,9 +9283,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)))
       (src_stm
         type: (src_lang)
@@ -9231,9 +9319,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))))
     (resources
       (resource_list
@@ -9260,15 +9349,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -9368,9 +9459,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)
           help: (string)
           output_name: (string)))
@@ -9411,27 +9503,31 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)
           help: (string)
           output_name: (string))
@@ -9443,9 +9539,10 @@ call PA_FINALIZE(
           output_name: (string))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)
           help: (string)
           output_name: (string))
@@ -9561,9 +9658,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -9575,9 +9673,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)))
       (src_stm
         type: (src_lang)
@@ -9604,23 +9703,26 @@ call PA_FINALIZE(
       (parameter_list
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
             (map_type
               (parameter_type
-                (id_list
-                  (identifier)
-                  (identifier)))))
+                (ref_list
+                  (id_list
+                    (identifier)
+                    (identifier))))))
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)))
       (src_stm
         type: (src_lang)
@@ -9669,21 +9771,24 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -9691,21 +9796,24 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -9717,9 +9825,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)
           help: (string)
           output_name: (string))
@@ -9836,15 +9945,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -9909,15 +10020,17 @@ call PA_FINALIZE(
     parameters: (parameter_list
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
@@ -9925,21 +10038,24 @@ call PA_FINALIZE(
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
@@ -11034,15 +11150,17 @@ call PA_FINALIZE(
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
@@ -11050,9 +11168,10 @@ call PA_FINALIZE(
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
@@ -11514,9 +11633,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -11545,9 +11665,10 @@ call PA_FINALIZE(
           type: (parameter_type
             (array_type
               (parameter_type
-                (id_list
-                  (identifier)
-                  (identifier)))))
+                (ref_list
+                  (id_list
+                    (identifier)
+                    (identifier))))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -11608,15 +11729,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -11624,9 +11747,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -11647,9 +11771,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -11684,9 +11809,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -11710,9 +11836,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -11736,15 +11863,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)))
       (src_stm
         type: (src_lang)
@@ -11777,9 +11906,10 @@ call PA_FINALIZE(
         name: (identifier))
       (in_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
@@ -11791,9 +11921,10 @@ call PA_FINALIZE(
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
@@ -11801,15 +11932,17 @@ call PA_FINALIZE(
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)))
     (call_stm
       name: (identifier)
@@ -12021,9 +12154,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -12035,15 +12169,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)))
       (src_stm
         type: (src_lang)
@@ -12093,15 +12229,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -12113,9 +12251,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)))
       (src_stm
         type: (src_lang)
@@ -12163,21 +12302,24 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -12189,9 +12331,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)))
       (src_stm
         type: (src_lang)
@@ -12230,15 +12373,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier)))
       (src_stm
         type: (src_lang)
@@ -12286,9 +12431,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -12306,9 +12452,10 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -12316,15 +12463,17 @@ call PA_FINALIZE(
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -12383,33 +12532,43 @@ call PA_FINALIZE(
         type: (parameter_type
           (array_type
             (parameter_type
-              (id_list
-                (identifier)
-                (identifier)))))
+              (ref_list
+                (id_list
+                  (identifier)
+                  (identifier))))))
         name: (identifier))
       (in_param
         type: (parameter_type
           (array_type
             (parameter_type
-              (id_list
-                (identifier)
-                (identifier)))))
+              (ref_list
+                (id_list
+                  (identifier)
+                  (identifier))))))
         name: (identifier))
       (in_param
         type: (parameter_type
           (array_type
             (parameter_type
-              (id_list
-                (identifier)
-                (identifier)))))
+              (ref_list
+                (id_list
+                  (identifier)
+                  (identifier))))))
         name: (identifier))
       (in_param
         type: (parameter_type
           (array_type
             (parameter_type
-              (id_list
-                (identifier)
-                (identifier)))))
+              (ref_list
+                (id_list
+                  (identifier)
+                  (identifier))))))
+        name: (identifier))
+      (in_param
+        type: (parameter_type
+          (array_type
+            (parameter_type
+              (identifier))))
         name: (identifier))
       (in_param
         type: (parameter_type
@@ -12425,73 +12584,75 @@ call PA_FINALIZE(
         name: (identifier))
       (in_param
         type: (parameter_type
-          (array_type
-            (parameter_type
+          (identifier))
+        name: (identifier))
+      (in_param
+        type: (parameter_type
+          (identifier))
+        name: (identifier))
+      (in_param
+        type: (parameter_type
+          (identifier))
+        name: (identifier))
+      (out_param
+        type: (parameter_type
+          (identifier))
+        name: (identifier))
+      (out_param
+        type: (parameter_type
+          (ref_list
+            (id_list
+              (identifier)
               (identifier))))
         name: (identifier))
-      (in_param
+      (out_param
         type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (in_param
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (in_param
-        type: (parameter_type
-          (identifier))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
-          (identifier))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
-        name: (identifier))
-      (out_param
-        type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
-        name: (identifier))
-      (out_param
-        type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
-        name: (identifier))
-      (out_param
-        type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -12503,9 +12664,10 @@ call PA_FINALIZE(
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -12517,25 +12679,28 @@ call PA_FINALIZE(
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -12559,9 +12724,10 @@ call PA_FINALIZE(
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -12573,9 +12739,10 @@ call PA_FINALIZE(
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
@@ -12583,25 +12750,28 @@ call PA_FINALIZE(
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -12613,9 +12783,10 @@ call PA_FINALIZE(
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier))
       (out_param
         type: (parameter_type
@@ -12629,9 +12800,10 @@ call PA_FINALIZE(
         output_name: (string))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)
         help: (string)
         output_name: (string))
@@ -12695,9 +12867,10 @@ call PA_FINALIZE(
         name: (identifier))
       (out_param
         type: (parameter_type
-          (id_list
-            (identifier)
-            (identifier)))
+          (ref_list
+            (id_list
+              (identifier)
+              (identifier))))
         name: (identifier)))
     (call_stm
       name: (identifier)
@@ -13946,17 +14119,19 @@ call PA_FINALIZE(
           type: (parameter_type
             (array_type
               (parameter_type
-                (id_list
-                  (identifier)
-                  (identifier)))))
+                (ref_list
+                  (id_list
+                    (identifier)
+                    (identifier))))))
           name: (identifier))
         (in_param
           type: (parameter_type
             (array_type
               (parameter_type
-                (id_list
-                  (identifier)
-                  (identifier)))))
+                (ref_list
+                  (id_list
+                    (identifier)
+                    (identifier))))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -14008,9 +14183,10 @@ call PA_FINALIZE(
           type: (parameter_type
             (array_type
               (parameter_type
-                (id_list
-                  (identifier)
-                  (identifier)))))
+                (ref_list
+                  (id_list
+                    (identifier)
+                    (identifier))))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -14022,17 +14198,19 @@ call PA_FINALIZE(
           type: (parameter_type
             (array_type
               (parameter_type
-                (id_list
-                  (identifier)
-                  (identifier)))))
+                (ref_list
+                  (id_list
+                    (identifier)
+                    (identifier))))))
           name: (identifier))
         (in_param
           type: (parameter_type
             (array_type
               (parameter_type
-                (id_list
-                  (identifier)
-                  (identifier)))))
+                (ref_list
+                  (id_list
+                    (identifier)
+                    (identifier))))))
           name: (identifier))
         (in_param
           type: (parameter_type
@@ -14052,9 +14230,10 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -14062,15 +14241,17 @@ call PA_FINALIZE(
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -14124,15 +14305,17 @@ call PA_FINALIZE(
           type: (parameter_type
             (array_type
               (parameter_type
-                (id_list
-                  (identifier)
-                  (identifier)))))
+                (ref_list
+                  (id_list
+                    (identifier)
+                    (identifier))))))
           name: (identifier))
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -14143,9 +14326,10 @@ call PA_FINALIZE(
         (comment)
         (out_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))
         (out_param
           type: (parameter_type
@@ -14158,9 +14342,10 @@ call PA_FINALIZE(
       (parameter_list
         (in_param
           type: (parameter_type
-            (id_list
-              (identifier)
-              (identifier)))
+            (ref_list
+              (id_list
+                (identifier)
+                (identifier))))
           name: (identifier))))
     (resources
       (resource_list
