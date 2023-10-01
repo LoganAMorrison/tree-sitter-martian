@@ -37,70 +37,82 @@ pipeline DUPLICATE_FINDER(
 
 (source_file
   (filetype_declaration
-    (filetype))
+    filetype: (identifier))
   (stage_declaration
     name: (identifier)
-    body: (stage_body
+    (stage_body
       (parameter_list
-        (input_parameter
+        (in_param
           type: (parameter_type
-            (filetype))
+            (identifier))
           name: (identifier))
-        (input_parameter
+        (in_param
           type: (parameter_type
-            (filetype))
+            (primitive_type))
           name: (identifier))
-        (output_parameter
+        (out_param
           type: (parameter_type
-            (filetype))
+            (identifier))
           name: (identifier)))
-      (source_declaration
-        (source_type)
+      (src_stm
+        type: (src_lang)
         source_path: (string))))
   (stage_declaration
     name: (identifier)
-    body: (stage_body
+    (stage_body
       (parameter_list
-        (input_parameter
+        (in_param
           type: (parameter_type
-            (filetype))
+            (identifier))
           name: (identifier))
-        (output_parameter
+        (out_param
           type: (parameter_type
-            (filetype))
+            (identifier))
           name: (identifier)))
-      (source_declaration
-        (source_type)
+      (src_stm
+        type: (src_lang)
         source_path: (string))))
   (pipeline_declaration
     name: (identifier)
-    (parameter_list
-      (input_parameter
+    parameters: (parameter_list
+      (in_param
         type: (parameter_type
-          (filetype))
+          (identifier))
         name: (identifier))
-      (output_parameter
+      (out_param
         type: (parameter_type
-          (filetype))
+          (identifier))
         name: (identifier)))
-    (call_statement
+    (call_stm
       name: (identifier)
-      (call_body
-        (binding_statement
-          target: (identifier)
-          value: (scoped_identifier
-            name: (identifier)))))
-    (call_statement
+      (binding_list
+        (binding
+          target: (binding_target
+            (identifier))
+          value: (expression
+            (ref_exp
+              (ref_list
+                (identifier)))))))
+    (call_stm
       name: (identifier)
-      (call_body
-        (binding_statement
-          target: (identifier)
-          value: (scoped_identifier
-            path: (identifier)
-            name: (identifier)))))
-    (return_statement
-      (binding_statement
-        target: (identifier)
-        value: (scoped_identifier
-          path: (identifier)
-          name: (identifier))))))
+      (binding_list
+        (binding
+          target: (binding_target
+            (identifier))
+          value: (expression
+            (ref_exp
+              (ref_list
+                (id_list
+                  (identifier)
+                  (identifier))))))))
+    (return_stm
+      (binding_list
+        (binding
+          target: (binding_target
+            (identifier))
+          value: (expression
+            (ref_exp
+              (ref_list
+                (id_list
+                  (identifier)
+                  (identifier))))))))))

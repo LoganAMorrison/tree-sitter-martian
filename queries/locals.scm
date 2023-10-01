@@ -1,8 +1,8 @@
 (source_file) @scope
 
-(struct_declaration
-  (struct_parameter_list name: (identifier) @definition.field))
+(struct_field_list
+  (struct_field name: (identifier) @definition.field))
 
 ; Includes
-(include_statement
+(includes
   include: (string) @definition.import)

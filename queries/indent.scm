@@ -1,10 +1,10 @@
 [
   (stage_body)
-  (using_body)
+  (resources)
 ] @indent.begin
 
 
-((call_statement) @indent.begin
+((call_stm) @indent.begin
  (#set! indent.open_delimiter "(")
  (#set! indent.close_delimiter ")"))
 
@@ -12,8 +12,8 @@
  (#set! indent.open_delimiter "(")
  (#set! indent.close_delimiter ")"))
 
-(using_body ")" @indent.end)
-(stage_body ")" @indent.end)
+(resources ")" @indent.end)
+(stage_declaration ")" @indent.end)
 
 [
   ")"

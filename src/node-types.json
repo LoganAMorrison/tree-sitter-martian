@@ -1,6 +1,6 @@
 [
   {
-    "type": "array_binding",
+    "type": "array_exp",
     "named": true,
     "fields": {},
     "children": {
@@ -8,43 +8,7 @@
       "required": false,
       "types": [
         {
-          "type": "array_binding",
-          "named": true
-        },
-        {
-          "type": "false",
-          "named": true
-        },
-        {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
-          "type": "map_binding",
-          "named": true
-        },
-        {
-          "type": "null",
-          "named": true
-        },
-        {
-          "type": "scoped_identifier",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "true",
+          "type": "expression",
           "named": true
         }
       ]
@@ -66,7 +30,7 @@
     }
   },
   {
-    "type": "binding_statement",
+    "type": "binding",
     "named": true,
     "fields": {
       "target": {
@@ -74,11 +38,7 @@
         "required": true,
         "types": [
           {
-            "type": "*",
-            "named": false
-          },
-          {
-            "type": "identifier",
+            "type": "binding_target",
             "named": true
           }
         ]
@@ -88,47 +48,7 @@
         "required": true,
         "types": [
           {
-            "type": "array_binding",
-            "named": true
-          },
-          {
-            "type": "false",
-            "named": true
-          },
-          {
-            "type": "float",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "map_binding",
-            "named": true
-          },
-          {
-            "type": "null",
-            "named": true
-          },
-          {
-            "type": "scoped_identifier",
-            "named": true
-          },
-          {
-            "type": "self",
-            "named": false
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "true",
+            "type": "expression",
             "named": true
           }
         ]
@@ -136,34 +56,55 @@
     }
   },
   {
-    "type": "call_body",
+    "type": "binding_list",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "binding_statement",
+          "type": "binding",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "call_statement",
+    "type": "binding_target",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "call_alias",
     "named": true,
     "fields": {
       "alias": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "identifier",
             "named": true
           }
         ]
-      },
+      }
+    }
+  },
+  {
+    "type": "call_stm",
+    "named": true,
+    "fields": {
       "name": {
         "multiple": false,
         "required": true,
@@ -177,14 +118,69 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "call_body",
+          "type": "binding_list",
           "named": true
         },
         {
-          "type": "using_statement",
+          "type": "call_alias",
+          "named": true
+        },
+        {
+          "type": "modifiers",
+          "named": true
+        },
+        {
+          "type": "resources",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "array_exp",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "map_exp",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "ref_exp",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "true",
           "named": true
         }
       ]
@@ -193,28 +189,17 @@
   {
     "type": "filetype_declaration",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "filetype",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "include_statement",
-    "named": true,
     "fields": {
-      "include": {
+      "filetype": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "string",
+            "type": "id_list",
+            "named": true
+          },
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -222,7 +207,22 @@
     }
   },
   {
-    "type": "input_parameter",
+    "type": "id_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "in_param",
     "named": true,
     "fields": {
       "help": {
@@ -258,73 +258,34 @@
     }
   },
   {
-    "type": "map_binding",
+    "type": "includes",
     "named": true,
     "fields": {
-      "key": {
-        "multiple": true,
-        "required": false,
+      "include": {
+        "multiple": false,
+        "required": true,
         "types": [
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "string",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "array_binding",
-            "named": true
-          },
-          {
-            "type": "false",
-            "named": true
-          },
-          {
-            "type": "float",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "map_binding",
-            "named": true
-          },
-          {
-            "type": "null",
-            "named": true
-          },
-          {
-            "type": "scoped_identifier",
-            "named": true
-          },
-          {
-            "type": "self",
-            "named": false
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "true",
             "named": true
           }
         ]
       }
+    }
+  },
+  {
+    "type": "map_exp",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "pair",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -343,7 +304,12 @@
     }
   },
   {
-    "type": "output_parameter",
+    "type": "modifiers",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "out_param",
     "named": true,
     "fields": {
       "help": {
@@ -389,6 +355,36 @@
     }
   },
   {
+    "type": "pair",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "parameter_list",
     "named": true,
     "fields": {},
@@ -397,11 +393,11 @@
       "required": true,
       "types": [
         {
-          "type": "input_parameter",
+          "type": "in_param",
           "named": true
         },
         {
-          "type": "output_parameter",
+          "type": "out_param",
           "named": true
         }
       ]
@@ -417,10 +413,6 @@
       "types": [
         {
           "type": "array_type",
-          "named": true
-        },
-        {
-          "type": "filetype",
           "named": true
         },
         {
@@ -451,6 +443,16 @@
             "named": true
           }
         ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -458,19 +460,15 @@
       "required": true,
       "types": [
         {
-          "type": "call_statement",
+          "type": "call_stm",
           "named": true
         },
         {
-          "type": "parameter_list",
+          "type": "retain_list",
           "named": true
         },
         {
-          "type": "retain_statement",
-          "named": true
-        },
-        {
-          "type": "return_statement",
+          "type": "return_stm",
           "named": true
         }
       ]
@@ -482,95 +480,173 @@
     "fields": {}
   },
   {
-    "type": "retain_statement",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "scoped_identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "return_statement",
+    "type": "ref_exp",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
-          "type": "binding_statement",
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ref_list",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "scoped_identifier",
+    "type": "ref_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "id_list",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "resource_binding",
     "named": true,
     "fields": {
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "path": {
+      "resource": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "resource_type",
             "named": true
-          },
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
           {
-            "type": "self",
-            "named": false
+            "type": "resource_value",
+            "named": true
           }
         ]
       }
     }
   },
   {
-    "type": "source_declaration",
+    "type": "resource_list",
     "named": true,
-    "fields": {
-      "source_path": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "resource_binding",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "resource_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "resource_value",
+    "named": true,
+    "fields": {},
     "children": {
       "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "source_type",
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "ref_exp",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "resources",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "resource_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "retain_list",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "ref_exp",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "return_stm",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "binding_list",
           "named": true
         }
       ]
@@ -585,7 +661,15 @@
       "required": false,
       "types": [
         {
-          "type": "call_statement",
+          "type": "array_exp",
+          "named": true
+        },
+        {
+          "type": "call_stm",
+          "named": true
+        },
+        {
+          "type": "false",
           "named": true
         },
         {
@@ -593,7 +677,23 @@
           "named": true
         },
         {
-          "type": "include_statement",
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "includes",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "map_exp",
+          "named": true
+        },
+        {
+          "type": "null",
           "named": true
         },
         {
@@ -605,19 +705,22 @@
           "named": true
         },
         {
+          "type": "string",
+          "named": true
+        },
+        {
           "type": "struct_declaration",
+          "named": true
+        },
+        {
+          "type": "true",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "source_type",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "split_statement",
+    "type": "split_param_list",
     "named": true,
     "fields": {},
     "children": {
@@ -629,6 +732,37 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "src_lang",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "src_stm",
+    "named": true,
+    "fields": {
+      "source_path": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "src_lang",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -644,7 +778,7 @@
           "named": true
         },
         {
-          "type": "source_declaration",
+          "type": "src_stm",
           "named": true
         }
       ]
@@ -654,16 +788,6 @@
     "type": "stage_declaration",
     "named": true,
     "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "stage_body",
-            "named": true
-          }
-        ]
-      },
       "name": {
         "multiple": false,
         "required": true,
@@ -677,18 +801,22 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "retain_statement",
+          "type": "resources",
           "named": true
         },
         {
-          "type": "split_statement",
+          "type": "retain_list",
           "named": true
         },
         {
-          "type": "using_statement",
+          "type": "split_param_list",
+          "named": true
+        },
+        {
+          "type": "stage_body",
           "named": true
         }
       ]
@@ -703,6 +831,16 @@
     "type": "struct_declaration",
     "named": true,
     "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "struct_field_list",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -713,24 +851,14 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "struct_parameter_list",
-          "named": true
-        }
-      ]
     }
   },
   {
-    "type": "struct_parameter_list",
+    "type": "struct_field",
     "named": true,
     "fields": {
       "help": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
@@ -740,7 +868,7 @@
         ]
       },
       "name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
@@ -750,7 +878,7 @@
         ]
       },
       "output_name": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
@@ -760,7 +888,7 @@
         ]
       },
       "type": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
@@ -772,93 +900,18 @@
     }
   },
   {
-    "type": "using_binding",
-    "named": true,
-    "fields": {
-      "resource": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "using_binding_resource",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "false",
-            "named": true
-          },
-          {
-            "type": "float",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "integer",
-            "named": true
-          },
-          {
-            "type": "null",
-            "named": true
-          },
-          {
-            "type": "scoped_identifier",
-            "named": true
-          },
-          {
-            "type": "string",
-            "named": true
-          },
-          {
-            "type": "true",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "using_binding_resource",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "using_body",
+    "type": "struct_field_list",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "using_binding",
+          "type": "struct_field",
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "using_statement",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "using_body",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -938,6 +991,10 @@
     "named": false
   },
   {
+    "type": "default",
+    "named": false
+  },
+  {
     "type": "disabled",
     "named": false
   },
@@ -956,10 +1013,6 @@
   {
     "type": "filetype",
     "named": false
-  },
-  {
-    "type": "filetype",
-    "named": true
   },
   {
     "type": "float",

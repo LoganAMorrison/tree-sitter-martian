@@ -37,6 +37,7 @@ const keywords = {
   bool: "bool",
   null: "null",
   file: "file",
+  default: "default",
 };
 
 const INCLUDE_DIRECTIVE = "@include";
@@ -48,26 +49,27 @@ module.exports = grammar({
 
   word: ($) => $.identifier,
 
-  conflicts: ($) => [],
+  conflicts: (_) => [],
+
+  inline: $ => [
+
+  ],
 
   rules: {
 
     source_file: ($) => repeat(
       choice(
-        $.include_statement,
-        $._declaration,
-        $.call_statement,
+        $.includes,
+        $.filetype_declaration,
+        $.stage_declaration,
+        $.pipeline_declaration,
+        $.struct_declaration,
+        $.call_stm,
+        $._val_exp,
       )
     ),
 
 
-    _declaration: ($) =>
-      choice(
-        $.filetype_declaration,
-        $.stage_declaration,
-        $.pipeline_declaration,
-        $.struct_declaration
-      ),
 
     // -----------------------------------------------------------------------
     // ==== Includes =========================================================
@@ -75,8 +77,7 @@ module.exports = grammar({
     // An include is something of the form:
     //      @include "path/to/file.mro"
 
-
-    include_statement: ($) => seq(INCLUDE_DIRECTIVE, field("include", $.string)),
+    includes: ($) => seq(INCLUDE_DIRECTIVE, field("include", $.string)),
 
     // -----------------------------------------------------------------------
     // ==== Structs ==========================================================
@@ -92,32 +93,19 @@ module.exports = grammar({
     struct_declaration: ($) => seq(
       keywords.struct,
       field("name", $.identifier),
-      choice(
-        seq("(", ")"),
-        seq("(", $.struct_parameter_list, ")"),
-      ),
+      "(",
+      field("body", optional($.struct_field_list)),
+      ")",
     ),
 
-    struct_parameter_list: ($) => repeat1($._struct_parameter),
+    struct_field_list: ($) => repeat1(seq($.struct_field, ",")),
 
-    _struct_parameter: ($) => choice(
+    struct_field: ($) => choice(
       $._typed_parameter,
       $._typed_parameter_help,
       $._typed_parameter_help_rename,
     ),
 
-    _typed_parameter: ($) => seq(
-      field("type", $.parameter_type),
-      field("name", $.identifier),
-      ","
-    ),
-
-    _typed_parameter_help: ($) => seq(
-      field("type", $.parameter_type),
-      field("name", $.identifier),
-      field("help", $.string),
-      ","
-    ),
 
     // -----------------------------------------------------------------------
     // ==== Pipeline =========================================================
@@ -163,19 +151,19 @@ module.exports = grammar({
       keywords.pipeline,
       field("name", $.identifier),
       "(",
-      $.parameter_list,
+      field("parameters", $.parameter_list),
       ")",
       "{",
-      repeat($.call_statement),
-      $.return_statement,
-      optional($.retain_statement),
+      repeat($.call_stm),
+      $.return_stm,
+      optional($.retain_list),
       "}"
     ),
 
-    return_statement: ($) => seq(
+    return_stm: ($) => seq(
       keywords.return,
       "(",
-      repeat($.binding_statement),
+      optional($.binding_list),
       ")",
     ),
 
@@ -214,76 +202,69 @@ module.exports = grammar({
     stage_declaration: ($) => seq(
       keywords.stage,
       field("name", $.identifier),
-      field("body", $.stage_body),
-      optional($._stage_modifiers),
+      "(",
+      $.stage_body,
+      ")",
+      repeat(choice($.split_param_list, $.resources, $.retain_list)),
     ),
 
     stage_body: ($) => seq(
-      "(",
       $.parameter_list,
-      $.source_declaration,
-      ")",
+      $.src_stm,
     ),
 
-    source_declaration: ($) => seq(
+
+    /**
+     * A source declartion for Martian stages.
+     *
+     * Example:
+     * ```martian
+     * stage MY_STAGE(
+     *  in int x,
+     *  out int y,
+     *  # Source declaration
+     *  src py "path/to/source",
+     * )
+     * ```
+     */
+    src_stm: ($) => seq(
       keywords.src,
-      $.source_type,
+      field("type", $.src_lang),
       field("source_path", $.string),
       ",",
     ),
 
-    source_type: (_) => choice(
+    src_lang: (_) => choice(
       keywords.py,
       keywords.compiled,
       keywords.exec,
     ),
 
-    _stage_modifiers: ($) => choice(
-      $.split_statement,
-      $.using_statement,
-      $.retain_statement,
-
-      seq($.split_statement, $.using_statement),
-      seq($.split_statement, $.retain_statement),
-
-      seq($.using_statement, $.split_statement),
-      seq($.using_statement, $.retain_statement),
-
-      seq($.retain_statement, $.split_statement),
-      seq($.retain_statement, $.using_statement),
-
-      seq($.split_statement, $.using_statement, $.retain_statement),
-      seq($.split_statement, $.retain_statement, $.using_statement),
-
-      seq($.using_statement, $.split_statement, $.retain_statement),
-      seq($.using_statement, $.retain_statement, $.split_statement),
-      seq($.retain_statement, $.split_statement, $.using_statement),
-      seq($.retain_statement, $.using_statement, $.split_statement),
-    ),
 
     // -----------------------------------------------------------------------
     // ==== Resource Statements ==============================================
     // -----------------------------------------------------------------------
 
-    using_statement: ($) => seq(
+    resources: ($) => seq(
       "using",
-      field("body", $.using_body),
-    ),
-
-    using_body: ($) => seq(
       "(",
-      repeat($.using_binding),
+      optional($.resource_list),
       ")",
     ),
 
-    using_binding: ($) => seq(
-      field("resource", $.using_binding_resource),
-      "=",
-      field("value", choice($.scoped_identifier, $.identifier, $._constant)),
-      ","
+    resource_list: ($) => seq(
+      $.resource_binding,
+      repeat(seq(",", $.resource_binding)),
+      optional(",")
     ),
 
-    using_binding_resource: (_) => choice(
+    resource_binding: ($) => seq(
+      field("resource", $.resource_type),
+      "=",
+      field("value", $.resource_value),
+    ),
+
+    resource_type: (_) => choice(
       keywords.mem_gb,
       keywords.vmem_gb,
       keywords.threads,
@@ -294,17 +275,29 @@ module.exports = grammar({
       keywords.special,
     ),
 
-    split_statement: ($) => seq(
+    resource_value: ($) => choice(
+      $.ref_exp, $._constant
+    ),
+
+    split_param_list: ($) => seq(
       keywords.split,
+      optional(keywords.using),
       "(",
       $.parameter_list,
       ")",
     ),
 
-    retain_statement: ($) => seq(
+    // retain_list: ($) => seq(
+    //   keywords.retain,
+    //   "(",
+    //   repeat(field("name", seq(choice($.scoped_identifier, $.identifier), ","))),
+    //   ")",
+    // ),
+
+    retain_list: ($) => seq(
       keywords.retain,
       "(",
-      repeat1(field("name", seq(choice($.scoped_identifier, $.identifier), ","))),
+      repeat(field("name", seq($.ref_exp, ","))),
       ")",
     ),
 
@@ -314,13 +307,16 @@ module.exports = grammar({
     // -----------------------------------------------------------------------
 
     parameter_list: ($) => repeat1(
-      choice(
-        $.input_parameter,
-        $.output_parameter,
+      seq(
+        choice(
+          $.in_param,
+          $.out_param,
+        ),
+        ","
       )
     ),
 
-    input_parameter: ($) => seq(
+    in_param: ($) => seq(
       keywords.in,
       choice(
         $._typed_parameter,
@@ -328,7 +324,7 @@ module.exports = grammar({
       ),
     ),
 
-    output_parameter: ($) => seq(
+    out_param: ($) => seq(
       keywords.out,
       choice(
         $._typed_default_parameter,
@@ -340,20 +336,17 @@ module.exports = grammar({
 
     _typed_default_parameter: ($) => seq(
       field("type", $.parameter_type),
-      ","
     ),
 
     _typed_parameter: ($) => seq(
       field("type", $.parameter_type),
       field("name", $.identifier),
-      ","
     ),
 
     _typed_parameter_help: ($) => seq(
       field("type", $.parameter_type),
       field("name", $.identifier),
       field("help", $.string),
-      ","
     ),
 
     _typed_parameter_help_rename: ($) => seq(
@@ -361,7 +354,6 @@ module.exports = grammar({
       field("name", $.identifier),
       field("help", $.string),
       field("output_name", $.string),
-      ","
     ),
 
     parameter_type: ($) => choice(
@@ -372,8 +364,6 @@ module.exports = grammar({
       $.array_type,
       // json, Point, ...
       $.identifier,
-      // ome.tif, ...
-      $.filetype,
     ),
 
     primitive_type: (_) => choice(
@@ -460,104 +450,121 @@ module.exports = grammar({
     //          },
     //      )
 
-    call_statement: ($) => seq(
-      $._call_statement_begin,
-      $.call_body,
-      // using (
-      //  preflight = true,
-      // )
-      optional($.using_statement),
-    ),
-
-    call_body: ($) => seq(
-      "(",
-      repeat($.binding_statement),
-      ")",
-    ),
-
-    _call_statement_begin: ($) => seq(
+    call_stm: ($) => seq(
       optional(keywords.map),
       keywords.call,
+      optional($.modifiers),
       field("name", $.identifier),
-      optional(seq(keywords.as, field("alias", $.identifier))),
+      optional($.call_alias),
+      "(",
+      optional($.binding_list),
+      ")",
+      optional($.resources),
     ),
 
+    call_alias: ($) => seq(
+      keywords.as,
+      field("alias", $.identifier)
+    ),
+
+    modifiers: (_) => repeat1(choice(
+      keywords.local,
+      keywords.preflight,
+      keywords.volatile,
+    )),
 
     // -----------------------------------------------------------------------
     // ==== Bindings =========================================================
     // -----------------------------------------------------------------------
 
-    binding_statement: ($) => seq(
-      field("target", $._binding_target),
-      "=",
-      optional(keywords.split),
-      field("value", $._binding_value),
-      ",",
+    binding_list: ($) => seq(
+      $.binding,
+      repeat(seq(",", $.binding)),
+      optional(",")
     ),
 
-    _binding_value: ($) => choice(
-      keywords.self,
-      $.identifier,
-      $.scoped_identifier,
-      $.array_binding,
-      $.map_binding,
+    binding: ($) => seq(
+      field("target", $.binding_target),
+      "=",
+      optional(keywords.split),
+      field("value", $.expression),
+    ),
+
+    expression: ($) => choice(
+      $.ref_exp,
+      $._val_exp,
+    ),
+
+    _val_exp: $ => choice(
+      $.array_exp,
+      $.map_exp,
       $._constant,
     ),
 
-    _binding_target: ($) => choice(
+    binding_target: ($) => choice(
       "*",
       $.identifier,
+    ),
+
+    wildcard_bind: $ => seq(
+      "*",
+      "=",
+      field("target", choice($.ref_exp, keywords.self)),
     ),
 
     // -----------------------
     // ==== Array Binding ====
     // -----------------------
 
-    array_binding: ($) => choice(
-      seq("[", "]"),
-      seq("[", $._binding_value, repeat(seq(",", $._binding_value)), optional(","), "]"),
+    array_exp: ($) => seq(
+      "[",
+      sepBy(",", $.expression),
+      optional(","),
+      "]"
     ),
 
     // ---------------------
     // ==== Map Binding ====
     // ---------------------
 
-    map_binding: ($) => choice(
-      seq("{", "}"),
-      seq(
-        "{",
-        $._map_binding_inner,
-        repeat(seq(",", $._map_binding_inner)),
-        optional(","),
-        "}"
-      ),
+    // Technically, we can only have: 
+    //    seq("{", $.string, ":" $.exp, "}")
+    // or
+    //    seq("{", $.identifier, ":" $.exp, "}")
+    // This rule is more relaxed.
+    map_exp: ($) => seq(
+      "{",
+      sepBy(",", $.pair),
+      optional(","),
+      "}"
     ),
 
-    _map_binding_inner: ($) => seq(
+    pair: ($) => seq(
       field("key", choice($.string, $.identifier)),
       ":",
-      field("value", $._binding_value),
+      field("value", $.expression),
     ),
 
     // ----------------------
     // ==== Path Binding ====
     // ----------------------
 
+    id_list: ($) => seq($.identifier, repeat1(seq(".", $.identifier))),
+
     // Something like self.value or STAGE.value.other_value
-    scoped_identifier: ($) => prec.left(10, seq(
-      field("path", $._scoped_identifier_begin),
-      repeat1($._scoped_identifier_member),
-    )),
-
-    _scoped_identifier_begin: ($) => choice(
+    ref_exp: $ => choice(
+      $.identifier,
       keywords.self,
-      $.identifier
+      $.ref_list,
     ),
 
-    _scoped_identifier_member: ($) => seq(
-      ".",
-      field("name", $.identifier),
+    ref_list: $ => choice(
+      $.id_list,
+      seq($.identifier, ".", keywords.default),
+      seq(keywords.self, ".", $.identifier),
+      seq(keywords.self, ".", $.id_list),
     ),
+
 
 
     // -----------------------------------------------------------------------
@@ -566,9 +573,13 @@ module.exports = grammar({
     // The file type declaration is something of the form:
     //      filetype json;
 
-    filetype_declaration: ($) => seq(keywords.filetype, $.filetype, ";"),
+    filetype_declaration: ($) => seq(
+      keywords.filetype,
+      field("filetype", choice($.identifier, $.id_list)),
+      ";"
+    ),
 
-    filetype: ($) => /(?:[a-zA-z0-9_]+\.)*[a-zA-z0-9_]+/,
+    filetype_name: (_) => /(?:[a-zA-z0-9_]+\.)*[a-zA-z0-9_]+/,
 
     // -----------------------------------------------------------------------
     // ==== Constants ========================================================
@@ -592,7 +603,7 @@ module.exports = grammar({
 
     string: ($) => seq('"', $._string_inner, '"'),
 
-    _string_inner: ($) => /((?:[^\\\"]|\\.)*)/,
+    _string_inner: (_) => /((?:[^\\\"]|\\.)*)/,
 
     // _string_inner: ($) => choice(
     //   $._string_inner_constant_character_escape_mro,
@@ -600,14 +611,9 @@ module.exports = grammar({
     //   $._string_inner_quoted_double_character_mro,
     // ),
 
-    _character_escape: ($) => /\\(?:[0-7]{3}|[abfnrtv\\\"]|x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})/,
-    _unknown_escape: ($) => /\\(?:[0-7]+[^0-7]|[xuU][0-9a-fA-F]*[^0-9a-fA-F]|.)/,
-    _quoted_double_character: ($) => /[^\\\"]/,
-
-
-    _string_inner_constant_character_escape_mro: ($) => /\\(?:[0-7]{3}|[abfnrtv\\\"]|x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})/,
-    _string_inner_invalid_illegal_unknown_escape_mro: ($) => /\\(?:[0-7]+[^0-7]|[xuU][0-9a-fA-F]*[^0-9a-fA-F]|.)/,
-    _string_inner_quoted_double_character_mro: ($) => /[^\\\"]/,
+    _character_escape: (_) => /\\(?:[0-7]{3}|[abfnrtv\\\"]|x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})/,
+    _unknown_escape: (_) => /\\(?:[0-7]+[^0-7]|[xuU][0-9a-fA-F]*[^0-9a-fA-F]|.)/,
+    _quoted_double_character: (_) => /[^\\\"]/,
 
     // ----------------
     // ==== Number ====
@@ -633,3 +639,12 @@ module.exports = grammar({
 
   },
 });
+
+function sepBy1(sep, rule) {
+  return seq(rule, repeat(seq(sep, rule)))
+}
+
+function sepBy(sep, rule) {
+  return optional(sepBy1(sep, rule))
+}
+

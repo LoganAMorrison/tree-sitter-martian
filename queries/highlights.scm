@@ -74,44 +74,53 @@
 ;;;  name: (identifier) @function.call)
 
 ; Bindings
-(binding_statement
-  target: (identifier) @variable)
+(binding
+  target: (binding_target (identifier) @variable))
 
-(input_parameter
-  type: (parameter_type) @type.builtin
-  name: (identifier) @variable)
-(output_parameter
-  type: (parameter_type) @type.builtin)
-(output_parameter
-  (identifier) @variable)
 
 (pipeline_declaration
   name: (identifier) @function)
+
 (stage_declaration
   name: (identifier) @function)
-(call_statement
+
+(call_stm
   name: (identifier) @function.call)
 
 
-(using_body
-  (using_binding
-    resource: (using_binding_resource) @variable.builtin))
+(struct_declaration 
+  name: (identifier) @type.definition)
+(struct_field 
+  name: (identifier) @field)
 
-(using_binding
-  (_)
-  value: (identifier) @constant.builtin
+
+(in_param
+  name: (identifier) @variable)
+
+(out_param 
+  name: (identifier) @variable)
+
+
+(parameter_type (identifier) @type)
+
+(resource_binding 
+  resource: (resource_type) @variable.builtin)
+
+(resource_binding
+  value: (resource_value (ref_exp (identifier) @constant.builtin))
   (#match? @constant.builtin "^strict$"))
 
-(binding_statement
-  target: (identifier) @parameter)
+(binding_target 
+  (identifier) @parameter)
 
-(call_statement
+(call_stm
   "map" @type.qualifier)
 
-(call_statement
+(call_alias
   "as" @keyword)
 
-(scoped_identifier name: (identifier) @property)
+
+(id_list (identifier) @property .)
 
 
 [
@@ -146,6 +155,15 @@
  "retain"
  "@include"
 ] @keyword
+
+[
+ "int"
+ "float"
+ "string"
+ "bool"
+ "file"
+ "path"
+] @type.builtin
 
 ;; [
 ;;  "in"

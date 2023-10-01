@@ -15,23 +15,23 @@ stage SORT_ITEMS(
 
 (source_file
   (filetype_declaration
-    (filetype))
+    filetype: (identifier))
   (stage_declaration
     name: (identifier)
-    body: (stage_body
+    (stage_body
       (parameter_list
-        (input_parameter
+        (in_param
           type: (parameter_type
-            (filetype))
+            (identifier))
           name: (identifier))
-        (input_parameter
+        (in_param
           type: (parameter_type
-            (filetype))
+            (primitive_type))
           name: (identifier))
-        (output_parameter
+        (out_param
           type: (parameter_type
-            (filetype))
+            (identifier))
           name: (identifier)))
-      (source_declaration
-        (source_type)
+      (src_stm
+        type: (src_lang)
         source_path: (string)))))
