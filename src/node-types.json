@@ -44,7 +44,6 @@
       "alias": {
         "multiple": false,
         "required": true,
-        "required": true,
         "types": [
           {
             "type": "identifier",
@@ -114,20 +113,11 @@
     "type": "binding_list",
     "named": true,
     "fields": {},
-      }
-    }
-  },
-  {
-    "type": "binding_list",
-    "named": true,
-    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
-      "required": true,
       "types": [
         {
-          "type": "binding",
           "type": "binding",
           "named": true
         }
@@ -136,16 +126,13 @@
   },
   {
     "type": "binding_target",
-    "type": "binding_target",
     "named": true,
     "fields": {},
     "children": {
       "multiple": false,
-      "multiple": false,
       "required": false,
       "types": [
         {
-          "type": "identifier",
           "type": "identifier",
           "named": true
         }
@@ -158,7 +145,6 @@
     "fields": {
       "name": {
         "multiple": false,
-        "required": true,
         "required": true,
         "types": [
           {
@@ -294,18 +280,15 @@
   },
   {
     "type": "filetype_declaration",
-    "type": "filetype_declaration",
     "named": true,
     "fields": {
       "filetype": {
-        "multiple": false,
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "identifier",
             "named": true
-          },
           },
           {
             "type": "scoped_identifier",
@@ -332,7 +315,7 @@
     }
   },
   {
-    "type": "in_param",
+    "type": "input_parameter",
     "named": true,
     "fields": {
       "help": {
@@ -357,11 +340,9 @@
       },
       "type": {
         "multiple": false,
-        "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "parameter_type",
             "type": "parameter_type",
             "named": true
           }
@@ -394,7 +375,6 @@
       "types": [
         {
           "type": "parameter_type",
-          "type": "parameter_type",
           "named": true
         }
       ]
@@ -411,12 +391,9 @@
     "fields": {
       "help": {
         "multiple": false,
-      "help": {
-        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "string",
             "type": "string",
             "named": true
           }
@@ -434,38 +411,13 @@
       },
       "output_name": {
         "multiple": false,
-      },
-      "name": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "output_name": {
-        "multiple": false,
         "required": false,
         "types": [
           {
             "type": "string",
-            "type": "string",
             "named": true
           }
         ]
-      },
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "parameter_type",
-            "named": true
-          }
-        ]
-      }
       },
       "type": {
         "multiple": false,
@@ -480,16 +432,12 @@
     }
   },
   {
-    "type": "pair",
     "type": "pair",
     "named": true,
     "fields": {
       "key": {
         "multiple": false,
         "required": true,
-      "key": {
-        "multiple": false,
-        "required": true,
         "types": [
           {
             "type": "identifier",
@@ -498,23 +446,8 @@
           {
             "type": "string",
             "named": true
-          },
-          {
-            "type": "string",
-            "named": true
           }
         ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
       },
       "value": {
         "multiple": false,
@@ -530,11 +463,9 @@
   },
   {
     "type": "parameter_list",
-    "type": "parameter_list",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
       "multiple": true,
       "required": true,
       "types": [
@@ -550,7 +481,6 @@
     }
   },
   {
-    "type": "parameter_type",
     "type": "parameter_type",
     "named": true,
     "fields": {},
@@ -617,8 +547,8 @@
       }
     },
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
         {
           "type": "retain_statement",
@@ -694,7 +624,6 @@
     },
     "children": {
       "multiple": false,
-      "required": false,
       "required": false,
       "types": [
         {
@@ -948,7 +877,7 @@
         "required": true,
         "types": [
           {
-            "type": "string",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -995,7 +924,7 @@
         "required": true,
         "types": [
           {
-            "type": "string",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -1109,10 +1038,6 @@
     "named": false
   },
   {
-    "type": "default",
-    "named": false
-  },
-  {
     "type": "disabled",
     "named": false
   },
@@ -1122,10 +1047,6 @@
   },
   {
     "type": "false",
-    "named": true
-  },
-  {
-    "type": "file",
     "named": true
   },
   {
@@ -1174,7 +1095,6 @@
   },
   {
     "type": "null",
-    "named": true
     "named": true
   },
   {
@@ -1239,7 +1159,6 @@
   },
   {
     "type": "true",
-    "named": true
     "named": true
   },
   {

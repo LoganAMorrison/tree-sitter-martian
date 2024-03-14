@@ -127,8 +127,6 @@
         {
           "type": "SYMBOL",
           "name": "_typed_parameter_help_rename"
-          "type": "SYMBOL",
-          "name": "_typed_parameter_help_rename"
         }
       ]
     },
@@ -156,7 +154,6 @@
           "name": "params",
           "content": {
             "type": "SYMBOL",
-            "name": "parameter_list"
             "name": "parameter_list"
           }
         },
@@ -216,28 +213,7 @@
         {
           "type": "STRING",
           "value": "("
-          "type": "STRING",
-          "value": "return"
         },
-        {
-          "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "binding_list"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": ")"
         {
           "type": "CHOICE",
           "members": [
@@ -315,11 +291,9 @@
         {
           "type": "STRING",
           "value": "src"
-          "value": "src"
         },
         {
           "type": "FIELD",
-          "name": "type",
           "name": "type",
           "content": {
             "type": "SYMBOL",
@@ -329,16 +303,13 @@
         {
           "type": "FIELD",
           "name": "source_path",
-          "name": "source_path",
           "content": {
             "type": "SYMBOL",
-            "name": "string"
             "name": "string"
           }
         },
         {
           "type": "STRING",
-          "value": ","
           "value": ","
         }
       ]
@@ -349,16 +320,13 @@
         {
           "type": "STRING",
           "value": "py"
-          "value": "py"
         },
         {
           "type": "STRING",
           "value": "comp"
-          "value": "comp"
         },
         {
           "type": "STRING",
-          "value": "exec"
           "value": "exec"
         }
       ]
@@ -533,24 +501,9 @@
         {
           "type": "STRING",
           "value": "special"
-          "type": "STRING",
-          "value": "local"
-        },
-        {
-          "type": "STRING",
-          "value": "disabled"
-        },
-        {
-          "type": "STRING",
-          "value": "preflight"
-        },
-        {
-          "type": "STRING",
-          "value": "special"
         }
       ]
     },
-    "resource_value": {
     "resource_value": {
       "type": "CHOICE",
       "members": [
@@ -561,7 +514,6 @@
         {
           "type": "SYMBOL",
           "name": "_constant"
-          "name": "_constant"
         }
       ]
     },
@@ -570,7 +522,11 @@
       "members": [
         {
           "type": "STRING",
-          "value": "split"
+          "value": "retain"
+        },
+        {
+          "type": "STRING",
+          "value": "("
         },
         {
           "type": "REPEAT",
@@ -776,28 +732,22 @@
       ]
     },
     "parameter_type": {
-    "parameter_type": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
           "name": "primitive_type"
-          "name": "primitive_type"
         },
         {
           "type": "SYMBOL",
-          "name": "map_type"
           "name": "map_type"
         },
         {
           "type": "SYMBOL",
           "name": "array_type"
         },
-          "name": "array_type"
-        },
         {
           "type": "SYMBOL",
-          "name": "identifier"
           "name": "identifier"
         },
         {
@@ -816,7 +766,6 @@
         {
           "type": "STRING",
           "value": "int"
-          "value": "int"
         },
         {
           "type": "STRING",
@@ -829,22 +778,15 @@
         {
           "type": "STRING",
           "value": "path"
-          "value": "path"
         },
         {
           "type": "STRING",
-          "value": "file"
           "value": "file"
         }
       ]
     },
     "map_type": {
-    "map_type": {
       "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "map"
       "members": [
         {
           "type": "STRING",
@@ -856,21 +798,17 @@
             {
               "type": "STRING",
               "value": "map"
-              "value": "map"
             },
             {
               "type": "STRING",
-              "value": "<"
               "value": "<"
             },
             {
               "type": "SYMBOL",
               "name": "parameter_type"
-              "name": "parameter_type"
             },
             {
               "type": "STRING",
-              "value": ">"
               "value": ">"
             }
           ]
@@ -879,13 +817,7 @@
     },
     "array_type": {
       "type": "SEQ",
-    "array_type": {
-      "type": "SEQ",
       "members": [
-        {
-          "type": "SYMBOL",
-          "name": "parameter_type"
-        },
         {
           "type": "SYMBOL",
           "name": "parameter_type"
@@ -896,11 +828,9 @@
             {
               "type": "STRING",
               "value": "["
-              "value": "["
             },
             {
               "type": "STRING",
-              "value": "]"
               "value": "]"
             }
           ]
@@ -1019,23 +949,6 @@
       ]
     },
     "modifiers": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "local"
-          },
-          {
-            "type": "STRING",
-            "value": "preflight"
-          },
-          {
-            "type": "STRING",
-            "value": "volatile"
-          }
-        ]
       "type": "REPEAT1",
       "content": {
         "type": "CHOICE",
@@ -1638,7 +1551,6 @@
       "name": "comment"
     }
   ],
-  "conflicts": [],
   "conflicts": [],
   "precedences": [],
   "externals": [],
