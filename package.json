@@ -13,6 +13,7 @@
   },
   "author": "",
   "license": "MIT",
+  "license": "MIT",
   "dependencies": {
     "node-gyp-build": "^4.8.0",
     "node-addon-api": "^7.1.0"

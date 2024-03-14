@@ -65,11 +65,14 @@
 
 ; Stage, Pipeline, Call
 ;;;(stage_expression
+;;;(stage_expression
 ;;;  name: (identifier) @function.call)
+;;;(pipeline_expression
 ;;;(pipeline_expression
 ;;;  name: (identifier) @function.call)
 ;;;(call_expression
 ;;;  name: (identifier) @function.call)
+;;;(struct_expression
 ;;;(struct_expression
 ;;;  name: (identifier) @function.call)
 
@@ -136,7 +139,18 @@
   "vmem_gb"
   "local"
   "disabled"
+  "special"
+  "threads"
+  "volatile"
+  "mem_gb"
+  "vmem_gb"
+  "local"
+  "disabled"
 ] @variable.builtin
+
+[
+ "*"
+] @character.special
 
 [
  "*"
@@ -153,9 +167,28 @@
  "using"
  "filetype"
  "struct"
+ "struct"
  "in"
  "out"
  "src"
+ "retain"
+ "@include"
+] @keyword
+
+[
+ "int"
+ "float"
+ "string"
+ "bool"
+ "file"
+ "path"
+] @type.builtin
+
+;; [
+;;  "in"
+;;  "out"
+;;  "src"
+;; ] @keyword.operator
  "retain"
  "@include"
 ] @keyword
@@ -186,12 +219,18 @@
  "comp"
  "exec"
  (parameter_type)
+ (parameter_type)
 ] @type.builtin
 
+(parameter_type (identifier) @type)
 (parameter_type (identifier) @type)
 
 ; Numbers, bools, etc.
 [
+ (true)
+ (false)
+ (null)
+] @constant.builtin
  (true)
  (false)
  (null)
@@ -203,6 +242,26 @@
 (comment) @comment
 
 ; Punctuation
+[
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
+]  @punctuation.bracket
+
+[
+  ","
+  "."
+  ";"
+] @punctuation.delimiter
+
+[
+  "="
+] @operator
+
+(ERROR) @error
 [
   "("
   ")"

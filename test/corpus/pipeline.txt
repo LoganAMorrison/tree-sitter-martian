@@ -37,6 +37,7 @@ pipeline DUPLICATE_FINDER(
 
 (source_file
   (filetype_declaration
+  (filetype_declaration
     filetype: (identifier))
   (stage_definition
     name: (identifier)

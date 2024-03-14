@@ -43,6 +43,7 @@ pipeline RUNS(
 {
     call RUN_CREATOR(
         food     = self.foo,
+        food     = self.foo,
         disable = false,
     ) using (
         disabled = self.disable_one,

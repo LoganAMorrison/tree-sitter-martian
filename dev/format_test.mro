@@ -9,6 +9,11 @@
 filetype json;
 filetype txt;
 
+struct F(
+    float x,
+    int[] y,
+)
+
 struct Point(
     # x coordinate
     float x,
@@ -64,6 +69,17 @@ stage ADD_KEY2(
     volatile = strict,
 )
 
+
+call F(
+    x = 2,
+) using (
+        x
+
+)
+
+
+
+
 # Adds a third key to the json in a file.
 stage ADD_KEY3(
     in  string key,
@@ -100,6 +116,7 @@ stage SUM_SQUARES(
     volatile = false,
 )
 
+
 stage PARAMETER_ALIGNMENT(
     in  float   longer_name_first,
     in  int[]   short_name,
@@ -107,6 +124,8 @@ stage PARAMETER_ALIGNMENT(
     in  Helpful stuff,
     src comp    "thing subcommand args",
 )
+
+
 
 # Takes two files containing json dictionaries and merges them.
 stage MERGE_JSON(
