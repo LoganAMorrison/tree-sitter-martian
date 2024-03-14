@@ -1,0 +1,976 @@
+================================================================================
+Complex Pipeline
+================================================================================
+
+# Adds some keys to some json files and then merges them.
+pipeline AWESOME(
+    in  string     key1       "help text",
+    in  string     value1,
+    in  string     key2,
+    in  string     value2,
+    in  Pointalism struct_in,
+    # Pipeline arguments get comments too.
+    out json[]     outfile    "The json file containing all of the keys and values."  "all_keys",
+    out Helpful    thing,
+)
+{
+    call ADD_KEY1(
+        key      = self.key1,
+        value    = self.value1,
+        # Comments can go on arguments as well.
+        failfile = "fail \n\"1\"",
+        start    = null,
+    ) using (
+        local = true,
+    )
+
+    call ADD_KEY2(
+        key      = self.key2,
+        value    = self.value2,
+        failfile = "fail2",
+        start    = ADD_KEY1.result,
+    )
+
+    call ADD_KEY3(
+        key      = "3",
+        value    = "three",
+        failfile = "fail3",
+        start    = ADD_KEY2.result,
+    )
+
+    map call ADD_KEY1 as ADD_KEY4(
+        key      = "4",
+        # We'll run this twice.
+        value    = split [
+            # Comments inside an array expression.
+            # Sometimes the comments are multi-line.
+            "four",
+            "feir",
+        ],
+        failfile = "fail4",
+        start    = ADD_KEY2.result,
+    )
+
+    call MAP_EXAMPLE(
+        foo = {
+            "bar": "baz",
+            # Comments inside a map expression.
+            "bing": null,
+            "blarg": {
+                # Deeper inside comments.
+                "n": 2,
+            },
+        },
+    ) using (
+        # ADD_KEY3 can disable this stage.
+        disabled = ADD_KEY3.disable_example,
+        local    = true,
+        # This shouldn't be volatile because reasons.
+        volatile = false,
+    )
+
+    call MAP_EXAMPLE as MAP_EXAMPLE2(
+        foo = {},
+    )
+
+    call ADD_KEY5(
+        key   = "5",
+        value = ["five"],
+    ) using (
+        volatile = true,
+    )
+
+    call ADD_KEY5 as ADD_KEY6(
+        key   = "6",
+        value = [
+            "six",
+            "seven",
+        ],
+    )
+
+    map call ADD_KEY5 as ADD_KEY7(
+        key   = split ADD_KEY5.value,
+        value = null,
+    )
+
+    map call MERGE_JSON(
+        json1 = ADD_KEY3.result,
+        json2 = split ADD_KEY4.result,
+    )
+
+    call MERGE_JSON2(
+        input = [ADD_KEY3.result],
+    )
+
+    call MERGE_JSON2 as MERGE_JSON3(
+        input = ADD_KEY4.result,
+    )
+
+    call MERGE_JSON2 as MERGE_JSON4(
+        input = [
+            "four",
+            ADD_KEY3.result,
+        ],
+    )
+
+    call MERGE_JSON2 as MERGE_JSON5(
+        input = [],
+    )
+
+    call STRUCT_CONSUMER(
+        foo   = self.struct_in,
+        y     = self.struct_in.point.y,
+        xarr  = null,
+        point = self.struct_in.point,
+    )
+
+    call STRUCT_CONSUMER as CANIBAL_1(
+        foo   = STRUCT_CONSUMER,
+        y     = STRUCT_CONSUMER.y,
+        xarr  = STRUCT_CONSUMER.arr.x,
+        point = STRUCT_CONSUMER.point,
+    )
+
+    call STRUCT_CONSUMER as CANIBAL_2(
+        foo   = STRUCT_CONSUMER.extra,
+        y     = STRUCT_CONSUMER.extra.point.y,
+        xarr  = STRUCT_CONSUMER.arr.x,
+        point = STRUCT_CONSUMER.extra.point,
+    )
+
+    call MAP_PRODUCER(
+        input = STRUCT_CONSUMER,
+    )
+
+    call PRODUCER_CONSUMER(
+        foo = 1,
+        *   = MAP_PRODUCER,
+    )
+
+    call POINT_CONSUMER(
+        * = MAP_PRODUCER.flat_map,
+    )
+
+    call MAP_CONSUMER(
+        foo1               = {
+            "item": STRUCT_CONSUMER,
+        },
+        foo2               = MAP_PRODUCER.flat_map,
+        point_array        = MAP_PRODUCER.array.point,
+        map_of_array       = MAP_PRODUCER.flat_map.y,
+        array_2d           = MAP_PRODUCER.array.y,
+        map_of_float_array = MAP_PRODUCER.map_of_array.x,
+        array_of_float_map = MAP_PRODUCER.array_of_map.x,
+    )
+
+    map call PARAMETER_ALIGNMENT as ALIGN1(
+        longer_name_first            = split [2.3],
+        short_name                   = [1],
+        very_long_name_to_align_with = 2,
+        stuff                        = {
+            a:                             [ADD_KEY3.disable_example],
+            d2:                            1,
+            d3_is_a_file_with_a_long_name: "",
+            ia:                            [],
+            m:                             {},
+        },
+    ) using (
+        preflight = true,
+    )
+
+    call PARAMETER_ALIGNMENT as ALIGN2(
+        longer_name_first            = 4.5,
+        short_name                   = [
+            1,
+            2,
+        ],
+        very_long_name_to_align_with = 2,
+        stuff                        = {
+            a:                             [],
+            d2:                            1,
+            d3_is_a_file_with_a_long_name: "",
+            ia: [
+                1,
+                2,
+            ],
+            m: {
+                "x": 1,
+            },
+        },
+    ) using (
+        local = true,
+    )
+
+    return (
+        outfile = MERGE_JSON.result,
+        # Package the outputs into a struct.
+        thing   = {
+            a:                             [true],
+            d2:                            1,
+            d3_is_a_file_with_a_long_name: "foo.bar",
+            ia:                            [1],
+            m:                             {},
+        },
+    )
+
+    retain (
+        ADD_KEY1.result,
+    )
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (pipeline_definition
+    (identifier)
+    (parameter_list
+      (input_parameter
+        (parameter_type
+          (primitive_type))
+        (identifier)
+        (string))
+      (input_parameter
+        (parameter_type
+          (primitive_type))
+        (identifier))
+      (input_parameter
+        (parameter_type
+          (primitive_type))
+        (identifier))
+      (input_parameter
+        (parameter_type
+          (primitive_type))
+        (identifier))
+      (input_parameter
+        (parameter_type
+          (identifier))
+        (identifier))
+      (comment)
+      (output_parameter
+        (parameter_type
+          (array_type
+            (parameter_type
+              (identifier))))
+        (identifier)
+        (string)
+        (string))
+      (output_parameter
+        (parameter_type
+          (identifier))
+        (identifier)))
+    (call_statement_list
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (identifier)))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (identifier)))))
+          (comment)
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (string)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (null))))
+        (using_statement
+          (resource_list
+            (resource
+              (resource_type)
+              (resource_value
+                (true))))))
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (identifier)))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (identifier)))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (string)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))))
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (string)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (string)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (string)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))))
+      (call_statement
+        (identifier)
+        (alias
+          (identifier))
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (string)))
+          (comment)
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (array_expression
+                (comment)
+                (comment)
+                (expression
+                  (string))
+                (expression
+                  (string)))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (string)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))))
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (map_expression
+                (pair
+                  (string)
+                  (expression
+                    (string)))
+                (comment)
+                (pair
+                  (string)
+                  (expression
+                    (null)))
+                (pair
+                  (string)
+                  (expression
+                    (map_expression
+                      (comment)
+                      (pair
+                        (string)
+                        (expression
+                          (integer))))))))))
+        (using_statement
+          (comment)
+          (resource_list
+            (resource
+              (resource_type)
+              (resource_value
+                (reference_expression
+                  (reference_list
+                    (scoped_identifier
+                      (identifier)
+                      (identifier))))))
+            (resource
+              (resource_type)
+              (resource_value
+                (true)))
+            (comment)
+            (resource
+              (resource_type)
+              (resource_value
+                (false))))))
+      (call_statement
+        (identifier)
+        (alias
+          (identifier))
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (map_expression)))))
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (string)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (array_expression
+                (expression
+                  (string))))))
+        (using_statement
+          (resource_list
+            (resource
+              (resource_type)
+              (resource_value
+                (true))))))
+      (call_statement
+        (identifier)
+        (alias
+          (identifier))
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (string)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (array_expression
+                (expression
+                  (string))
+                (expression
+                  (string)))))))
+      (call_statement
+        (identifier)
+        (alias
+          (identifier))
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (null)))))
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))))
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (array_expression
+                (expression
+                  (reference_expression
+                    (reference_list
+                      (scoped_identifier
+                        (identifier)
+                        (identifier))))))))))
+      (call_statement
+        (identifier)
+        (alias
+          (identifier))
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))))
+      (call_statement
+        (identifier)
+        (alias
+          (identifier))
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (array_expression
+                (expression
+                  (string))
+                (expression
+                  (reference_expression
+                    (reference_list
+                      (scoped_identifier
+                        (identifier)
+                        (identifier))))))))))
+      (call_statement
+        (identifier)
+        (alias
+          (identifier))
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (array_expression)))))
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (identifier)))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (null)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))))
+      (call_statement
+        (identifier)
+        (alias
+          (identifier))
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (identifier))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))))
+      (call_statement
+        (identifier)
+        (alias
+          (identifier))
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier)
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier)
+                    (identifier))))))))
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (identifier))))))
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (integer)))
+          (binding
+            (binding_target)
+            (expression
+              (reference_expression
+                (identifier))))))
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target)
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))))
+      (call_statement
+        (identifier)
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (map_expression
+                (pair
+                  (string)
+                  (expression
+                    (reference_expression
+                      (identifier)))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier)
+                    (identifier))))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    (identifier)
+                    (identifier)
+                    (identifier))))))))
+      (call_statement
+        (identifier)
+        (alias
+          (identifier))
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (array_expression
+                (expression
+                  (float)))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (array_expression
+                (expression
+                  (integer)))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (integer)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (map_expression
+                (pair
+                  (identifier)
+                  (expression
+                    (array_expression
+                      (expression
+                        (reference_expression
+                          (reference_list
+                            (scoped_identifier
+                              (identifier)
+                              (identifier))))))))
+                (pair
+                  (identifier)
+                  (expression
+                    (integer)))
+                (pair
+                  (identifier)
+                  (expression
+                    (string)))
+                (pair
+                  (identifier)
+                  (expression
+                    (array_expression)))
+                (pair
+                  (identifier)
+                  (expression
+                    (map_expression)))))))
+        (using_statement
+          (resource_list
+            (resource
+              (resource_type)
+              (resource_value
+                (true))))))
+      (call_statement
+        (identifier)
+        (alias
+          (identifier))
+        (binding_list
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (float)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (array_expression
+                (expression
+                  (integer))
+                (expression
+                  (integer)))))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (integer)))
+          (binding
+            (binding_target
+              (identifier))
+            (expression
+              (map_expression
+                (pair
+                  (identifier)
+                  (expression
+                    (array_expression)))
+                (pair
+                  (identifier)
+                  (expression
+                    (integer)))
+                (pair
+                  (identifier)
+                  (expression
+                    (string)))
+                (pair
+                  (identifier)
+                  (expression
+                    (array_expression
+                      (expression
+                        (integer))
+                      (expression
+                        (integer)))))
+                (pair
+                  (identifier)
+                  (expression
+                    (map_expression
+                      (pair
+                        (string)
+                        (expression
+                          (integer))))))))))
+        (using_statement
+          (resource_list
+            (resource
+              (resource_type)
+              (resource_value
+                (true)))))))
+    (return_statement
+      (binding_list
+        (binding
+          (binding_target
+            (identifier))
+          (expression
+            (reference_expression
+              (reference_list
+                (scoped_identifier
+                  (identifier)
+                  (identifier))))))
+        (comment)
+        (binding
+          (binding_target
+            (identifier))
+          (expression
+            (map_expression
+              (pair
+                (identifier)
+                (expression
+                  (array_expression
+                    (expression
+                      (true)))))
+              (pair
+                (identifier)
+                (expression
+                  (integer)))
+              (pair
+                (identifier)
+                (expression
+                  (string)))
+              (pair
+                (identifier)
+                (expression
+                  (array_expression
+                    (expression
+                      (integer)))))
+              (pair
+                (identifier)
+                (expression
+                  (map_expression))))))))
+    (retain_statement
+      (reference_expression
+        (reference_list
+          (scoped_identifier
+            (identifier)
+            (identifier)))))))

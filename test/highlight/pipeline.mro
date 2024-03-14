@@ -28,3 +28,24 @@ pipeline DUPLICATE_FINDER(
         duplicates = FIND_DUPLICATES.duplicates,
     )
 }
+
+pipeline RETURNS_WILD(
+    in  STRUCT_CONSUMER          input,
+    in  int                      x,
+    out int                      x,
+    out map<STRUCT_CONSUMER>     flat_map,
+    out map<STRUCT_CONSUMER>[]   array_of_map,
+    out map<STRUCT_CONSUMER[]>   map_of_array,
+    out map<STRUCT_CONSUMER[]>[] array_of_map_of_array,
+    out STRUCT_CONSUMER[]        array "some help" "new_name.out",
+)
+{
+    call MAP_PRODUCER(
+        * = self,
+    )
+
+    return (
+        x = self.x,
+        * = MAP_PRODUCER,
+    )
+}

@@ -64,31 +64,83 @@
 ; ((identifier) @constant)
 
 ; Stage, Pipeline, Call
-;;;(stage_expression 
+;;;(stage_expression
 ;;;  name: (identifier) @function.call)
-;;;(pipeline_expression 
+;;;(pipeline_expression
 ;;;  name: (identifier) @function.call)
 ;;;(call_expression
 ;;;  name: (identifier) @function.call)
-;;;(struct_expression 
+;;;(struct_expression
 ;;;  name: (identifier) @function.call)
 
 ; Bindings
-(bind 
-  name: (identifier) @variable 
-  value: (identifier) @field)
+(binding
+  target: (binding_target (identifier) @variable))
+
+
+(pipeline_definition
+  name: (identifier) @function)
+
+(stage_definition
+  name: (identifier) @function)
+
+(call_statement
+  name: (identifier) @function.call)
+
+
+(stage_definition
+  name: (identifier) @type.definition)
+
+(field
+  type: (_)
+  name: (identifier) @field)
+
 
 (input_parameter
-  type: (type) @type.builtin
   name: (identifier) @variable)
+
 (output_parameter
-  type: (type) @type.builtin)
-(output_parameter
-  (identifier) @variable)
+  name: (identifier) @variable)
+
+
+(parameter_type (identifier) @type)
+
+(resource
+  target: (resource_type) @variable.builtin)
+
+(resource
+  target: (resource_type)
+  value: (resource_value
+           (reference_expression (identifier) @constant.builtin)
+           (#match? @constant.builtin "^strict$")))
+
+(binding_target
+  (identifier) @parameter)
+
+(call_statement
+  "map" @type.qualifier)
+
+(alias
+  "as" @keyword)
+
+
+(reference_expression (identifier) @property .)
+
 
 [
   "self"
+  "special"
+  "threads"
+  "volatile"
+  "mem_gb"
+  "vmem_gb"
+  "local"
+  "disabled"
 ] @variable.builtin
+
+[
+ "*"
+] @character.special
 
 [
  "stage"
@@ -100,13 +152,28 @@
  "split"
  "using"
  "filetype"
-] @keyword
-
-[
+ "struct"
  "in"
  "out"
  "src"
-] @keyword.operator
+ "retain"
+ "@include"
+] @keyword
+
+[
+ "int"
+ "float"
+ "string"
+ "bool"
+ "file"
+ "path"
+] @type.builtin
+
+;; [
+;;  "in"
+;;  "out"
+;;  "src"
+;; ] @keyword.operator
 
 [
  "return"
@@ -118,16 +185,17 @@
  "py"
  "comp"
  "exec"
- (type)
+ (parameter_type)
 ] @type.builtin
 
-(type (identifier) @type)
+(parameter_type (identifier) @type)
 
 ; Numbers, bools, etc.
 [
- "true"
- "false"
-] @boolean
+ (true)
+ (false)
+ (null)
+] @constant.builtin
 
 (integer) @number
 (float) @float
@@ -135,5 +203,23 @@
 (comment) @comment
 
 ; Punctuation
-["(" ")" "[" "]" "{" "}"]  @punctuation.bracket
-["," "." ";"] @punctuation.delimiter
+[
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
+]  @punctuation.bracket
+
+[
+  ","
+  "."
+  ";"
+] @punctuation.delimiter
+
+[
+  "="
+] @operator
+
+(ERROR) @error

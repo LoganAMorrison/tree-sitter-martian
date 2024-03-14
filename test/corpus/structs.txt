@@ -2,6 +2,9 @@
 Structs
 ================================================================================
 
+filetype tiff;
+filetype json;
+
 struct Point(
     # x coordinate
     float x,
@@ -22,56 +25,79 @@ struct Helpful(
     int[]  ia,
     map    m,
     bool[] a,
+    map<tiff> images,
 )
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (struct_expression
+  (filetype_declaration
+    filetype: (identifier))
+  (filetype_declaration
+    filetype: (identifier))
+  (struct_definition
     name: (identifier)
     (comment)
-    body: (field_declaration_list
-      (field_declaration
-        type: (type)
+    (fields
+      (field
+        type: (parameter_type
+          (primitive_type))
         name: (identifier))
       (comment)
-      (field_declaration
-        type: (type)
+      (field
+        type: (parameter_type
+          (array_type
+            (parameter_type
+              (primitive_type))))
         name: (identifier))))
   (comment)
-  (struct_expression
+  (struct_definition
     name: (identifier)
-    body: (field_declaration_list
-      (field_declaration
-        type: (type
+    (fields
+      (field
+        type: (parameter_type
           (identifier))
         name: (identifier))
       (comment)
-      (field_declaration
-        type: (type
+      (field
+        type: (parameter_type
           (identifier))
         name: (identifier)
         help: (string)
-        outname: (string))))
-  (struct_expression
+        output_name: (string))))
+  (struct_definition
     name: (identifier)
-    body: (field_declaration_list
-      (field_declaration
-        type: (type)
+    (fields
+      (field
+        type: (parameter_type
+          (primitive_type))
         name: (identifier)
         help: (string))
-      (field_declaration
-        type: (type
-          (identifier))
+      (field
+        type: (parameter_type
+          (primitive_type))
         name: (identifier)
-        (ERROR)
-        help: (string))
-      (field_declaration
-        type: (type)
+        help: (string)
+        output_name: (string))
+      (field
+        type: (parameter_type
+          (array_type
+            (parameter_type
+              (primitive_type))))
         name: (identifier))
-      (field_declaration
-        type: (type)
+      (field
+        type: (parameter_type
+          (map_type))
         name: (identifier))
-      (field_declaration
-        type: (type)
+      (field
+        type: (parameter_type
+          (array_type
+            (parameter_type
+              (primitive_type))))
+        name: (identifier))
+      (field
+        type: (parameter_type
+          (map_type
+            (parameter_type
+              (identifier))))
         name: (identifier)))))

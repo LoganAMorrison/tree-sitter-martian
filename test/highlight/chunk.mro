@@ -10,3 +10,5 @@ stage SUM_SQUARES(
     in  bool[] value,
     out float value,
 )
+
+

@@ -8,29 +8,16 @@ call DUPLICATE_FINDER(
     unsorted = "/home/duplicator_dave/unsorted.txt",
 )
 
-call DUPLICATE_FINDER(
-    unsorted = p.y.z.x,
-)
-
 --------------------------------------------------------------------------------
 
 (source_file
-  (includes
-    (include
-      (string)))
-  (ERROR
-    (call_expression
-      (identifier)
-      (bindings
-        (bind
-          (identifier)
-          (string)))))
-  (call_expression
+  (include_statement
+    (string))
+  (call_statement
     (identifier)
-    (bindings
-      (bind
-        (identifier)
-        (identifier)
-        (identifier)
-        (identifier)
-        (identifier)))))
+    (binding_list
+      (binding
+        (binding_target
+          (identifier))
+        (expression
+          (string))))))

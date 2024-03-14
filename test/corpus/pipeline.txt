@@ -36,66 +36,82 @@ pipeline DUPLICATE_FINDER(
 --------------------------------------------------------------------------------
 
 (source_file
-  (filetype_statement
+  (filetype_declaration
     filetype: (identifier))
-  (stage_expression
+  (stage_definition
     name: (identifier)
-    parameters: (stage_parameters
+    (parameter_list
       (input_parameter
-        type: (type
+        type: (parameter_type
           (identifier))
         name: (identifier))
       (input_parameter
-        type: (type)
-        name: (identifier))
-      (output_parameter
-        type: (type
-          (identifier))
-        help: (identifier))
-      (source
-        type: (src_lang)
-        file: (string))))
-  (stage_expression
-    name: (identifier)
-    parameters: (stage_parameters
-      (input_parameter
-        type: (type
-          (identifier))
+        type: (parameter_type
+          (primitive_type))
         name: (identifier))
       (output_parameter
-        type: (type
+        type: (parameter_type
           (identifier))
-        help: (identifier))
-      (source
-        type: (src_lang)
-        file: (string))))
-  (pipeline_expression
+        name: (identifier)))
+    (source_declaration
+      type: (source_type)
+      source_path: (string)))
+  (stage_definition
     name: (identifier)
-    parameters: (pipeline_parameters
+    (parameter_list
       (input_parameter
-        type: (type
+        type: (parameter_type
           (identifier))
         name: (identifier))
       (output_parameter
-        type: (type
+        type: (parameter_type
           (identifier))
-        help: (identifier)))
-    (call_expression
-      name: (identifier)
-      (bindings
-        (bind
-          name: (identifier)
-          value: (identifier))))
-    (call_expression
-      name: (identifier)
-      (bindings
-        (bind
-          name: (identifier)
-          value: (identifier)
-          value: (identifier))))
-    (return
-      (bindings
-        (bind
-          name: (identifier)
-          value: (identifier)
-          value: (identifier))))))
+        name: (identifier)))
+    (source_declaration
+      type: (source_type)
+      source_path: (string)))
+  (pipeline_definition
+    name: (identifier)
+    params: (parameter_list
+      (input_parameter
+        type: (parameter_type
+          (identifier))
+        name: (identifier))
+      (output_parameter
+        type: (parameter_type
+          (identifier))
+        name: (identifier)))
+    calls: (call_statement_list
+      (call_statement
+        name: (identifier)
+        params: (binding_list
+          (binding
+            target: (binding_target
+              (identifier))
+            value: (expression
+              (reference_expression
+                (reference_list
+                  field: (identifier)))))))
+      (call_statement
+        name: (identifier)
+        params: (binding_list
+          (binding
+            target: (binding_target
+              (identifier))
+            value: (expression
+              (reference_expression
+                (reference_list
+                  (scoped_identifier
+                    value: (identifier)
+                    field: (identifier)))))))))
+    (return_statement
+      (binding_list
+        (binding
+          target: (binding_target
+            (identifier))
+          value: (expression
+            (reference_expression
+              (reference_list
+                (scoped_identifier
+                  value: (identifier)
+                  field: (identifier))))))))))

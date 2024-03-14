@@ -1,468 +1,660 @@
+/**
+ * @file Martian grammar for tree-sitter
+ * @author Logan Morrison <dr.logan.morrison@gmail.com>
+ * @license MIT
+ */
+
+/* eslint-disable arrow-parens */
+/* eslint-disable camelcase */
+/* eslint-disable-next-line spaced-comment */
+/// <reference types='tree-sitter-cli/dsl' />
+// @ts-checkconst ID = /_?[a-zA-Z][a-zA-Z0-9_]*/;
+
 const ID = /_?[a-zA-Z][a-zA-Z0-9_]*/;
 
-const KEYWORDS = {
-  COMPILED: "comp",
-  PY: "py",
-  EXEC: "exec",
-  DISABLED: "disabled",
-  FILETYPE: "filetype",
-  LOCAL: "local",
-  MEM_GB: "mem_gb",
-  VMEM_GB: "vmem_gb",
-  PREFLIGHT: "preflight",
-  RETAIN: "retain",
-  SPECIAL: "special",
-  SPLIT: "split",
-  STRICT: "strict",
-  STRUCT: "struct",
-  THREADS: "threads",
-  USING: "using",
-  VOLATILE: "volatile",
-  SELF: "self",
-  TRUE: "true",
-  FALSE: "false",
-  MAP: "map",
-  CALL: "call",
-  AS: "as",
-  SRC: "src",
-  RETURN: "return",
-  STAGE: "stage",
-  PIPELINE: "pipeline",
-  IN: "in",
-  OUT: "out",
-  INT: "int",
-  STRING: "string",
-  PATH: "path",
-  FLOAT: "float",
-  BOOL: "bool",
-  NULL: "null",
+const keywords = {
+  include: '@include',
+  compiled: 'comp',
+  py: 'py',
+  exec: 'exec',
+  disabled: 'disabled',
+  filetype: 'filetype',
+  local: 'local',
+  mem_gb: 'mem_gb',
+  vmem_gb: 'vmem_gb',
+  preflight: 'preflight',
+  retain: 'retain',
+  special: 'special',
+  split: 'split',
+  strict: 'strict',
+  struct: 'struct',
+  threads: 'threads',
+  using: 'using',
+  volatile: 'volatile',
+  self: 'self',
+  true: 'true',
+  false: 'false',
+  map: 'map',
+  call: 'call',
+  as: 'as',
+  src: 'src',
+  return: 'return',
+  stage: 'stage',
+  pipeline: 'pipeline',
+  in: 'in',
+  out: 'out',
+  int: 'int',
+  string: 'string',
+  path: 'path',
+  float: 'float',
+  bool: 'bool',
+  null: 'null',
+  file: 'file',
+  default: 'default',
 };
 
-const INCLUDE_DIRECTIVE = "@include";
-
 module.exports = grammar({
-  name: "martian",
+  name: 'martian',
 
   extras: ($) => [/\s|\\\r?\n/, $.comment],
 
   word: ($) => $.identifier,
 
-  conflicts: ($) => [[$.field_declaration]],
+  conflicts: (_) => [],
+
+  inline: _ => [],
+
+  supertypes: ($) => [
+    $._val_exp,
+  ],
 
   rules: {
-    source_file: ($) =>
+
+    source_file: ($) => repeat(
       choice(
-        seq($.includes, $._dec_list),
-        seq($.includes, $._dec_list, $.call_expression),
-        seq($.includes, $.call_expression),
-        $._dec_list,
-        seq($._dec_list, $.call_expression),
-        $.call_expression,
-        $._val_expr
+        $.include_statement,
+        $.filetype_declaration,
+        $.stage_definition,
+        $.pipeline_definition,
+        $.struct_definition,
+        $.call_statement,
+        $._val_exp,
       ),
+    ),
 
-    includes: ($) => repeat1($.include),
+    // -----------------------------------------------------------------------
+    // ==== Includes =========================================================
+    // -----------------------------------------------------------------------
+    // An include is something of the form:
+    //      @include 'path/to/file.mro'
 
-    include: ($) => seq(INCLUDE_DIRECTIVE, field("include", $.string)),
+    include_statement: ($) => seq(keywords.include, field('file', $.string)),
 
-    _dec_list: ($) => repeat1($._declaration),
+    // -----------------------------------------------------------------------
+    // ==== Structs ==========================================================
+    // -----------------------------------------------------------------------
+    // A 'struct' is something of the form:
+    //      struct Point(
+    //          float x,
+    //          int[] y,
+    //          int    d2   'foo',
+    //          json  dest  'help' 'dest.xml',
+    //      )
 
-    _declaration: ($) =>
-      choice(
-        $.filetype_statement,
-        $.stage_expression,
-        $.pipeline_expression,
-        $.struct_expression
-      ),
+    struct_definition: ($) => seq(
+      keywords.struct,
+      field('name', $.identifier),
+      '(',
+      optional(alias($._struct_field_list, $.fields)),
+      ')',
+    ),
 
-    filetype_statement: ($) =>
-      seq(KEYWORDS.FILETYPE, field("filetype", $._id_list), ";"),
+    _struct_field_list: ($) => repeat1(seq($.field, ',')),
 
-    pipeline_expression: ($) =>
-      seq(
-        "pipeline",
-        field("name", $.identifier),
-        "(",
-        field("parameters", $.pipeline_parameters),
-        ")",
-        "{",
-        optional($._call_stm_list),
-        $.return,
-        optional($.pipeline_retain),
-        "}"
-      ),
+    field: ($) => choice(
+      $._typed_parameter,
+      $._typed_parameter_help,
+      $._typed_parameter_help_rename,
+    ),
 
-    pipeline_parameters: ($) => seq($._input_parameters, $._output_parameters),
 
-    stage_expression: ($) =>
-      seq(
-        "stage",
-        field("name", $.identifier),
-        "(",
-        field("parameters", $.stage_parameters),
-        ")",
-        optional($.split_parameters),
-        optional($.resources),
-        optional($.stage_retain)
-      ),
+    // -----------------------------------------------------------------------
+    // ==== Pipeline =========================================================
+    // -----------------------------------------------------------------------
+    //      pipeline AWESOME(
+    //          in  string     key1       'help text',
+    //          in  string     value1,
+    //          in  string     key2,
+    //          in  string     value2,
+    //          in  Pointalism struct_in,
+    //          # Pipeline arguments get comments too.
+    //          out json[]     outfile    'The json file containing all of the keys and values.'  'all_keys',
+    //          out Helpful    thing,
+    //      )
+    //      {
+    //          # one or more call expressions
+    //          call ADD_KEY1(
+    //              key      = self.key1,
+    //          ) using (
+    //              local = true,
+    //          )
+    //
+    //          # The return statement
+    //          return (
+    //              outfile = MERGE_JSON.result,
+    //              # Package the outputs into a struct.
+    //              thing   = {
+    //                  a:                             [true],
+    //                  d2:                            1,
+    //                  d3_is_a_file_with_a_long_name: 'foo.bar',
+    //                  ia:                            [1],
+    //                  m:                             {},
+    //              },
+    //          )
+    //
+    //          # Optional 'retain'
+    //          retain (
+    //              ADD_KEY1.result,
+    //          )
+    //      }
 
-    stage_parameters: ($) =>
-      seq($._input_parameters, $._output_parameters, $.source),
+    pipeline_definition: ($) => seq(
+      keywords.pipeline,
+      field('name', $.identifier),
+      '(',
+      field('params', $.parameter_list),
+      ')',
+      '{',
+      field('calls', alias(repeat($.call_statement), $.call_statement_list)),
+      $.return_statement,
+      optional($.retain_statement),
+      '}',
+    ),
 
-    struct_expression: ($) =>
-      seq(
-        KEYWORDS.STRUCT,
-        field("name", $.identifier),
-        "(",
-        field("body", $.field_declaration_list),
-        ")"
-      ),
+    return_statement: ($) => seq(keywords.return, '(', optional($.binding_list), ')'),
 
-    resources: ($) => seq(KEYWORDS.USING, "(", $._resource_list, ")"),
+    // -----------------------------------------------------------------------
+    // ==== Stage ============================================================
+    // -----------------------------------------------------------------------
+    // A 'stage' is something of the form:
+    //      stage STAGE_NAME(
+    //          # Input parameters
+    //          in string                    key,
+    //          in int[]                     y,
+    //          in  json                     start,
+    //          in  string                   fail_file  "The file to \"check\' to force failure.',
+    //          in  map<Point>               point,
+    //          # Output parameters
+    //          out json                     result    ''  'out name',
+    //          out Point[]                  arr,
+    //          out map<STRUCT_CONSUMER>     flat_map,
+    //          # The source file.
+    //          src py                       'stages/add_key',
+    //          # or src exec     'stages/whatever arg',
+    //          # or src comp    'bin/sum_squares mode_arg',
+    //      ) split (
+    //          in  float   value,
+    //          out float   square,
+    //      ) using (
+    //          # This stage does almost nothing.
+    //          mem_gb  = 0.05,
+    //          # Perhaps it sleeps a while.
+    //          threads = 0.01,
+    //          # This stage uses 2TB of vmem.
+    //          vmem_gb  = 1024,
+    //          volatile = strict,
+    //      )
 
-    _resource_list: ($) => repeat1($.resource),
+    stage_definition: ($) => seq(
+      keywords.stage,
+      field('name', $.identifier),
+      '(',
+      $.parameter_list,
+      $.source_declaration,
+      ')',
+      repeat(choice($.split_statement, $.using_statement, $.retain_statement)),
+    ),
 
-    resource: ($) =>
-      choice(
-        seq(
-          field("resource", KEYWORDS.THREADS),
-          "=",
-          field("value", $.number),
-          ","
-        ),
-        seq(
-          field("resource", KEYWORDS.MEM_GB),
-          "=",
-          field("value", $.number),
-          ","
-        ),
-        seq(
-          field("resource", KEYWORDS.VMEM_GB),
-          "=",
-          field("value", $.number),
-          ","
-        ),
-        seq(
-          field("resource", KEYWORDS.SPECIAL),
-          "=",
-          field("value", $.string),
-          ","
-        ),
-        seq(
-          field("resource", KEYWORDS.VOLATILE),
-          "=",
-          field("value", KEYWORDS.STRICT),
-          ","
-        ),
-        seq(
-          field("resource", KEYWORDS.VOLATILE),
-          "=",
-          field("value", KEYWORDS.FALSE),
-          ","
-        )
-      ),
 
-    number: ($) => choice($.integer, $.float),
+    // A source declartion for Martian stages.
+    //
+    // Example:
+    // ```martian
+    // stage MY_STAGE(
+    //  in int x,
+    //  out int y,
+    //  # Source declaration
+    //  src py 'path/to/source',
+    // )
+    // ```
+    source_declaration: ($) => seq(
+      keywords.src,
+      field('type', $.source_type),
+      field('source_path', $.string),
+      ',',
+    ),
 
-    stage_retain: ($) =>
-      seq(KEYWORDS.RETAIN, "(", optional($.stage_retain_list), ")"),
+    source_type: (_) => choice(
+      keywords.py,
+      keywords.compiled,
+      keywords.exec,
+    ),
 
-    stage_retain_list: ($) => repeat1(seq($.identifier, ",")),
 
-    _id_list: ($) => choice($._path_id, $._nonpath_id),
+    // -----------------------------------------------------------------------
+    // ==== Resource Statements ==============================================
+    // -----------------------------------------------------------------------
 
-    _path_id: ($) =>
-      prec.right(
-        seq(repeat1(seq(field("path", $.identifier), ".")), $.identifier)
-      ),
-    _nonpath_id: ($) => $.identifier,
+    split_statement: ($) => seq(
+      keywords.split,
+      optional(keywords.using),
+      '(',
+      optional($.parameter_list),
+      ')',
+    ),
 
-    _arr_list: (_) => repeat1(seq("[", "]")),
+    using_statement: ($) => seq(
+      'using',
+      '(',
+      optional(field('resources', $.resource_list)),
+      ')',
+    ),
 
-    _input_parameters: ($) => repeat1($.input_parameter),
+    resource_list: ($) => sepBy1(',', $.resource),
 
-    input_parameter: ($) =>
-      seq(
-        "in",
-        field("type", $._type_id),
-        field("name", $.identifier),
-        optional(field("help", $.string)),
-        ","
-      ),
+    resource: ($) => seq(
+      field('target', $.resource_type),
+      '=',
+      field('value', $.resource_value),
+    ),
 
-    _output_parameters: ($) => repeat1($.output_parameter),
+    resource_type: (_) => choice(
+      keywords.mem_gb,
+      keywords.vmem_gb,
+      keywords.threads,
+      keywords.volatile,
+      keywords.local,
+      keywords.disabled,
+      keywords.preflight,
+      keywords.special,
+    ),
 
-    output_parameter: ($) =>
-      choice(
-        seq("out", field("type", $._type_id), ","),
-        seq(
-          "out",
-          field("type", $._type_id),
-          field("help", choice($.identifier, $.string)),
-          ","
-        ),
-        seq(
-          "out",
-          field("type", $._type_id),
-          field("help", choice($.identifier, $.string)),
-          field("outname", $.string),
-          ","
-        )
-      ),
+    resource_value: ($) => choice(
+      $.reference_expression, $._constant,
+    ),
 
-    field_declaration_list: ($) => repeat1($.field_declaration),
 
-    field_declaration: ($) =>
-      choice(
-        seq(field("type", $._type_id), field("name", $.identifier), ","),
-        seq(
-          field("type", $._type_id),
-          field("name", $.identifier),
-          field("help", $.string),
-          ","
-        ),
-        seq(
-          field("type", $._type_id),
-          field("name", $.identifier),
-          field("help", $.string),
-          field("outname", $.string),
-          ","
-        )
-      ),
+    // Retain list is a statement of the form
+    //  retain (
+    //    x = y,
+    //  )
+    retain_statement: ($) => seq(
+      keywords.retain,
+      '(',
+      repeat(field('name', seq($.reference_expression, ','))),
+      ')',
+    ),
 
-    source: ($) =>
-      seq(
-        KEYWORDS.SRC,
-        field("type", $.src_lang),
-        field("file", $.string),
-        ","
-      ),
 
-    type: ($) => choice($._nonmap_type, KEYWORDS.MAP),
+    // -----------------------------------------------------------------------
+    // ==== Stage and Pipeline Parameter Lists ===============================
+    // -----------------------------------------------------------------------
 
-    _array_type: ($) => seq($.type, $._arr_list),
-
-    _map_inner: ($) => choice($._nonmap_type, seq($._nonmap_type, $._arr_list)),
-    _map_inner_scalar: ($) => alias($._nonmap_type, $.type),
-    _map_inner_array: ($) =>
-      alias(seq($._nonmap_type, $._arr_list), $._array_type),
-
-    map_type: ($) =>
-      seq(KEYWORDS.MAP, "<", $._map_inner, ">", optional($._arr_list)),
-
-    _nonmap_type: ($) =>
-      choice(
-        KEYWORDS.INT,
-        KEYWORDS.STRING,
-        KEYWORDS.PATH,
-        KEYWORDS.FLOAT,
-        KEYWORDS.BOOL,
-        $._id_list
-      ),
-
-    _type_id: ($) => choice($.map_type, $.type, $._array_type),
-
-    src_lang: (_) => choice(KEYWORDS.PY, KEYWORDS.EXEC, KEYWORDS.COMPILED),
-
-    split_parameters: ($) =>
-      choice(
-        seq(
-          KEYWORDS.SPLIT,
-          KEYWORDS.USING,
-          "(",
-          $._input_parameters,
-          $._output_parameters,
-          ")"
-        ),
-        seq(KEYWORDS.SPLIT, "(", $._input_parameters, $._output_parameters, ")")
-      ),
-
-    return: ($) => choice(seq(KEYWORDS.RETURN, "(", $.bindings, ")")),
-
-    pipeline_retain: ($) =>
-      choice(seq(KEYWORDS.RETAIN, "(", optional($.pipeline_retain_list), ")")),
-
-    pipeline_retain_list: ($) => repeat1(seq($._ref_expr, ",")),
-
-    _call_stm_list: ($) => repeat1($.call_expression),
-
-    _call_stm_begin: ($) =>
-      seq(
-        "call",
-        optional($.modifiers),
-        field("name", $.identifier),
-        optional(seq(KEYWORDS.AS, field("alias", $.identifier)))
-      ),
-
-    call_expression: ($) =>
+    parameter_list: ($) => repeat1(
       seq(
         choice(
-          seq($._call_stm_begin, "(", $.bindings, ")"),
-          seq(
-            KEYWORDS.MAP,
-            $._call_stm_begin,
-            "(",
-            alias($.split_bind_stm_list, $.bindings),
-            ")"
-          )
+          $.input_parameter,
+          $.output_parameter,
         ),
-        repeat(seq(KEYWORDS.USING, "(", $._modifier_stm_list, ")"))
+        ',',
       ),
+    ),
 
-    modifiers: (_) =>
-      prec.right(
-        repeat1(choice(KEYWORDS.LOCAL, KEYWORDS.PREFLIGHT, KEYWORDS.VOLATILE))
-      ),
-
-    _modifier_stm_list: ($) => repeat1($.modifier),
-
-    modifier: ($) =>
+    input_parameter: ($) => seq(
+      keywords.in,
       choice(
-        seq(
-          choice(KEYWORDS.LOCAL, KEYWORDS.PREFLIGHT, KEYWORDS.VOLATILE),
-          "=",
-          $.bool_expr,
-          ","
-        ),
-        seq(KEYWORDS.DISABLED, "=", $._ref_expr, ",")
+        $._typed_parameter,
+        $._typed_parameter_help,
       ),
+    ),
 
-    _nonempty_bind_stm_list: ($) => prec.right(repeat1($.bind)),
-
-    bindings: ($) =>
+    output_parameter: ($) => seq(
+      keywords.out,
       choice(
-        $._nonempty_bind_stm_list,
-        seq($._nonempty_bind_stm_list, $.wildcard_bind),
-        $.wildcard_bind
+        $._typed_default_parameter,
+        $._typed_parameter,
+        $._typed_parameter_help,
+        $._typed_parameter_help_rename,
       ),
+    ),
 
-    _split_bind_stm_list_partial: ($) =>
-      seq(
-        choice(
-          alias($.split_bind_stm, $.bind),
-          seq($._nonempty_bind_stm_list, alias($.split_bind_stm, $.bind))
-        ),
-        repeat(choice(alias($.split_bind_stm, $.bind), $.bind))
-      ),
+    _typed_default_parameter: ($) => seq(
+      field('type', $.parameter_type),
+    ),
 
-    split_bind_stm_list: ($) =>
-      choice(
-        $._split_bind_stm_list_partial,
-        seq($._split_bind_stm_list_partial, $.wildcard_bind)
-      ),
+    _typed_parameter: ($) => seq(
+      field('type', $.parameter_type),
+      field('name', $.identifier),
+    ),
 
-    bind: ($) =>
-      seq(field("name", $.identifier), "=", field("value", $._expr), ","),
+    _typed_parameter_help: ($) => seq(
+      field('type', $.parameter_type),
+      field('name', $.identifier),
+      field('help', $.string),
+    ),
 
-    wildcard_bind: ($) =>
-      choice(
-        seq("*", "=", $._ref_expr, ","),
-        seq("*", "=", KEYWORDS.SELF, ",")
-      ),
+    _typed_parameter_help_rename: ($) => seq(
+      field('type', $.parameter_type),
+      field('name', $.identifier),
+      field('help', $.string),
+      field('output_name', $.string),
+    ),
 
-    split_bind_stm: ($) =>
-      choice(
-        seq($.identifier, "=", KEYWORDS.SPLIT, $.nonempty_collection_exp, ","),
-        seq($.identifier, "=", KEYWORDS.SPLIT, $._ref_expr, ",")
-      ),
+    parameter_type: ($) => choice(
+      $.primitive_type,
+      // map<int>, map<int[]>
+      $.map_type,
+      // int[], Point[], map<string>[], map<int[]>[], json[]
+      $.array_type,
+      // json, Point, ...
+      $.identifier,
+      // ome.tif
+      $.scoped_identifier,
+    ),
 
-    nonempty_collection_exp: ($) =>
-      choice($._nonempty_array_expr, $._nonempty_map_expr),
+    primitive_type: (_) => choice(
+      keywords.string,
+      keywords.int,
+      keywords.float,
+      keywords.bool,
+      keywords.path,
+      keywords.file,
+    ),
 
-    _expr_list_partial: ($) =>
-      prec.right(seq(repeat(seq($._expr, ",")), $._expr, optional(","))),
+    map_type: ($) => choice(
+      keywords.map,
+      seq(keywords.map, '<', $.parameter_type, '>'),
+    ),
 
-    _expr_list: ($) => $._expr_list_partial,
-    //prec.right(choice(seq($._expr_list_partial, ","), $._expr_list_partial)),
+    array_type: ($) => seq(
+      $.parameter_type,
+      // int[], int[][],
+      seq('[', ']'),
+    ),
 
-    kvpair_list_partial: ($) => {
-      const atom = seq($.string, ":", $._expr);
-      return prec.right(seq(repeat(seq(atom, ",")), atom));
-    },
+    // -----------------------------------------------------------------------
+    // ==== Call or Map Call =================================================
+    // -----------------------------------------------------------------------
+    // A 'stage' is something of the form:
+    //      call MAP_PRODUCER(
+    //          * = self,
+    //      )
+    //
+    //      call ADD_KEY1(
+    //          key      = self.key1,
+    //          value    = self.value1,
+    //          input = [
+    //              'four',
+    //              ADD_KEY3.result,
+    //          ],
+    //          foo1               = {
+    //              'item': STRUCT_CONSUMER,
+    //          },
+    //          # Comments can go on arguments as well.
+    //          failfile = "fail \n\"1\'',
+    //          start    = null,
+    //      ) using (
+    //          local = true,
+    //      )
+    //
+    //      call MAP_EXAMPLE(
+    //          foo = {
+    //              'bar': 'baz',
+    //              # Comments inside a map expression.
+    //              'bing': null,
+    //              'blarg': {
+    //                  # Deeper inside comments.
+    //                  'n': 2,
+    //              },
+    //          },
+    //      ) using (
+    //          # ADD_KEY3 can disable this stage.
+    //          disabled = ADD_KEY3.disable_example,
+    //          local    = true,
+    //          # This shouldn't be volatile because reasons.
+    //          volatile = false,
+    //      )
+    //
+    //      # Calls the pipelines, splitting over two forks.
+    //      map call AWESOME(
+    //          key1      = '1',
+    //          value1    = 'one',
+    //          key2      = '2',
+    //          value2    = split [
+    //              'two',
+    //              'deux',
+    //          ],
+    //          struct_in = {
+    //              dest: 'foo.json',
+    //              point: {
+    //                  x: 1.5,
+    //                  y: [
+    //                      2,
+    //                      3,
+    //                  ],
+    //              },
+    //          },
+    //      )
 
-    kvpair_list: ($) =>
-      choice(seq($.kvpair_list_partial, ","), $.kvpair_list_partial),
+    call_statement: ($) => seq(
+      optional(keywords.map),
+      keywords.call,
+      optional($.modifiers),
+      field('name', $.identifier),
+      optional(alias($._call_alias, $.alias)),
+      '(',
+      optional(field('params', $.binding_list)),
+      ')',
+      optional($.using_statement),
+    ),
 
-    struct_vals_list_partial: ($) => {
-      const atom = seq($.identifier, ":", $._expr);
-      return prec.right(seq(repeat(seq(atom, ",")), atom));
-    },
+    _call_alias: ($) => seq(
+      keywords.as,
+      field('alias', $.identifier),
+    ),
 
-    struct_vals_list: ($) =>
-      choice(seq($.struct_vals_list_partial, ","), $.struct_vals_list_partial),
+    modifiers: (_) => repeat1(choice(
+      keywords.local,
+      keywords.preflight,
+      keywords.volatile,
+    )),
 
-    _expr: ($) => choice($._val_expr, $._ref_expr),
+    // -----------------------------------------------------------------------
+    // ==== Bindings =========================================================
+    // -----------------------------------------------------------------------
 
-    _val_expr: ($) =>
-      choice(
-        $.float,
-        $.integer,
-        $.string,
-        $.array_expr,
-        $.map_expr,
-        $.bool_expr,
-        KEYWORDS.NULL
-      ),
+    binding_list: ($) => seq(
+      $.binding,
+      repeat(seq(',', $.binding)),
+      optional(','),
+    ),
 
-    _nonempty_array_expr: ($) => seq("[", $._expr_list, "]"),
+    binding: ($) => seq(
+      field('target', $.binding_target),
+      '=',
+      optional(keywords.split),
+      field('value', $.expression),
+    ),
 
-    array_expr: ($) => choice($._nonempty_array_expr, seq("[", "]")),
+    expression: ($) => choice(
+      $.reference_expression,
+      $._val_exp,
+    ),
 
-    _nonempty_map_expr: ($) => seq("{", $.kvpair_list, "}"),
+    _val_exp: $ => choice(
+      $.array_expression,
+      $.map_expression,
+      $._constant,
+    ),
 
-    map_expr: ($) =>
-      choice(
-        $._nonempty_map_expr,
-        seq("{", $.struct_vals_list, "}"),
-        seq("{", "}")
-      ),
+    binding_target: ($) => choice(
+      '*',
+      $.identifier,
+    ),
 
-    bool_expr: (_) => choice(KEYWORDS.TRUE, KEYWORDS.FALSE),
+    wildcard_bind: $ => seq(
+      '*',
+      '=',
+      field('target', choice($.reference_expression, keywords.self)),
+    ),
 
-    _ref_expr: ($) =>
-      choice(
-        seq($.identifier, ".", $._id_list),
-        //seq($.id, ".", $._default), // TODO: What is default?
-        $.identifier,
-        seq(KEYWORDS.SELF, ".", $.identifier),
-        seq(KEYWORDS.SELF, $.identifier, ".", $._id_list)
-      ),
+    // -----------------------
+    // ==== Array Binding ====
+    // -----------------------
 
-    id: ($) =>
-      choice(
-        $.identifier
-        //KEYWORDS.COMPILED,
-        //KEYWORDS.DISABLED,
-        //KEYWORDS.EXEC,
-        //KEYWORDS.FILETYPE,
-        //KEYWORDS.LOCAL,
-        //KEYWORDS.MEM_GB,
-        //KEYWORDS.VMEM_GB,
-        //KEYWORDS.PREFLIGHT,
-        //KEYWORDS.RETAIN,
-        //KEYWORDS.SPECIAL,
-        //KEYWORDS.SPLIT,
-        //KEYWORDS.STRICT,
-        //KEYWORDS.struct_expression,
-        //KEYWORDS.THREADS,
-        //KEYWORDS.USING,
-        //KEYWORDS.VOLATILE,
-      ),
+    array_expression: ($) => seq(
+      '[',
+      sepBy(',', $.expression),
+      ']',
+    ),
 
-    string: ($) =>
-      choice(seq('"', $._string_inner, '"'), seq("'", $._string_inner, "'")),
+    // ---------------------
+    // ==== Map Binding ====
+    // ---------------------
 
-    _string_inner: ($) =>
-      repeat1(choice(token.immediate(/[^\\"\n]+/), $._escape_sequence)),
+    // Technically, we can only have:
+    //    seq('{', $.string, ':' $.exp, '}')
+    // or
+    //    seq('{', $.identifier, ':' $.exp, '}')
+    // This rule is more relaxed.
+    map_expression: ($) => seq(
+      '{',
+      sepBy(',', $.pair),
+      '}',
+    ),
 
-    _escape_sequence: (_) =>
-      choice('\\"', "\\\\", "\\b", "\\n", "\\r", "\\t", /\\u[0-9a-fA-F]{4}/),
+    // A `pair` is a statement of the form:
+    //  key: value
+    pair: ($) => seq(
+      field('key', choice($.string, $.identifier)),
+      ':',
+      field('value', $.expression),
+    ),
 
-    comment: (_) => token(seq("#", /.*/)),
+    // -----------------------------------------------------------------------
+    // ==== File Type Declaration ============================================
+    // -----------------------------------------------------------------------
+    // The file type declaration is something of the form:
+    //      filetype json;
 
-    integer: (_) => /-?\d+/,
-    float: (_) => /-?\d+\.\d+/,
+    filetype_declaration: ($) => seq(
+      keywords.filetype,
+      field('filetype', choice($.identifier, $.scoped_identifier)),
+      ';',
+    ),
+
+    // filetype_name: (_) => /(?:[a-zA-z0-9_]+\.)*[a-zA-z0-9_]+/,
+
+    // ----------------------
+    // ==== Path Binding ====
+    // ----------------------
+
+
+    // Something like self.value or STAGE.value.other_value
+    reference_expression: $ => choice(
+      $.identifier,
+      keywords.self,
+      $.reference_list,
+    ),
+
+    reference_list: $ => choice(
+      $.scoped_identifier,
+      seq(field('value', $.identifier), '.', field('field', keywords.default)),
+      seq(field('value', keywords.self), '.', field('field', $.identifier)),
+      seq(field('value', keywords.self), '.', field('field', $.scoped_identifier)),
+    ),
+
+    scoped_identifier: ($) => seq(
+      field('value', $.identifier),
+      field('field', repeat1(seq('.', $.identifier))),
+    ),
+
+    // -----------------------------------------------------------------------
+    // ==== Constants ========================================================
+    // -----------------------------------------------------------------------
+
+    _constant: ($) => choice(
+      $.string,
+      $._number,
+      $.true,
+      $.false,
+      $.null,
+    ),
+
+    true: (_) => 'true',
+    false: (_) => 'false',
+    null: (_) => 'null',
+
+    // ----------------
+    // ==== String ====
+    // ----------------
+
+    string: ($) => seq('"', $._string_inner, '"'),
+
+    _string_inner: (_) => /((?:[^\\\"]|\\.)*)/,
+
+    // _string_inner: ($) => choice(
+    //   $._string_inner_constant_character_escape_mro,
+    //   $._string_inner_invalid_illegal_unknown_escape_mro,
+    //   $._string_inner_quoted_double_character_mro,
+    // ),
+
+    _character_escape: (_) => /\\(?:[0-7]{3}|[abfnrtv\\\"]|x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})/,
+    _unknown_escape: (_) => /\\(?:[0-7]+[^0-7]|[xuU][0-9a-fA-F]*[^0-9a-fA-F]|.)/,
+    _quoted_double_character: (_) => /[^\\\"]/,
+
+    // ----------------
+    // ==== Number ====
+    // ----------------
+
+    _number: ($) => choice($.float, $.integer),
+
+    float: (_) => /-?[0-9]+(\.[0-9]+[eE][+-]?|[eE][+-]?|\.)[0-9]+/,
+
+    integer: (_) => /-?0*[0-9]{1,19}/,
+
+    // -----------------------------------------------------------------------
+    // ==== Comments =========================================================
+    // -----------------------------------------------------------------------
+
+    comment: (_) => token(seq('#', /.*/)),
+
+    // -----------------------------------------------------------------------
+    // ==== Identifier =======================================================
+    // -----------------------------------------------------------------------
 
     identifier: (_) => ID,
+
   },
 });
+
+/**
+ * Create a rule that matches a rule seperated by a token.
+ * @param {*} sep The seperation token.
+ * @param {*} rule The rule.
+ * @return {*} The rule.
+ */
+function sepBy1(sep, rule) {
+  return seq(rule, repeat(seq(sep, rule)), optional(sep));
+}
+
+/**
+ * Same as `sepBy1` except the rule is optional.
+ * @param {*} sep The seperation token.
+ * @param {*} rule The rule.
+ * @return {*} The rule.
+ */
+function sepBy(sep, rule) {
+  return optional(sepBy1(sep, rule));
+}
+
