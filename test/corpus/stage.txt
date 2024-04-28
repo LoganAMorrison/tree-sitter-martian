@@ -15,11 +15,10 @@ stage SORT_ITEMS(
 
 (source_file
   (filetype_declaration
-  (filetype_declaration
     filetype: (identifier))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (identifier))
@@ -32,6 +31,6 @@ stage SORT_ITEMS(
         type: (parameter_type
           (identifier))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string))))
+      source_path: (string_literal))))

@@ -45,12 +45,12 @@ call MY_PIPE(
 
 (source_file
   (include_statement
-    file: (string))
+    file: (string_literal))
   (filetype_declaration
     filetype: (identifier))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (identifier))
@@ -59,12 +59,12 @@ call MY_PIPE(
         type: (parameter_type
           (identifier))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (identifier))
@@ -72,12 +72,12 @@ call MY_PIPE(
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (pipeline_definition
     name: (identifier)
     params: (parameter_list
@@ -88,7 +88,7 @@ call MY_PIPE(
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier)))
     calls: (call_statement_list
@@ -114,7 +114,7 @@ call MY_PIPE(
                   (scoped_identifier
                     value: (identifier)
                     field: (identifier)))))))))
-    (return_statement
+    return: (return_statement
       (binding_list
         (binding
           target: (binding_target
@@ -132,4 +132,5 @@ call MY_PIPE(
         target: (binding_target
           (identifier))
         value: (expression
-          (string))))))
+          (literal
+            (string_literal)))))))

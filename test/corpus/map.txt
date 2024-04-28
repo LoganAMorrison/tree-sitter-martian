@@ -32,4 +32,4 @@ stage MY_STAGE(
         (identifier)))
     (source_declaration
       (source_type)
-      (string))))
+      (string_literal))))

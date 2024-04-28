@@ -43,7 +43,6 @@ pipeline RUNS(
 {
     call RUN_CREATOR(
         food     = self.foo,
-        food     = self.foo,
         disable = false,
     ) using (
         disabled = self.disable_one,
@@ -173,7 +172,7 @@ call TOP_CALL(
   (comment)
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (primitive_type))
@@ -182,9 +181,9 @@ call TOP_CALL(
         type: (parameter_type
           (primitive_type))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (pipeline_definition
     name: (identifier)
     params: (parameter_list
@@ -212,7 +211,7 @@ call TOP_CALL(
             target: (binding_target)
             value: (expression
               (reference_expression))))
-        (using_statement
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
@@ -220,7 +219,7 @@ call TOP_CALL(
                 (reference_expression
                   (reference_list
                     field: (identifier)))))))))
-    (return_statement
+    return: (return_statement
       (binding_list
         (binding
           target: (binding_target
@@ -244,13 +243,13 @@ call TOP_CALL(
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (input_parameter
@@ -264,9 +263,9 @@ call TOP_CALL(
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (array_type
-                (parameter_type
+                value_type: (parameter_type
                   (primitive_type))))))
         name: (identifier))
       (output_parameter
@@ -292,8 +291,9 @@ call TOP_CALL(
             target: (binding_target
               (identifier))
             value: (expression
-              (false))))
-        (using_statement
+              (literal
+                (boolean_literal)))))
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
@@ -320,7 +320,7 @@ call TOP_CALL(
               (reference_expression
                 (reference_list
                   field: (identifier))))))
-        (using_statement
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
@@ -347,7 +347,7 @@ call TOP_CALL(
               (reference_expression
                 (reference_list
                   field: (identifier))))))
-        (using_statement
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
@@ -375,7 +375,7 @@ call TOP_CALL(
               (reference_expression
                 (reference_list
                   field: (identifier))))))
-        (using_statement
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
@@ -403,7 +403,7 @@ call TOP_CALL(
               (reference_expression
                 (reference_list
                   field: (identifier))))))
-        (using_statement
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
@@ -427,8 +427,9 @@ call TOP_CALL(
             target: (binding_target
               (identifier))
             value: (expression
-              (false))))
-        (using_statement
+              (literal
+                (boolean_literal)))))
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
@@ -436,40 +437,40 @@ call TOP_CALL(
                 (reference_expression
                   (reference_list
                     field: (identifier)))))))))
-    (return_statement
+    return: (return_statement
       (binding_list
         (binding
           target: (binding_target
             (identifier))
           value: (expression
             (array_expression
-              (expression
+              element: (expression
                 (array_expression
-                  (expression
+                  element: (expression
                     (reference_expression
                       (reference_list
                         (scoped_identifier
                           value: (identifier)
                           field: (identifier)))))))
-              (expression
+              element: (expression
                 (reference_expression
                   (reference_list
                     (scoped_identifier
                       value: (identifier)
                       field: (identifier)))))
-              (expression
+              element: (expression
                 (reference_expression
                   (reference_list
                     (scoped_identifier
                       value: (identifier)
                       field: (identifier)))))
-              (expression
+              element: (expression
                 (reference_expression
                   (reference_list
                     (scoped_identifier
                       value: (identifier)
                       field: (identifier)))))
-              (expression
+              element: (expression
                 (reference_expression
                   (reference_list
                     (scoped_identifier
@@ -503,13 +504,13 @@ call TOP_CALL(
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (input_parameter
@@ -519,11 +520,11 @@ call TOP_CALL(
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (array_type
-                (parameter_type
+                value_type: (parameter_type
                   (array_type
-                    (parameter_type
+                    value_type: (parameter_type
                       (primitive_type))))))))
         name: (identifier)))
     (comment)
@@ -558,12 +559,14 @@ call TOP_CALL(
             target: (binding_target
               (identifier))
             value: (expression
-              (false)))
+              (literal
+                (boolean_literal))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
-              (false)))))
+              (literal
+                (boolean_literal))))))
       (comment)
       (call_statement
         name: (identifier)
@@ -574,7 +577,8 @@ call TOP_CALL(
             target: (binding_target
               (identifier))
             value: (expression
-              (integer)))
+              (literal
+                (integer_literal))))
           (binding
             target: (binding_target
               (identifier))
@@ -593,12 +597,14 @@ call TOP_CALL(
             target: (binding_target
               (identifier))
             value: (expression
-              (true)))
+              (literal
+                (boolean_literal))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
-              (false)))))
+              (literal
+                (boolean_literal))))))
       (call_statement
         name: (identifier)
         (alias
@@ -608,7 +614,8 @@ call TOP_CALL(
             target: (binding_target
               (identifier))
             value: (expression
-              (integer)))
+              (literal
+                (integer_literal))))
           (binding
             target: (binding_target
               (identifier))
@@ -641,7 +648,7 @@ call TOP_CALL(
                   (scoped_identifier
                     value: (identifier)
                     field: (identifier)))))))
-        (using_statement
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
@@ -661,7 +668,8 @@ call TOP_CALL(
             target: (binding_target
               (identifier))
             value: (expression
-              (integer)))
+              (literal
+                (integer_literal))))
           (binding
             target: (binding_target
               (identifier))
@@ -680,13 +688,15 @@ call TOP_CALL(
             target: (binding_target
               (identifier))
             value: (expression
-              (true)))
+              (literal
+                (boolean_literal))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
-              (false))))
-        (using_statement
+              (literal
+                (boolean_literal)))))
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
@@ -694,32 +704,32 @@ call TOP_CALL(
                 (reference_expression
                   (reference_list
                     field: (identifier)))))))))
-    (return_statement
+    return: (return_statement
       (binding_list
         (binding
           target: (binding_target
             (identifier))
           value: (expression
             (array_expression
-              (expression
+              element: (expression
                 (reference_expression
                   (reference_list
                     (scoped_identifier
                       value: (identifier)
                       field: (identifier)))))
-              (expression
+              element: (expression
                 (reference_expression
                   (reference_list
                     (scoped_identifier
                       value: (identifier)
                       field: (identifier)))))
-              (expression
+              element: (expression
                 (reference_expression
                   (reference_list
                     (scoped_identifier
                       value: (identifier)
                       field: (identifier)))))
-              (expression
+              element: (expression
                 (reference_expression
                   (reference_list
                     (scoped_identifier
@@ -732,23 +742,28 @@ call TOP_CALL(
         target: (binding_target
           (identifier))
         value: (expression
-          (integer)))
+          (literal
+            (integer_literal))))
       (binding
         target: (binding_target
           (identifier))
         value: (expression
           (array_expression
-            (expression
-              (integer))
-            (expression
-              (integer)))))
+            element: (expression
+              (literal
+                (integer_literal)))
+            element: (expression
+              (literal
+                (integer_literal))))))
       (binding
         target: (binding_target
           (identifier))
         value: (expression
-          (null)))
+          (literal
+            (null_literal))))
       (binding
         target: (binding_target
           (identifier))
         value: (expression
-          (true))))))
+          (literal
+            (boolean_literal)))))))

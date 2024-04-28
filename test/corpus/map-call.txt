@@ -38,7 +38,7 @@ pipeline SUM_SQUARES(
 (source_file
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (primitive_type))
@@ -47,32 +47,32 @@ pipeline SUM_SQUARES(
         type: (parameter_type
           (primitive_type))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (output_parameter
         type: (parameter_type
           (primitive_type))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (pipeline_definition
     name: (identifier)
     params: (parameter_list
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (output_parameter
@@ -102,7 +102,7 @@ pipeline SUM_SQUARES(
                   (scoped_identifier
                     value: (identifier)
                     field: (identifier)))))))))
-    (return_statement
+    return: (return_statement
       (binding_list
         (binding
           target: (binding_target

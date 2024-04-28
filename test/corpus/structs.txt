@@ -38,7 +38,7 @@ struct Helpful(
   (struct_definition
     name: (identifier)
     (comment)
-    (fields
+    fields: (field_list
       (field
         type: (parameter_type
           (primitive_type))
@@ -47,13 +47,13 @@ struct Helpful(
       (field
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))))
   (comment)
   (struct_definition
     name: (identifier)
-    (fields
+    fields: (field_list
       (field
         type: (parameter_type
           (identifier))
@@ -63,26 +63,26 @@ struct Helpful(
         type: (parameter_type
           (identifier))
         name: (identifier)
-        help: (string)
-        output_name: (string))))
+        help: (string_literal)
+        output_name: (string_literal))))
   (struct_definition
     name: (identifier)
-    (fields
+    fields: (field_list
       (field
         type: (parameter_type
           (primitive_type))
         name: (identifier)
-        help: (string))
+        help: (string_literal))
       (field
         type: (parameter_type
           (primitive_type))
         name: (identifier)
-        help: (string)
-        output_name: (string))
+        help: (string_literal)
+        output_name: (string_literal))
       (field
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (field
@@ -92,12 +92,12 @@ struct Helpful(
       (field
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (field
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier)))))

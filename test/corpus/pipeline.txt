@@ -19,7 +19,7 @@ stage FIND_DUPLICATES(
 
 pipeline DUPLICATE_FINDER(
     in  txt  unsorted,
-    out txt  duplicates,
+    out txt  duplicates "some help" "new_out_name",
 )
 {
     call SORT_ITEMS(
@@ -37,11 +37,10 @@ pipeline DUPLICATE_FINDER(
 
 (source_file
   (filetype_declaration
-  (filetype_declaration
     filetype: (identifier))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (identifier))
@@ -54,24 +53,10 @@ pipeline DUPLICATE_FINDER(
         type: (parameter_type
           (identifier))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (stage_definition
-    name: (identifier)
-    (parameter_list
-      (input_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier))
-      (output_parameter
-        type: (parameter_type
-          (identifier))
-        name: (identifier)))
-    (source_declaration
-      type: (source_type)
-      source_path: (string)))
-  (pipeline_definition
     name: (identifier)
     params: (parameter_list
       (input_parameter
@@ -82,6 +67,22 @@ pipeline DUPLICATE_FINDER(
         type: (parameter_type
           (identifier))
         name: (identifier)))
+    src: (source_declaration
+      type: (source_type)
+      source_path: (string_literal)))
+  (pipeline_definition
+    name: (identifier)
+    params: (parameter_list
+      (input_parameter
+        type: (parameter_type
+          (identifier))
+        name: (identifier))
+      (output_parameter
+        type: (parameter_type
+          (identifier))
+        name: (identifier)
+        help: (string_literal)
+        output_name: (string_literal)))
     calls: (call_statement_list
       (call_statement
         name: (identifier)
@@ -105,7 +106,7 @@ pipeline DUPLICATE_FINDER(
                   (scoped_identifier
                     value: (identifier)
                     field: (identifier)))))))))
-    (return_statement
+    return: (return_statement
       (binding_list
         (binding
           target: (binding_target

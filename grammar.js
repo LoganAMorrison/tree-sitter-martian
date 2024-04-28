@@ -62,11 +62,16 @@ module.exports = grammar({
 
   conflicts: (_) => [],
 
-  inline: _ => [],
-
-  supertypes: ($) => [
+  inline: $ => [
+    $._number,
+    $._typed_default_parameter,
+    $._typed_parameter,
+    $._typed_parameter_help,
+    $._typed_parameter_help_rename,
     $._val_exp,
   ],
+
+  supertypes: _ => [],
 
   rules: {
 
@@ -88,7 +93,7 @@ module.exports = grammar({
     // An include is something of the form:
     //      @include 'path/to/file.mro'
 
-    include_statement: ($) => seq(keywords.include, field('file', $.string)),
+    include_statement: ($) => seq(keywords.include, field('file', $.string_literal)),
 
     // -----------------------------------------------------------------------
     // ==== Structs ==========================================================
@@ -105,16 +110,19 @@ module.exports = grammar({
       keywords.struct,
       field('name', $.identifier),
       '(',
-      optional(alias($._struct_field_list, $.fields)),
+      field('fields', optional($.field_list)),
       ')',
     ),
 
-    _struct_field_list: ($) => repeat1(seq($.field, ',')),
+    field_list: ($) => repeat1($.field),
 
-    field: ($) => choice(
-      $._typed_parameter,
-      $._typed_parameter_help,
-      $._typed_parameter_help_rename,
+    field: ($) => seq(
+      choice(
+        $._typed_parameter,
+        $._typed_parameter_help,
+        $._typed_parameter_help_rename,
+      ),
+      ',',
     ),
 
 
@@ -165,11 +173,13 @@ module.exports = grammar({
       field('params', $.parameter_list),
       ')',
       '{',
-      field('calls', alias(repeat($.call_statement), $.call_statement_list)),
-      $.return_statement,
-      optional($.retain_statement),
+      field('calls', optional($.call_statement_list)),
+      field('return', $.return_statement),
+      field('retain', optional($.retain_statement)),
       '}',
     ),
+
+    call_statement_list: ($) => repeat1($.call_statement),
 
     return_statement: ($) => seq(keywords.return, '(', optional($.binding_list), ')'),
 
@@ -209,10 +219,12 @@ module.exports = grammar({
       keywords.stage,
       field('name', $.identifier),
       '(',
-      $.parameter_list,
-      $.source_declaration,
+      field('params', optional($.parameter_list)),
+      field('src', $.source_declaration),
       ')',
-      repeat(choice($.split_statement, $.using_statement, $.retain_statement)),
+      field('split', optional($.split_statement)),
+      field('using', optional($.using_statement)),
+      field('retain', optional($.retain_statement)),
     ),
 
 
@@ -230,7 +242,7 @@ module.exports = grammar({
     source_declaration: ($) => seq(
       keywords.src,
       field('type', $.source_type),
-      field('source_path', $.string),
+      field('source_path', $.string_literal),
       ',',
     ),
 
@@ -249,23 +261,24 @@ module.exports = grammar({
       keywords.split,
       optional(keywords.using),
       '(',
-      optional($.parameter_list),
+      field('params', optional($.parameter_list)),
       ')',
     ),
 
     using_statement: ($) => seq(
       'using',
       '(',
-      optional(field('resources', $.resource_list)),
+      field('resources', optional($.resource_list)),
       ')',
     ),
 
-    resource_list: ($) => sepBy1(',', $.resource),
+    resource_list: ($) => repeat1($.resource),
 
     resource: ($) => seq(
       field('target', $.resource_type),
       '=',
       field('value', $.resource_value),
+      ',',
     ),
 
     resource_type: (_) => choice(
@@ -280,7 +293,7 @@ module.exports = grammar({
     ),
 
     resource_value: ($) => choice(
-      $.reference_expression, $._constant,
+      $.reference_expression, $.literal,
     ),
 
 
@@ -301,12 +314,9 @@ module.exports = grammar({
     // -----------------------------------------------------------------------
 
     parameter_list: ($) => repeat1(
-      seq(
-        choice(
-          $.input_parameter,
-          $.output_parameter,
-        ),
-        ',',
+      choice(
+        $.input_parameter,
+        $.output_parameter,
       ),
     ),
 
@@ -316,6 +326,7 @@ module.exports = grammar({
         $._typed_parameter,
         $._typed_parameter_help,
       ),
+      ',',
     ),
 
     output_parameter: ($) => seq(
@@ -326,6 +337,7 @@ module.exports = grammar({
         $._typed_parameter_help,
         $._typed_parameter_help_rename,
       ),
+      ',',
     ),
 
     _typed_default_parameter: ($) => seq(
@@ -340,14 +352,14 @@ module.exports = grammar({
     _typed_parameter_help: ($) => seq(
       field('type', $.parameter_type),
       field('name', $.identifier),
-      field('help', $.string),
+      field('help', $.string_literal),
     ),
 
     _typed_parameter_help_rename: ($) => seq(
       field('type', $.parameter_type),
       field('name', $.identifier),
-      field('help', $.string),
-      field('output_name', $.string),
+      field('help', $.string_literal),
+      field('output_name', $.string_literal),
     ),
 
     parameter_type: ($) => choice(
@@ -373,11 +385,11 @@ module.exports = grammar({
 
     map_type: ($) => choice(
       keywords.map,
-      seq(keywords.map, '<', $.parameter_type, '>'),
+      seq(keywords.map, '<', field('value_type', $.parameter_type), '>'),
     ),
 
     array_type: ($) => seq(
-      $.parameter_type,
+      field('value_type', $.parameter_type),
       // int[], int[][],
       seq('[', ']'),
     ),
@@ -449,13 +461,13 @@ module.exports = grammar({
     call_statement: ($) => seq(
       optional(keywords.map),
       keywords.call,
-      optional($.modifiers),
+      field('modifiers', optional($.modifiers)),
       field('name', $.identifier),
       optional(alias($._call_alias, $.alias)),
       '(',
-      optional(field('params', $.binding_list)),
+      field('params', optional($.binding_list)),
       ')',
-      optional($.using_statement),
+      field('using', optional($.using_statement)),
     ),
 
     _call_alias: ($) => seq(
@@ -473,17 +485,14 @@ module.exports = grammar({
     // ==== Bindings =========================================================
     // -----------------------------------------------------------------------
 
-    binding_list: ($) => seq(
-      $.binding,
-      repeat(seq(',', $.binding)),
-      optional(','),
-    ),
+    binding_list: ($) => repeat1($.binding),
 
     binding: ($) => seq(
       field('target', $.binding_target),
       '=',
       optional(keywords.split),
       field('value', $.expression),
+      ',',
     ),
 
     expression: ($) => choice(
@@ -494,7 +503,7 @@ module.exports = grammar({
     _val_exp: $ => choice(
       $.array_expression,
       $.map_expression,
-      $._constant,
+      $.literal,
     ),
 
     binding_target: ($) => choice(
@@ -514,7 +523,7 @@ module.exports = grammar({
 
     array_expression: ($) => seq(
       '[',
-      sepBy(',', $.expression),
+      sepBy(',', field('element', $.expression)),
       ']',
     ),
 
@@ -536,7 +545,7 @@ module.exports = grammar({
     // A `pair` is a statement of the form:
     //  key: value
     pair: ($) => seq(
-      field('key', choice($.string, $.identifier)),
+      field('key', choice($.string_literal, $.identifier)),
       ':',
       field('value', $.expression),
     ),
@@ -583,23 +592,22 @@ module.exports = grammar({
     // ==== Constants ========================================================
     // -----------------------------------------------------------------------
 
-    _constant: ($) => choice(
-      $.string,
+    literal: ($) => choice(
+      $.string_literal,
       $._number,
-      $.true,
-      $.false,
-      $.null,
+      $.boolean_literal,
+      $.null_literal,
     ),
 
-    true: (_) => 'true',
-    false: (_) => 'false',
-    null: (_) => 'null',
+    boolean_literal: (_) => choice('true', 'false'),
+
+    null_literal: (_) => 'null',
 
     // ----------------
     // ==== String ====
     // ----------------
 
-    string: ($) => seq('"', $._string_inner, '"'),
+    string_literal: ($) => seq('"', $._string_inner, '"'),
 
     _string_inner: (_) => /((?:[^\\\"]|\\.)*)/,
 
@@ -609,19 +617,19 @@ module.exports = grammar({
     //   $._string_inner_quoted_double_character_mro,
     // ),
 
-    _character_escape: (_) => /\\(?:[0-7]{3}|[abfnrtv\\\"]|x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})/,
-    _unknown_escape: (_) => /\\(?:[0-7]+[^0-7]|[xuU][0-9a-fA-F]*[^0-9a-fA-F]|.)/,
-    _quoted_double_character: (_) => /[^\\\"]/,
+    // _character_escape: (_) => /\\(?:[0-7]{3}|[abfnrtv\\\"]|x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})/,
+    // _unknown_escape: (_) => /\\(?:[0-7]+[^0-7]|[xuU][0-9a-fA-F]*[^0-9a-fA-F]|.)/,
+    // _quoted_double_character: (_) => /[^\\\"]/,
 
     // ----------------
     // ==== Number ====
     // ----------------
 
-    _number: ($) => choice($.float, $.integer),
+    _number: ($) => choice($.float_literal, $.integer_literal),
 
-    float: (_) => /-?[0-9]+(\.[0-9]+[eE][+-]?|[eE][+-]?|\.)[0-9]+/,
+    float_literal: (_) => /-?[0-9]+(\.[0-9]+[eE][+-]?|[eE][+-]?|\.)[0-9]+/,
 
-    integer: (_) => /-?0*[0-9]{1,19}/,
+    integer_literal: (_) => /-?0*[0-9]{1,19}/,
 
     // -----------------------------------------------------------------------
     // ==== Comments =========================================================

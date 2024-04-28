@@ -229,7 +229,7 @@ pipeline AWESOME(
         (parameter_type
           (primitive_type))
         (identifier)
-        (string))
+        (string_literal))
       (input_parameter
         (parameter_type
           (primitive_type))
@@ -253,8 +253,8 @@ pipeline AWESOME(
             (parameter_type
               (identifier))))
         (identifier)
-        (string)
-        (string))
+        (string_literal)
+        (string_literal))
       (output_parameter
         (parameter_type
           (identifier))
@@ -282,18 +282,21 @@ pipeline AWESOME(
             (binding_target
               (identifier))
             (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             (binding_target
               (identifier))
             (expression
-              (null))))
+              (literal
+                (null_literal)))))
         (using_statement
           (resource_list
             (resource
               (resource_type)
               (resource_value
-                (true))))))
+                (literal
+                  (boolean_literal)))))))
       (call_statement
         (identifier)
         (binding_list
@@ -315,7 +318,8 @@ pipeline AWESOME(
             (binding_target
               (identifier))
             (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             (binding_target
               (identifier))
@@ -332,17 +336,20 @@ pipeline AWESOME(
             (binding_target
               (identifier))
             (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             (binding_target
               (identifier))
             (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             (binding_target
               (identifier))
             (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             (binding_target
               (identifier))
@@ -361,7 +368,8 @@ pipeline AWESOME(
             (binding_target
               (identifier))
             (expression
-              (string)))
+              (literal
+                (string_literal))))
           (comment)
           (binding
             (binding_target
@@ -371,14 +379,17 @@ pipeline AWESOME(
                 (comment)
                 (comment)
                 (expression
-                  (string))
+                  (literal
+                    (string_literal)))
                 (expression
-                  (string)))))
+                  (literal
+                    (string_literal))))))
           (binding
             (binding_target
               (identifier))
             (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             (binding_target
               (identifier))
@@ -397,23 +408,26 @@ pipeline AWESOME(
             (expression
               (map_expression
                 (pair
-                  (string)
+                  (string_literal)
                   (expression
-                    (string)))
+                    (literal
+                      (string_literal))))
                 (comment)
                 (pair
-                  (string)
+                  (string_literal)
                   (expression
-                    (null)))
+                    (literal
+                      (null_literal))))
                 (pair
-                  (string)
+                  (string_literal)
                   (expression
                     (map_expression
                       (comment)
                       (pair
-                        (string)
+                        (string_literal)
                         (expression
-                          (integer))))))))))
+                          (literal
+                            (integer_literal)))))))))))
         (using_statement
           (comment)
           (resource_list
@@ -428,12 +442,14 @@ pipeline AWESOME(
             (resource
               (resource_type)
               (resource_value
-                (true)))
+                (literal
+                  (boolean_literal))))
             (comment)
             (resource
               (resource_type)
               (resource_value
-                (false))))))
+                (literal
+                  (boolean_literal)))))))
       (call_statement
         (identifier)
         (alias
@@ -451,20 +467,23 @@ pipeline AWESOME(
             (binding_target
               (identifier))
             (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             (binding_target
               (identifier))
             (expression
               (array_expression
                 (expression
-                  (string))))))
+                  (literal
+                    (string_literal)))))))
         (using_statement
           (resource_list
             (resource
               (resource_type)
               (resource_value
-                (true))))))
+                (literal
+                  (boolean_literal)))))))
       (call_statement
         (identifier)
         (alias
@@ -474,16 +493,19 @@ pipeline AWESOME(
             (binding_target
               (identifier))
             (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             (binding_target
               (identifier))
             (expression
               (array_expression
                 (expression
-                  (string))
+                  (literal
+                    (string_literal)))
                 (expression
-                  (string)))))))
+                  (literal
+                    (string_literal))))))))
       (call_statement
         (identifier)
         (alias
@@ -502,7 +524,8 @@ pipeline AWESOME(
             (binding_target
               (identifier))
             (expression
-              (null)))))
+              (literal
+                (null_literal))))))
       (call_statement
         (identifier)
         (binding_list
@@ -563,7 +586,8 @@ pipeline AWESOME(
             (expression
               (array_expression
                 (expression
-                  (string))
+                  (literal
+                    (string_literal)))
                 (expression
                   (reference_expression
                     (reference_list
@@ -604,7 +628,8 @@ pipeline AWESOME(
             (binding_target
               (identifier))
             (expression
-              (null)))
+              (literal
+                (null_literal))))
           (binding
             (binding_target
               (identifier))
@@ -714,7 +739,8 @@ pipeline AWESOME(
             (binding_target
               (identifier))
             (expression
-              (integer)))
+              (literal
+                (integer_literal))))
           (binding
             (binding_target)
             (expression
@@ -740,7 +766,7 @@ pipeline AWESOME(
             (expression
               (map_expression
                 (pair
-                  (string)
+                  (string_literal)
                   (expression
                     (reference_expression
                       (identifier)))))))
@@ -814,19 +840,22 @@ pipeline AWESOME(
             (expression
               (array_expression
                 (expression
-                  (float)))))
+                  (literal
+                    (float_literal))))))
           (binding
             (binding_target
               (identifier))
             (expression
               (array_expression
                 (expression
-                  (integer)))))
+                  (literal
+                    (integer_literal))))))
           (binding
             (binding_target
               (identifier))
             (expression
-              (integer)))
+              (literal
+                (integer_literal))))
           (binding
             (binding_target
               (identifier))
@@ -845,11 +874,13 @@ pipeline AWESOME(
                 (pair
                   (identifier)
                   (expression
-                    (integer)))
+                    (literal
+                      (integer_literal))))
                 (pair
                   (identifier)
                   (expression
-                    (string)))
+                    (literal
+                      (string_literal))))
                 (pair
                   (identifier)
                   (expression
@@ -863,7 +894,8 @@ pipeline AWESOME(
             (resource
               (resource_type)
               (resource_value
-                (true))))))
+                (literal
+                  (boolean_literal)))))))
       (call_statement
         (identifier)
         (alias
@@ -873,21 +905,25 @@ pipeline AWESOME(
             (binding_target
               (identifier))
             (expression
-              (float)))
+              (literal
+                (float_literal))))
           (binding
             (binding_target
               (identifier))
             (expression
               (array_expression
                 (expression
-                  (integer))
+                  (literal
+                    (integer_literal)))
                 (expression
-                  (integer)))))
+                  (literal
+                    (integer_literal))))))
           (binding
             (binding_target
               (identifier))
             (expression
-              (integer)))
+              (literal
+                (integer_literal))))
           (binding
             (binding_target
               (identifier))
@@ -900,33 +936,39 @@ pipeline AWESOME(
                 (pair
                   (identifier)
                   (expression
-                    (integer)))
+                    (literal
+                      (integer_literal))))
                 (pair
                   (identifier)
                   (expression
-                    (string)))
+                    (literal
+                      (string_literal))))
                 (pair
                   (identifier)
                   (expression
                     (array_expression
                       (expression
-                        (integer))
+                        (literal
+                          (integer_literal)))
                       (expression
-                        (integer)))))
+                        (literal
+                          (integer_literal))))))
                 (pair
                   (identifier)
                   (expression
                     (map_expression
                       (pair
-                        (string)
+                        (string_literal)
                         (expression
-                          (integer))))))))))
+                          (literal
+                            (integer_literal)))))))))))
         (using_statement
           (resource_list
             (resource
               (resource_type)
               (resource_value
-                (true)))))))
+                (literal
+                  (boolean_literal))))))))
     (return_statement
       (binding_list
         (binding
@@ -949,21 +991,25 @@ pipeline AWESOME(
                 (expression
                   (array_expression
                     (expression
-                      (true)))))
+                      (literal
+                        (boolean_literal))))))
               (pair
                 (identifier)
                 (expression
-                  (integer)))
+                  (literal
+                    (integer_literal))))
               (pair
                 (identifier)
                 (expression
-                  (string)))
+                  (literal
+                    (string_literal))))
               (pair
                 (identifier)
                 (expression
                   (array_expression
                     (expression
-                      (integer)))))
+                      (literal
+                        (integer_literal))))))
               (pair
                 (identifier)
                 (expression

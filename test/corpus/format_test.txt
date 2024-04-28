@@ -478,7 +478,7 @@ map call AWESOME(
   (comment)
   (comment)
   (include_statement
-    file: (string))
+    file: (string_literal))
   (comment)
   (filetype_declaration
     filetype: (identifier))
@@ -491,7 +491,7 @@ map call AWESOME(
   (struct_definition
     name: (identifier)
     (comment)
-    (fields
+    fields: (field_list
       (field
         type: (parameter_type
           (primitive_type))
@@ -500,13 +500,13 @@ map call AWESOME(
       (field
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))))
   (comment)
   (struct_definition
     name: (identifier)
-    (fields
+    fields: (field_list
       (field
         type: (parameter_type
           (identifier))
@@ -516,26 +516,26 @@ map call AWESOME(
         type: (parameter_type
           (identifier))
         name: (identifier)
-        help: (string)
-        output_name: (string))))
+        help: (string_literal)
+        output_name: (string_literal))))
   (struct_definition
     name: (identifier)
-    (fields
+    fields: (field_list
       (field
         type: (parameter_type
           (primitive_type))
         name: (identifier)
-        help: (string))
+        help: (string_literal))
       (field
         type: (parameter_type
           (primitive_type))
         name: (identifier)
-        help: (string)
-        output_name: (string))
+        help: (string_literal)
+        output_name: (string_literal))
       (field
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (field
@@ -545,14 +545,14 @@ map call AWESOME(
       (field
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))))
   (comment)
   (stage_definition
     name: (identifier)
     (comment)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (primitive_type))
@@ -578,27 +578,27 @@ map call AWESOME(
         type: (parameter_type
           (identifier))
         name: (identifier)
-        help: (string)
-        output_name: (string)))
+        help: (string_literal)
+        output_name: (string_literal)))
     (comment)
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (comment)
   (comment)
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (primitive_type))
         name: (identifier)
-        help: (string))
+        help: (string_literal))
       (input_parameter
         type: (parameter_type
           (primitive_type))
         name: (identifier)
-        help: (string))
+        help: (string_literal))
       (input_parameter
         type: (parameter_type
           (identifier))
@@ -607,7 +607,7 @@ map call AWESOME(
         type: (parameter_type
           (primitive_type))
         name: (identifier)
-        help: (string))
+        help: (string_literal))
       (output_parameter
         type: (parameter_type
           (identifier))
@@ -616,15 +616,16 @@ map call AWESOME(
         type: (parameter_type
           (primitive_type))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string))
-    (using_statement
+      source_path: (string_literal))
+    using: (using_statement
       resources: (resource_list
         (resource
           target: (resource_type)
           value: (resource_value
-            (string)))
+            (literal
+              (string_literal))))
         (resource
           target: (resource_type)
           value: (resource_value
@@ -633,7 +634,7 @@ map call AWESOME(
   (comment)
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (primitive_type))
@@ -658,15 +659,15 @@ map call AWESOME(
         type: (parameter_type
           (primitive_type))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string))
-    (retain_statement
+      source_path: (string_literal))
+    retain: (retain_statement
       name: (reference_expression
         (identifier))))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (primitive_type))
@@ -674,28 +675,28 @@ map call AWESOME(
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier)
-        help: (string))
+        help: (string_literal))
       (output_parameter
         type: (parameter_type
           (primitive_type))
@@ -704,11 +705,11 @@ map call AWESOME(
       (output_parameter
         type: (parameter_type
           (primitive_type))))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string))
-    (split_statement
-      (parameter_list
+      source_path: (string_literal))
+    split: (split_statement
+      params: (parameter_list
         (input_parameter
           type: (parameter_type
             (primitive_type))
@@ -717,21 +718,23 @@ map call AWESOME(
           type: (parameter_type
             (primitive_type))
           name: (identifier))))
-    (using_statement
+    using: (using_statement
       (comment)
       resources: (resource_list
         (resource
           target: (resource_type)
           value: (resource_value
-            (integer)))
+            (literal
+              (integer_literal))))
         (comment)
         (resource
           target: (resource_type)
           value: (resource_value
-            (false))))))
+            (literal
+              (boolean_literal)))))))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (primitive_type))
@@ -739,7 +742,7 @@ map call AWESOME(
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (input_parameter
@@ -750,13 +753,13 @@ map call AWESOME(
         type: (parameter_type
           (identifier))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (comment)
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (identifier))
@@ -769,59 +772,64 @@ map call AWESOME(
         type: (parameter_type
           (identifier))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string))
-    (using_statement
+      source_path: (string_literal))
+    using: (using_statement
       (comment)
       resources: (resource_list
         (resource
           target: (resource_type)
           value: (resource_value
-            (float)))
+            (literal
+              (float_literal))))
         (comment)
         (resource
           target: (resource_type)
           value: (resource_value
-            (float))))))
+            (literal
+              (float_literal)))))))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (map_type))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string))
-    (using_statement
+      source_path: (string_literal))
+    using: (using_statement
       resources: (resource_list
         (resource
           target: (resource_type)
           value: (resource_value
-            (integer)))
+            (literal
+              (integer_literal))))
         (comment)
         (resource
           target: (resource_type)
           value: (resource_value
-            (integer)))
+            (literal
+              (integer_literal))))
         (comment)
         (resource
           target: (resource_type)
           value: (resource_value
-            (integer)))
+            (literal
+              (integer_literal))))
         (resource
           target: (resource_type)
           value: (resource_value
@@ -830,7 +838,7 @@ map call AWESOME(
   (comment)
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (identifier))
@@ -838,13 +846,13 @@ map call AWESOME(
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (input_parameter
@@ -860,7 +868,7 @@ map call AWESOME(
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (primitive_type))))
         name: (identifier))
       (output_parameter
@@ -872,7 +880,7 @@ map call AWESOME(
         type: (parameter_type
           (identifier))
         name: (identifier)
-        help: (string))
+        help: (string_literal))
       (output_parameter
         type: (parameter_type
           (identifier))
@@ -880,16 +888,16 @@ map call AWESOME(
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier)))
     (comment)
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (identifier))
@@ -897,154 +905,154 @@ map call AWESOME(
       (output_parameter
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier))
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (map_type
-                (parameter_type
+                value_type: (parameter_type
                   (identifier))))))
         name: (identifier))
       (output_parameter
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (array_type
-                (parameter_type
+                value_type: (parameter_type
                   (identifier))))))
         name: (identifier))
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (map_type
-                (parameter_type
+                value_type: (parameter_type
                   (array_type
-                    (parameter_type
+                    value_type: (parameter_type
                       (identifier))))))))
         name: (identifier))
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (array_type
-                (parameter_type
+                value_type: (parameter_type
                   (primitive_type))))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (array_type
-                (parameter_type
+                value_type: (parameter_type
                   (primitive_type))))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (array_type
-                (parameter_type
+                value_type: (parameter_type
                   (primitive_type))))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (map_type
-                (parameter_type
+                value_type: (parameter_type
                   (primitive_type))))))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (map_type
-                (parameter_type
+                value_type: (parameter_type
                   (identifier))))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (array_type
-                (parameter_type
+                value_type: (parameter_type
                   (identifier))))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (primitive_type))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (input_parameter
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier))
       (input_parameter
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier)))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (comment)
   (stage_definition
     name: (identifier)
-    (parameter_list
+    params: (parameter_list
       (output_parameter
         type: (parameter_type
           (primitive_type))))
-    (source_declaration
+    src: (source_declaration
       type: (source_type)
-      source_path: (string)))
+      source_path: (string_literal)))
   (pipeline_definition
     name: (identifier)
     params: (parameter_list
@@ -1055,7 +1063,7 @@ map call AWESOME(
     calls: (call_statement_list
       (call_statement
         name: (identifier)))
-    (return_statement
+    return: (return_statement
       (binding_list
         (binding
           target: (binding_target
@@ -1082,39 +1090,39 @@ map call AWESOME(
       (output_parameter
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier))
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (map_type
-                (parameter_type
+                value_type: (parameter_type
                   (identifier))))))
         name: (identifier))
       (output_parameter
         type: (parameter_type
           (map_type
-            (parameter_type
+            value_type: (parameter_type
               (array_type
-                (parameter_type
+                value_type: (parameter_type
                   (identifier))))))
         name: (identifier))
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (map_type
-                (parameter_type
+                value_type: (parameter_type
                   (array_type
-                    (parameter_type
+                    value_type: (parameter_type
                       (identifier))))))))
         name: (identifier))
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier)))
     calls: (call_statement_list
@@ -1125,7 +1133,7 @@ map call AWESOME(
             target: (binding_target)
             value: (expression
               (reference_expression))))))
-    (return_statement
+    return: (return_statement
       (binding_list
         (binding
           target: (binding_target
@@ -1147,7 +1155,7 @@ map call AWESOME(
         type: (parameter_type
           (primitive_type))
         name: (identifier)
-        help: (string))
+        help: (string_literal))
       (input_parameter
         type: (parameter_type
           (primitive_type))
@@ -1168,11 +1176,11 @@ map call AWESOME(
       (output_parameter
         type: (parameter_type
           (array_type
-            (parameter_type
+            value_type: (parameter_type
               (identifier))))
         name: (identifier)
-        help: (string)
-        output_name: (string))
+        help: (string_literal)
+        output_name: (string_literal))
       (output_parameter
         type: (parameter_type
           (identifier))
@@ -1200,18 +1208,21 @@ map call AWESOME(
             target: (binding_target
               (identifier))
             value: (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
-              (null))))
-        (using_statement
+              (literal
+                (null_literal)))))
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
               value: (resource_value
-                (true))))))
+                (literal
+                  (boolean_literal)))))))
       (call_statement
         name: (identifier)
         params: (binding_list
@@ -1233,7 +1244,8 @@ map call AWESOME(
             target: (binding_target
               (identifier))
             value: (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             target: (binding_target
               (identifier))
@@ -1250,17 +1262,20 @@ map call AWESOME(
             target: (binding_target
               (identifier))
             value: (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             target: (binding_target
               (identifier))
@@ -1279,7 +1294,8 @@ map call AWESOME(
             target: (binding_target
               (identifier))
             value: (expression
-              (string)))
+              (literal
+                (string_literal))))
           (comment)
           (binding
             target: (binding_target
@@ -1288,15 +1304,18 @@ map call AWESOME(
               (array_expression
                 (comment)
                 (comment)
-                (expression
-                  (string))
-                (expression
-                  (string)))))
+                element: (expression
+                  (literal
+                    (string_literal)))
+                element: (expression
+                  (literal
+                    (string_literal))))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             target: (binding_target
               (identifier))
@@ -1315,24 +1334,27 @@ map call AWESOME(
             value: (expression
               (map_expression
                 (pair
-                  key: (string)
+                  key: (string_literal)
                   value: (expression
-                    (string)))
+                    (literal
+                      (string_literal))))
                 (comment)
                 (pair
-                  key: (string)
+                  key: (string_literal)
                   value: (expression
-                    (null)))
+                    (literal
+                      (null_literal))))
                 (pair
-                  key: (string)
+                  key: (string_literal)
                   value: (expression
                     (map_expression
                       (comment)
                       (pair
-                        key: (string)
+                        key: (string_literal)
                         value: (expression
-                          (integer))))))))))
-        (using_statement
+                          (literal
+                            (integer_literal)))))))))))
+        using: (using_statement
           (comment)
           resources: (resource_list
             (resource
@@ -1346,12 +1368,14 @@ map call AWESOME(
             (resource
               target: (resource_type)
               value: (resource_value
-                (true)))
+                (literal
+                  (boolean_literal))))
             (comment)
             (resource
               target: (resource_type)
               value: (resource_value
-                (false))))))
+                (literal
+                  (boolean_literal)))))))
       (call_statement
         name: (identifier)
         (alias
@@ -1369,20 +1393,23 @@ map call AWESOME(
             target: (binding_target
               (identifier))
             value: (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
               (array_expression
-                (expression
-                  (string))))))
-        (using_statement
+                element: (expression
+                  (literal
+                    (string_literal)))))))
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
               value: (resource_value
-                (true))))))
+                (literal
+                  (boolean_literal)))))))
       (call_statement
         name: (identifier)
         (alias
@@ -1392,16 +1419,19 @@ map call AWESOME(
             target: (binding_target
               (identifier))
             value: (expression
-              (string)))
+              (literal
+                (string_literal))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
               (array_expression
-                (expression
-                  (string))
-                (expression
-                  (string)))))))
+                element: (expression
+                  (literal
+                    (string_literal)))
+                element: (expression
+                  (literal
+                    (string_literal))))))))
       (call_statement
         name: (identifier)
         (alias
@@ -1420,7 +1450,8 @@ map call AWESOME(
             target: (binding_target
               (identifier))
             value: (expression
-              (null)))))
+              (literal
+                (null_literal))))))
       (call_statement
         name: (identifier)
         params: (binding_list
@@ -1450,7 +1481,7 @@ map call AWESOME(
               (identifier))
             value: (expression
               (array_expression
-                (expression
+                element: (expression
                   (reference_expression
                     (reference_list
                       (scoped_identifier
@@ -1480,9 +1511,10 @@ map call AWESOME(
               (identifier))
             value: (expression
               (array_expression
-                (expression
-                  (string))
-                (expression
+                element: (expression
+                  (literal
+                    (string_literal)))
+                element: (expression
                   (reference_expression
                     (reference_list
                       (scoped_identifier
@@ -1522,7 +1554,8 @@ map call AWESOME(
             target: (binding_target
               (identifier))
             value: (expression
-              (null)))
+              (literal
+                (null_literal))))
           (binding
             target: (binding_target
               (identifier))
@@ -1632,7 +1665,8 @@ map call AWESOME(
             target: (binding_target
               (identifier))
             value: (expression
-              (integer)))
+              (literal
+                (integer_literal))))
           (binding
             target: (binding_target)
             value: (expression
@@ -1658,7 +1692,7 @@ map call AWESOME(
             value: (expression
               (map_expression
                 (pair
-                  key: (string)
+                  key: (string_literal)
                   value: (expression
                     (reference_expression
                       (identifier)))))))
@@ -1731,20 +1765,23 @@ map call AWESOME(
               (identifier))
             value: (expression
               (array_expression
-                (expression
-                  (float)))))
+                element: (expression
+                  (literal
+                    (float_literal))))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
               (array_expression
-                (expression
-                  (integer)))))
+                element: (expression
+                  (literal
+                    (integer_literal))))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
-              (integer)))
+              (literal
+                (integer_literal))))
           (binding
             target: (binding_target
               (identifier))
@@ -1754,7 +1791,7 @@ map call AWESOME(
                   key: (identifier)
                   value: (expression
                     (array_expression
-                      (expression
+                      element: (expression
                         (reference_expression
                           (reference_list
                             (scoped_identifier
@@ -1763,11 +1800,13 @@ map call AWESOME(
                 (pair
                   key: (identifier)
                   value: (expression
-                    (integer)))
+                    (literal
+                      (integer_literal))))
                 (pair
                   key: (identifier)
                   value: (expression
-                    (string)))
+                    (literal
+                      (string_literal))))
                 (pair
                   key: (identifier)
                   value: (expression
@@ -1776,12 +1815,13 @@ map call AWESOME(
                   key: (identifier)
                   value: (expression
                     (map_expression)))))))
-        (using_statement
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
               value: (resource_value
-                (true))))))
+                (literal
+                  (boolean_literal)))))))
       (call_statement
         name: (identifier)
         (alias
@@ -1791,21 +1831,25 @@ map call AWESOME(
             target: (binding_target
               (identifier))
             value: (expression
-              (float)))
+              (literal
+                (float_literal))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
               (array_expression
-                (expression
-                  (integer))
-                (expression
-                  (integer)))))
+                element: (expression
+                  (literal
+                    (integer_literal)))
+                element: (expression
+                  (literal
+                    (integer_literal))))))
           (binding
             target: (binding_target
               (identifier))
             value: (expression
-              (integer)))
+              (literal
+                (integer_literal))))
           (binding
             target: (binding_target
               (identifier))
@@ -1818,34 +1862,40 @@ map call AWESOME(
                 (pair
                   key: (identifier)
                   value: (expression
-                    (integer)))
+                    (literal
+                      (integer_literal))))
                 (pair
                   key: (identifier)
                   value: (expression
-                    (string)))
+                    (literal
+                      (string_literal))))
                 (pair
                   key: (identifier)
                   value: (expression
                     (array_expression
-                      (expression
-                        (integer))
-                      (expression
-                        (integer)))))
+                      element: (expression
+                        (literal
+                          (integer_literal)))
+                      element: (expression
+                        (literal
+                          (integer_literal))))))
                 (pair
                   key: (identifier)
                   value: (expression
                     (map_expression
                       (pair
-                        key: (string)
+                        key: (string_literal)
                         value: (expression
-                          (integer))))))))))
-        (using_statement
+                          (literal
+                            (integer_literal)))))))))))
+        using: (using_statement
           resources: (resource_list
             (resource
               target: (resource_type)
               value: (resource_value
-                (true)))))))
-    (return_statement
+                (literal
+                  (boolean_literal))))))))
+    return: (return_statement
       (binding_list
         (binding
           target: (binding_target
@@ -1866,27 +1916,31 @@ map call AWESOME(
                 key: (identifier)
                 value: (expression
                   (array_expression
-                    (expression
-                      (true)))))
+                    element: (expression
+                      (literal
+                        (boolean_literal))))))
               (pair
                 key: (identifier)
                 value: (expression
-                  (integer)))
+                  (literal
+                    (integer_literal))))
               (pair
                 key: (identifier)
                 value: (expression
-                  (string)))
+                  (literal
+                    (string_literal))))
               (pair
                 key: (identifier)
                 value: (expression
                   (array_expression
-                    (expression
-                      (integer)))))
+                    element: (expression
+                      (literal
+                        (integer_literal))))))
               (pair
                 key: (identifier)
                 value: (expression
                   (map_expression))))))))
-    (retain_statement
+    retain: (retain_statement
       name: (reference_expression
         (reference_list
           (scoped_identifier
@@ -1900,26 +1954,31 @@ map call AWESOME(
         target: (binding_target
           (identifier))
         value: (expression
-          (string)))
+          (literal
+            (string_literal))))
       (binding
         target: (binding_target
           (identifier))
         value: (expression
-          (string)))
+          (literal
+            (string_literal))))
       (binding
         target: (binding_target
           (identifier))
         value: (expression
-          (string)))
+          (literal
+            (string_literal))))
       (binding
         target: (binding_target
           (identifier))
         value: (expression
           (array_expression
-            (expression
-              (string))
-            (expression
-              (string)))))
+            element: (expression
+              (literal
+                (string_literal)))
+            element: (expression
+              (literal
+                (string_literal))))))
       (binding
         target: (binding_target
           (identifier))
@@ -1928,7 +1987,8 @@ map call AWESOME(
             (pair
               key: (identifier)
               value: (expression
-                (string)))
+                (literal
+                  (string_literal))))
             (pair
               key: (identifier)
               value: (expression
@@ -1936,12 +1996,15 @@ map call AWESOME(
                   (pair
                     key: (identifier)
                     value: (expression
-                      (float)))
+                      (literal
+                        (float_literal))))
                   (pair
                     key: (identifier)
                     value: (expression
                       (array_expression
-                        (expression
-                          (integer))
-                        (expression
-                          (integer))))))))))))))
+                        element: (expression
+                          (literal
+                            (integer_literal)))
+                        element: (expression
+                          (literal
+                            (integer_literal)))))))))))))))

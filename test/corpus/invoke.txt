@@ -12,7 +12,7 @@ call DUPLICATE_FINDER(
 
 (source_file
   (include_statement
-    (string))
+    (string_literal))
   (call_statement
     (identifier)
     (binding_list
@@ -20,4 +20,5 @@ call DUPLICATE_FINDER(
         (binding_target
           (identifier))
         (expression
-          (string))))))
+          (literal
+            (string_literal)))))))
