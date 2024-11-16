@@ -13,7 +13,6 @@
   },
   "author": "",
   "license": "MIT",
-  "license": "MIT",
   "dependencies": {
     "node-gyp-build": "^4.8.0",
     "node-addon-api": "^7.1.0"
@@ -32,18 +31,6 @@
     "prebuildify": "^6.0.0",
     "tree-sitter-cli": "^0.22.1"
   },
-  "tree-sitter": [
-    {
-      "scope": "source.martian",
-      "injection-regex": "martian",
-      "file-types": [
-        "mro"
-      ],
-      "highlights": [
-        "queries/highlights.scm"
-      ]
-    }
-  ],
   "files": [
     "grammar.js",
     "binding.gyp",
